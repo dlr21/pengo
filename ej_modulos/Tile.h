@@ -2,6 +2,8 @@
 #include <SFML/Graphics.hpp>
 #include "jugador.h"
 
+
+
 class Tile{
 
    
@@ -12,6 +14,9 @@ class Tile{
     void draw(sf::RenderWindow &window);
     void reiniciocrono(){min=5;seg=59;terminada=false;}
     bool getTerminada(){return terminada;}
+    void setPuntos(int a){
+        puntos.setString("Puntuacion: "+ std::to_string(a));
+    }
 private:
 
     sf::Sprite vida1;
@@ -30,6 +35,7 @@ private:
     sf::Font fuente;
     sf::String cadena;
     sf::Text texto;
+    sf::Text puntos;
     int vidas=3;
     bool terminada=false;
     int min=2;

@@ -12,6 +12,8 @@ class Jugador{
     int getVidas(){return vidas;}
     float getInvencibilidad(){return invencibilidad;}
     bool getInvencible(){return invencible;}
+    int getPuntos(){return puntos;}
+    void sumaPuntos(){puntos+=100;}
     void setPuesta(bool estado){bomba = estado;}
     void setVelocidad(int velocidad){kVel = velocidad;}
     void setVidas(int v){vidas = v;}
@@ -24,7 +26,7 @@ class Jugador{
              invencible=false;
           } 
    }
-    void setInicio(){    sprite->setPosition(160, 113); }
+    void setInicio(){    sprite->setPosition(160, 113); }//DEPENDE DEL MAPA
     void mover(int direccion);
     void quitarVidas(){if(vidas > 0)vidas--;}
 
@@ -39,4 +41,5 @@ class Jugador{
     int vidas = 3;
     float invencibilidad = -1;
     bool invencible;
+    int puntos;
 };

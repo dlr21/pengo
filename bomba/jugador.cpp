@@ -22,7 +22,7 @@ Jugador::Jugador(int numero)
             sprite->setPosition(192, 177);
     }
     
-    
+    puntos=0;
     invencible=false;
     identificador = numero;
     kVel = 2;

@@ -103,13 +103,8 @@ void Mundo::Event(sf::Event event,sf::RenderWindow &window){ //COSAS DEL MUNDO C
         //case sf::Event::MouseButtonPressed:
         case sf::Event::KeyPressed:
               ///Verifico si se pulsa alguna tecla de movimiento
-          switch (event.key.code) {
-            case 13: //n siguiente nivel 13
-              if(lvlactual<mapas.size()){
-                  mapas[lvlactual]->terminar();
-              }
-              //Colocacion de una bomba pulsando tecla ESPACIO.
-            case 57:
+          switch (event.key.code) {  
+            case 57://Colocacion de una bomba pulsando tecla ESPACIO. //EMPUJAR
             {
               //Si el jugador no tiene una bomba ya puesta, le permitimos poner una.
               if(jugador1->getPuesta() == false)
@@ -126,6 +121,11 @@ void Mundo::Event(sf::Event event,sf::RenderWindow &window){ //COSAS DEL MUNDO C
               }
               break;
             }
+            case 13: //n siguiente nivel 13
+              if(lvlactual<mapas.size()){
+                  mapas[lvlactual]->terminar();
+              }
+              break;
             case 6://g modo dios inmortal 6
               jugador1->changeInvencile();
             break;
@@ -134,7 +134,7 @@ void Mundo::Event(sf::Event event,sf::RenderWindow &window){ //COSAS DEL MUNDO C
               jugador1->setVidas(0);
             break;
 
-            case 31://esc salir 31
+            case 36://esc salir 31
               Contexto::Instance()->Quit();
               window.close();
             break;
@@ -143,25 +143,25 @@ void Mundo::Event(sf::Event event,sf::RenderWindow &window){ //COSAS DEL MUNDO C
               jugador1->mover(0);
               Colisiones::crearColisiones(*jugador1->getSprite(),todoSprites,0,jugador1->getVelocidad());
               Colisiones::colisionesBombas(*jugador1,totalBombas,0);
-              break;
+            break;
             //Abajo
             case 74:
               jugador1->mover(1);
               Colisiones::crearColisiones(*jugador1->getSprite(),todoSprites,1,jugador1->getVelocidad());
               Colisiones::colisionesBombas(*jugador1,totalBombas,1);
-              break;
+            break;
             //Derecha
             case 72:
               jugador1->mover(2);
               Colisiones::crearColisiones(*jugador1->getSprite(),todoSprites,2,jugador1->getVelocidad());
               Colisiones::colisionesBombas(*jugador1,totalBombas,2);
-              break;
+            break;
             //Izquierda
             case 71:
               jugador1->mover(3);
               Colisiones::crearColisiones(*jugador1->getSprite(),todoSprites,3,jugador1->getVelocidad());
               Colisiones::colisionesBombas(*jugador1,totalBombas,3);
-              break;
+            break;
 
           //Cualquier tecla desconocida se imprime por pantalla su código
           default:
@@ -218,7 +218,7 @@ void Mundo::Update(sf::RenderWindow &window) {//COSAS DEL MUNDO QUE SE ACTUALIZA
           Colisiones::update(temporizador,dinosaurios,*jugador1,totalExplosiones,*mapas[lvlactual],todoSprites); 
       if(jugador1->getVidas()==0){
         finjuego();
-      std::cout<<"pierdes"<<endl;
+        std::cout<<"pierdes"<<endl;
       }
       if(jugador1->getInvencible()){
         jugador1->setVidas(3);
@@ -241,7 +241,7 @@ void Mundo::finjuego(){
         //RENICIAR MUNDO
         this->renicio();
         this->Inicializar();
-       /* //MENU INICIAL
+       /*//MENU INICIAL
         Menu::Instance()->reinicio();
         ChangeState(Contexto::Instance(),Menu::Instance());*/
 }
