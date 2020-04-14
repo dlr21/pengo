@@ -433,33 +433,6 @@ maquina/contexto.cpp.s:
 	$(MAKE) -f CMakeFiles/libModulos.dir/build.make CMakeFiles/libModulos.dir/maquina/contexto.cpp.s
 .PHONY : maquina/contexto.cpp.s
 
-menu/menu.o: menu/menu.cpp.o
-
-.PHONY : menu/menu.o
-
-# target to build an object file
-menu/menu.cpp.o:
-	$(MAKE) -f CMakeFiles/libModulos.dir/build.make CMakeFiles/libModulos.dir/menu/menu.cpp.o
-.PHONY : menu/menu.cpp.o
-
-menu/menu.i: menu/menu.cpp.i
-
-.PHONY : menu/menu.i
-
-# target to preprocess a source file
-menu/menu.cpp.i:
-	$(MAKE) -f CMakeFiles/libModulos.dir/build.make CMakeFiles/libModulos.dir/menu/menu.cpp.i
-.PHONY : menu/menu.cpp.i
-
-menu/menu.s: menu/menu.cpp.s
-
-.PHONY : menu/menu.s
-
-# target to generate assembly for a file
-menu/menu.cpp.s:
-	$(MAKE) -f CMakeFiles/libModulos.dir/build.make CMakeFiles/libModulos.dir/menu/menu.cpp.s
-.PHONY : menu/menu.cpp.s
-
 mundo/mundo.o: mundo/mundo.cpp.o
 
 .PHONY : mundo/mundo.o
@@ -638,9 +611,6 @@ help:
 	@echo "... maquina/contexto.o"
 	@echo "... maquina/contexto.i"
 	@echo "... maquina/contexto.s"
-	@echo "... menu/menu.o"
-	@echo "... menu/menu.i"
-	@echo "... menu/menu.s"
 	@echo "... mundo/mundo.o"
 	@echo "... mundo/mundo.i"
 	@echo "... mundo/mundo.s"

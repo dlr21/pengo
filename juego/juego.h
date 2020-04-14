@@ -16,8 +16,8 @@ class Juego : public States {
   public:
     void Inicializar();
     static Juego* Instance();
-    void Event(sf::Event event,sf::RenderWindow &window);
-    void Update(sf::RenderWindow &window);
+    void Event(sf::Event event,sf::RenderWindow &window, float time);
+    void Update(sf::RenderWindow &window, float time);
     void Draw(sf::RenderWindow &window);
   protected:
     void Cargarecursos();

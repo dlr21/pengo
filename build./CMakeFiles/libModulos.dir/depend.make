@@ -9,7 +9,6 @@ CMakeFiles/libModulos.dir/IA/ia.cpp.o: ../ej_modulos/Tile.h
 CMakeFiles/libModulos.dir/IA/ia.cpp.o: ../mapa/Map.h
 CMakeFiles/libModulos.dir/IA/ia.cpp.o: ../maquina/contexto.h
 CMakeFiles/libModulos.dir/IA/ia.cpp.o: ../maquina/states.h
-CMakeFiles/libModulos.dir/IA/ia.cpp.o: ../menu/menu.h
 CMakeFiles/libModulos.dir/IA/ia.cpp.o: ../tinyxml-master/tinystr.h
 CMakeFiles/libModulos.dir/IA/ia.cpp.o: ../tinyxml-master/tinyxml.h
 CMakeFiles/libModulos.dir/IA/ia.cpp.o: ../IA/ia.cpp
@@ -53,7 +52,6 @@ CMakeFiles/libModulos.dir/juego/juego.cpp.o: ../ej_modulos/Tile.h
 CMakeFiles/libModulos.dir/juego/juego.cpp.o: ../mapa/Map.h
 CMakeFiles/libModulos.dir/juego/juego.cpp.o: ../maquina/contexto.h
 CMakeFiles/libModulos.dir/juego/juego.cpp.o: ../maquina/states.h
-CMakeFiles/libModulos.dir/juego/juego.cpp.o: ../menu/menu.h
 CMakeFiles/libModulos.dir/juego/juego.cpp.o: ../mundo/mundo.h
 CMakeFiles/libModulos.dir/juego/juego.cpp.o: ../tinyxml-master/tinystr.h
 CMakeFiles/libModulos.dir/juego/juego.cpp.o: ../tinyxml-master/tinyxml.h
@@ -69,23 +67,6 @@ CMakeFiles/libModulos.dir/maquina/contexto.cpp.o: ../maquina/contexto.cpp
 CMakeFiles/libModulos.dir/maquina/contexto.cpp.o: ../maquina/contexto.h
 CMakeFiles/libModulos.dir/maquina/contexto.cpp.o: ../maquina/states.h
 
-CMakeFiles/libModulos.dir/menu/menu.cpp.o: ../IA/ia.h
-CMakeFiles/libModulos.dir/menu/menu.cpp.o: ../adn/adn.h
-CMakeFiles/libModulos.dir/menu/menu.cpp.o: ../bomba/bombas.h
-CMakeFiles/libModulos.dir/menu/menu.cpp.o: ../bomba/colisiones.h
-CMakeFiles/libModulos.dir/menu/menu.cpp.o: ../bomba/jugador.h
-CMakeFiles/libModulos.dir/menu/menu.cpp.o: ../dinosaurio/dinosaurio.h
-CMakeFiles/libModulos.dir/menu/menu.cpp.o: ../ej_modulos/Tile.h
-CMakeFiles/libModulos.dir/menu/menu.cpp.o: ../juego/juego.h
-CMakeFiles/libModulos.dir/menu/menu.cpp.o: ../mapa/Map.h
-CMakeFiles/libModulos.dir/menu/menu.cpp.o: ../maquina/contexto.h
-CMakeFiles/libModulos.dir/menu/menu.cpp.o: ../maquina/states.h
-CMakeFiles/libModulos.dir/menu/menu.cpp.o: ../mundo/mundo.h
-CMakeFiles/libModulos.dir/menu/menu.cpp.o: ../tinyxml-master/tinystr.h
-CMakeFiles/libModulos.dir/menu/menu.cpp.o: ../tinyxml-master/tinyxml.h
-CMakeFiles/libModulos.dir/menu/menu.cpp.o: ../menu/menu.cpp
-CMakeFiles/libModulos.dir/menu/menu.cpp.o: ../menu/menu.h
-
 CMakeFiles/libModulos.dir/mundo/mundo.cpp.o: ../IA/ia.h
 CMakeFiles/libModulos.dir/mundo/mundo.cpp.o: ../adn/adn.h
 CMakeFiles/libModulos.dir/mundo/mundo.cpp.o: ../bomba/bombas.h
@@ -96,7 +77,6 @@ CMakeFiles/libModulos.dir/mundo/mundo.cpp.o: ../ej_modulos/Tile.h
 CMakeFiles/libModulos.dir/mundo/mundo.cpp.o: ../mapa/Map.h
 CMakeFiles/libModulos.dir/mundo/mundo.cpp.o: ../maquina/contexto.h
 CMakeFiles/libModulos.dir/mundo/mundo.cpp.o: ../maquina/states.h
-CMakeFiles/libModulos.dir/mundo/mundo.cpp.o: ../menu/menu.h
 CMakeFiles/libModulos.dir/mundo/mundo.cpp.o: ../tinyxml-master/tinystr.h
 CMakeFiles/libModulos.dir/mundo/mundo.cpp.o: ../tinyxml-master/tinyxml.h
 CMakeFiles/libModulos.dir/mundo/mundo.cpp.o: ../mundo/mundo.cpp

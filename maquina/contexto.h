@@ -23,8 +23,8 @@ class Contexto{
 
     void ChangeState(States* state);
 
-    void Event(sf::Event event,sf::RenderWindow &window);
-    void Update(sf::RenderWindow &window);
+    void Event(sf::Event event,sf::RenderWindow &window, float time);
+    void Update(sf::RenderWindow &window, float time);
     void Draw(sf::RenderWindow &window);
 
     bool Running() { return m_running; }

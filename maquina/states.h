@@ -11,8 +11,8 @@
 class States {
 public:
 	 virtual void Inicializar()=0;
-	 virtual void Event(sf::Event event,sf::RenderWindow &window)=0 ;
-	 virtual void Update(sf::RenderWindow &window)=0 ;
+	 virtual void Event(sf::Event event,sf::RenderWindow &window, float time)=0 ;
+	 virtual void Update(sf::RenderWindow &window, float time)=0 ;
 	 virtual void Draw(sf::RenderWindow &window)=0;
 	void ChangeState(Contexto* game, States* state) {
 		game->ChangeState(state);

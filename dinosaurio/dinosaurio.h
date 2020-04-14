@@ -62,16 +62,14 @@ class Dinosaurio
       void sumaPasos();
       void setDireccion(int i);
       int getDireccion();
+      void draw(sf::RenderWindow &window);
 
 
     private:
       float _Speed; // Velocidad
       int _Direccion;
       sf::Sprite* _Sprite = new sf::Sprite; // Sprite
-      sf::Texture _dino_texture_abajo;
-      sf::Texture _dino_texture_arriba;
-      sf::Texture _dino_texture_derecha;
-      sf::Texture _dino_texture_izquierda;
+      sf::Texture* textura;
       int _posdino; // Posicion a la que mira el dino ==> 0:Arriba | 1:Abajo | 2:Derecha | 3:Izquierda
       int _Vida; // Vida del dino
       int _Tipodino; // Indica el tipo de dinosaurio. 0: T-Rex | 1: Velociraptor | 2: Pterodactilo | 3: Triceratops

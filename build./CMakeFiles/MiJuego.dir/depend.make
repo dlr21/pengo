@@ -11,7 +11,6 @@ CMakeFiles/MiJuego.dir/main.cpp.o: ../ej_modulos/Tile.h
 CMakeFiles/MiJuego.dir/main.cpp.o: ../mapa/Map.h
 CMakeFiles/MiJuego.dir/main.cpp.o: ../maquina/contexto.h
 CMakeFiles/MiJuego.dir/main.cpp.o: ../maquina/states.h
-CMakeFiles/MiJuego.dir/main.cpp.o: ../menu/menu.h
 CMakeFiles/MiJuego.dir/main.cpp.o: ../tinyxml-master/tinystr.h
 CMakeFiles/MiJuego.dir/main.cpp.o: ../tinyxml-master/tinyxml.h
 CMakeFiles/MiJuego.dir/main.cpp.o: ../bomba/bombas.h

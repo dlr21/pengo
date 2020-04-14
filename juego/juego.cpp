@@ -18,15 +18,15 @@ void Juego::Inicializar() {
   m->Inicializar();
 }
 
-void Juego::Event(sf::Event event,sf::RenderWindow &window){
+void Juego::Event(sf::Event event,sf::RenderWindow &window, float time){
 
-m->Event(event,window);
+m->Event(event,window,time);
 
 }
 
-void Juego::Update(sf::RenderWindow &window) {
+void Juego::Update(sf::RenderWindow &window, float time) {
 
-        m->Update(window);
+        m->Update(window,time);
 }
  void Juego::Draw(sf::RenderWindow &window){
 

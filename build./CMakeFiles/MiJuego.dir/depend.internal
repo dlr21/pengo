@@ -12,7 +12,6 @@ CMakeFiles/MiJuego.dir/main.cpp.o
  ../mapa/Map.h
  ../maquina/contexto.h
  ../maquina/states.h
- ../menu/menu.h
  ../tinyxml-master/tinystr.h
  ../tinyxml-master/tinyxml.h
  /home/fv2/Desktop/PENGO/pengo/bomba/bombas.h

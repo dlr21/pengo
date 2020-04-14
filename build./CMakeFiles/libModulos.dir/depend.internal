@@ -10,7 +10,6 @@ CMakeFiles/libModulos.dir/IA/ia.cpp.o
  ../mapa/Map.h
  ../maquina/contexto.h
  ../maquina/states.h
- ../menu/menu.h
  ../tinyxml-master/tinystr.h
  ../tinyxml-master/tinyxml.h
  /home/fv2/Desktop/PENGO/pengo/IA/ia.cpp
@@ -54,7 +53,6 @@ CMakeFiles/libModulos.dir/juego/juego.cpp.o
  ../mapa/Map.h
  ../maquina/contexto.h
  ../maquina/states.h
- ../menu/menu.h
  ../mundo/mundo.h
  ../tinyxml-master/tinystr.h
  ../tinyxml-master/tinyxml.h
@@ -69,23 +67,6 @@ CMakeFiles/libModulos.dir/maquina/contexto.cpp.o
  /home/fv2/Desktop/PENGO/pengo/maquina/contexto.cpp
  /home/fv2/Desktop/PENGO/pengo/maquina/contexto.h
  /home/fv2/Desktop/PENGO/pengo/maquina/states.h
-CMakeFiles/libModulos.dir/menu/menu.cpp.o
- ../IA/ia.h
- ../adn/adn.h
- ../bomba/bombas.h
- ../bomba/colisiones.h
- ../bomba/jugador.h
- ../dinosaurio/dinosaurio.h
- ../ej_modulos/Tile.h
- ../juego/juego.h
- ../mapa/Map.h
- ../maquina/contexto.h
- ../maquina/states.h
- ../mundo/mundo.h
- ../tinyxml-master/tinystr.h
- ../tinyxml-master/tinyxml.h
- /home/fv2/Desktop/PENGO/pengo/menu/menu.cpp
- /home/fv2/Desktop/PENGO/pengo/menu/menu.h
 CMakeFiles/libModulos.dir/mundo/mundo.cpp.o
  ../IA/ia.h
  ../adn/adn.h
@@ -97,7 +78,6 @@ CMakeFiles/libModulos.dir/mundo/mundo.cpp.o
  ../mapa/Map.h
  ../maquina/contexto.h
  ../maquina/states.h
- ../menu/menu.h
  ../tinyxml-master/tinystr.h
  ../tinyxml-master/tinyxml.h
  /home/fv2/Desktop/PENGO/pengo/mundo/mundo.cpp

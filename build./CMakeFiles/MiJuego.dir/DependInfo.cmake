@@ -13,7 +13,6 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "../ej_modulos"
   "../mapa"
   "../maquina"
-  "../menu"
   "../mundo"
   "../juego"
   "../bomba"

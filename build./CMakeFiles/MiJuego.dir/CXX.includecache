@@ -15,8 +15,6 @@ states.h
 ../IA/states.h
 Map.h
 ../IA/Map.h
-menu.h
-../IA/menu.h
 Tile.h
 ../IA/Tile.h
 jugador.h
@@ -87,14 +85,6 @@ SFML/Graphics.hpp
 ../maquina/SFML/Graphics.hpp
 contexto.h
 ../maquina/contexto.h
-
-../menu/menu.h
-string
--
-iostream
--
-states.h
-../menu/states.h
 
 ../tinyxml-master/tinystr.h
 assert.h
@@ -195,8 +185,6 @@ states.h
 /home/fv2/Desktop/PENGO/pengo/mundo/states.h
 Map.h
 /home/fv2/Desktop/PENGO/pengo/mundo/Map.h
-menu.h
-/home/fv2/Desktop/PENGO/pengo/mundo/menu.h
 Tile.h
 /home/fv2/Desktop/PENGO/pengo/mundo/Tile.h
 jugador.h

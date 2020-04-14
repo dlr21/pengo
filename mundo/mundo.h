@@ -6,7 +6,6 @@
 #include <iostream>
 #include "states.h"
 #include "Map.h"
-#include "menu.h"
 #include "Tile.h"
 #include "jugador.h"
 #include "bombas.h"
@@ -52,8 +51,8 @@ class Mundo : public States {
   public:
     void Inicializar();
     static Mundo* Instance();
-    void Event(sf::Event event,sf::RenderWindow &window);
-    void Update(sf::RenderWindow &window);
+    void Event(sf::Event event,sf::RenderWindow &window, float time);
+    void Update(sf::RenderWindow &window, float time);
     void Draw(sf::RenderWindow &window);
     void renicio();
     void finjuego();

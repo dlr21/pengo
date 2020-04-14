@@ -6,5 +6,5 @@ CXX_FLAGS =  -std=c++1y -Wall -Wextra
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/fv2/Desktop/PENGO/pengo/ej_modulos -I/home/fv2/Desktop/PENGO/pengo/mapa -I/home/fv2/Desktop/PENGO/pengo/maquina -I/home/fv2/Desktop/PENGO/pengo/menu -I/home/fv2/Desktop/PENGO/pengo/mundo -I/home/fv2/Desktop/PENGO/pengo/juego -I/home/fv2/Desktop/PENGO/pengo/bomba -I/home/fv2/Desktop/PENGO/pengo/dinosaurio -I/home/fv2/Desktop/PENGO/pengo/adn -I/home/fv2/Desktop/PENGO/pengo/IA -I/home/fv2/Desktop/PENGO/pengo/tinyxml-master 
+CXX_INCLUDES = -I/home/fv2/Desktop/PENGO/pengo/ej_modulos -I/home/fv2/Desktop/PENGO/pengo/mapa -I/home/fv2/Desktop/PENGO/pengo/maquina -I/home/fv2/Desktop/PENGO/pengo/mundo -I/home/fv2/Desktop/PENGO/pengo/juego -I/home/fv2/Desktop/PENGO/pengo/bomba -I/home/fv2/Desktop/PENGO/pengo/dinosaurio -I/home/fv2/Desktop/PENGO/pengo/adn -I/home/fv2/Desktop/PENGO/pengo/IA -I/home/fv2/Desktop/PENGO/pengo/tinyxml-master 
 

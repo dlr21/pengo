@@ -12,30 +12,16 @@ float velocidad_velociraptor = 0.00225;
 Dinosaurio::Dinosaurio(){ // Constructor por defecto
     // Texturas de todos los movimientos del dinosaurio.
     // Se crean aqui porque asi, nada mas llamar al constructor, estan dentro de la clase 
-    sf::Texture dino_abajo, dino_derecha, dino_izquierda, dino_arriba;
-    _Sprite->setScale(0.5,0.5);
-    
-    if(!dino_abajo.loadFromFile("resources/dino_abajo.png")){
-        std::cerr << "Error cargando dino_abajo.png";
+    textura = new sf::Texture();
+    if (!textura->loadFromFile("resources/pengos.png")) {
+        std::cerr << "Error cargando la imagen sprites.png";
         exit(0);
     }
-    if(!dino_derecha.loadFromFile("resources/dino_derecha.png")){
-        std::cerr << "Error cargando dino_derecha.png";
-        exit(0);
-    }
-    if(!dino_izquierda.loadFromFile("resources/dino_izquierda.png")){
-        std::cerr << "Error cargando dino_izquierda.png";
-        exit(0);
-    }     
-    if(!dino_arriba.loadFromFile("resources/dino_arriba.png")){
-        std::cerr << "Error cargando dino_arriba.png";
-        exit(0);
-    }        
 
-    _dino_texture_abajo=dino_abajo;
-    _dino_texture_arriba=dino_arriba;
-    _dino_texture_derecha=dino_derecha;
-    _dino_texture_izquierda=dino_izquierda;     
+    _Sprite = new sf::Sprite();
+    _Sprite->setTexture(*textura);
+    _Sprite->setOrigin(32 / 2, 32 / 2);
+    _Sprite->setTextureRect(sf::IntRect(0 * 32, 0 * 32, 32, 32));   
     srand (time(NULL));    
     _posdino = rand() % 5; // Posicion inicial por defecto hacia abajo
     _Direccion = _Tipodino;
@@ -81,16 +67,16 @@ sf::Sprite* Dinosaurio::getSprite() { // Devuelve el sprite
      * estando ahi.
      */
     if(_posdino==0){
-        _Sprite->setTexture(_dino_texture_arriba);
+        _Sprite->setTextureRect(sf::IntRect(4 * 32, 9 * 32, 32, 32));
     }
     if(_posdino==1){
-        _Sprite->setTexture(_dino_texture_abajo);
+        _Sprite->setTextureRect(sf::IntRect(0 * 32, 9 * 32, 32, 32));
     }   
     if(_posdino==2){
-        _Sprite->setTexture(_dino_texture_derecha);
+        _Sprite->setTextureRect(sf::IntRect(6 * 32, 9 * 32, 32, 32));
     }
     if(_posdino==3){
-        _Sprite->setTexture(_dino_texture_izquierda);
+        _Sprite->setTextureRect(sf::IntRect(3 * 32, 9 * 32, 32, 32));
     }
     return _Sprite;
 }
@@ -134,7 +120,7 @@ sf::FloatRect Dinosaurio::getHitbox(){ // FloatRect devuelve coordenada superior
 
 // Funciones de movimiento (salto y movimientos)
 int Dinosaurio::marriba(std::vector<sf::Sprite*> &todo){ // Movimiento arriba
-    _Sprite->setTexture(_dino_texture_arriba);
+    _Sprite->setTextureRect(sf::IntRect(4 * 32, 9 * 32, 32, 32));
     for(int i = 0; i < 160; i++){
         for(unsigned int j = 0;j < todo.size();j++)
         {
@@ -153,7 +139,7 @@ int Dinosaurio::marriba(std::vector<sf::Sprite*> &todo){ // Movimiento arriba
 }
 
 int Dinosaurio::mabajo(std::vector<sf::Sprite*> &todo){ // Movimiento abajo
-    _Sprite->setTexture(_dino_texture_abajo);
+        _Sprite->setTextureRect(sf::IntRect(0 * 32, 9 * 32, 32, 32));
     for(int i = 0; i < 160; i++){
         for(unsigned int j = 0;j < todo.size();j++)
         {
@@ -172,7 +158,7 @@ int Dinosaurio::mabajo(std::vector<sf::Sprite*> &todo){ // Movimiento abajo
 }
 
 int Dinosaurio::mderecha(std::vector<sf::Sprite*> &todo){ // Movimiento derecha
-    //_Sprite.setTextureRect(sf::IntRect(1 * 75, 2 * 75, 75, 75));
+        _Sprite->setTextureRect(sf::IntRect(6 * 32, 9 * 32, 32, 32));
     for(int i = 0; i < 160; i++){
         for(unsigned int j = 0;j < todo.size();j++)
         {
@@ -191,6 +177,7 @@ int Dinosaurio::mderecha(std::vector<sf::Sprite*> &todo){ // Movimiento derecha
 }
 
 int Dinosaurio::mizquierda(std::vector<sf::Sprite*> &todo){ // Movimiento izquierda
+        _Sprite->setTextureRect(sf::IntRect(3 * 32, 9 * 32, 32, 32));
     for(int i = 0; i < 160; i++){
         for(unsigned int j = 0;j < todo.size();j++)
         {
@@ -243,6 +230,11 @@ void Dinosaurio::salto(int pos_mirando){
         }
     }
 }
+void Dinosaurio::draw(sf::RenderWindow &window)
+{
+    window.draw(*_Sprite);
+}
+
 
 
 

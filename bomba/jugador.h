@@ -27,7 +27,7 @@ class Jugador{
           } 
    }
     void setInicio(){    sprite->setPosition(160, 113); }//DEPENDE DEL MAPA
-    void mover(int direccion);
+    void mover(int direccion,float time);
     void quitarVidas(){if(vidas > 0)vidas--;}
 
     void draw(sf::RenderWindow &window);

@@ -15,8 +15,6 @@ states.h
 ../IA/states.h
 Map.h
 ../IA/Map.h
-menu.h
-../IA/menu.h
 Tile.h
 ../IA/Tile.h
 jugador.h
@@ -64,16 +62,6 @@ SFML/Graphics.hpp
 jugador.h
 ../ej_modulos/jugador.h
 
-../juego/juego.h
-string
--
-iostream
--
-states.h
-../juego/states.h
-mundo.h
-../juego/mundo.h
-
 ../mapa/Map.h
 tinyxml.h
 ../mapa/tinyxml.h
@@ -98,14 +86,6 @@ SFML/Graphics.hpp
 contexto.h
 ../maquina/contexto.h
 
-../menu/menu.h
-string
--
-iostream
--
-states.h
-../menu/states.h
-
 ../mundo/mundo.h
 string
 -
@@ -115,8 +95,6 @@ states.h
 ../mundo/states.h
 Map.h
 ../mundo/Map.h
-menu.h
-../mundo/menu.h
 Tile.h
 ../mundo/Tile.h
 jugador.h
@@ -173,8 +151,6 @@ states.h
 /home/fv2/Desktop/PENGO/pengo/IA/states.h
 Map.h
 /home/fv2/Desktop/PENGO/pengo/IA/Map.h
-menu.h
-/home/fv2/Desktop/PENGO/pengo/IA/menu.h
 Tile.h
 /home/fv2/Desktop/PENGO/pengo/IA/Tile.h
 jugador.h
@@ -310,20 +286,6 @@ SFML/Graphics.hpp
 contexto.h
 /home/fv2/Desktop/PENGO/pengo/maquina/contexto.h
 
-/home/fv2/Desktop/PENGO/pengo/menu/menu.cpp
-menu.h
-/home/fv2/Desktop/PENGO/pengo/menu/menu.h
-juego.h
-/home/fv2/Desktop/PENGO/pengo/menu/juego.h
-
-/home/fv2/Desktop/PENGO/pengo/menu/menu.h
-string
--
-iostream
--
-states.h
-/home/fv2/Desktop/PENGO/pengo/menu/states.h
-
 /home/fv2/Desktop/PENGO/pengo/mundo/mundo.cpp
 mundo.h
 /home/fv2/Desktop/PENGO/pengo/mundo/mundo.h
@@ -337,8 +299,6 @@ states.h
 /home/fv2/Desktop/PENGO/pengo/mundo/states.h
 Map.h
 /home/fv2/Desktop/PENGO/pengo/mundo/Map.h
-menu.h
-/home/fv2/Desktop/PENGO/pengo/mundo/menu.h
 Tile.h
 /home/fv2/Desktop/PENGO/pengo/mundo/Tile.h
 jugador.h

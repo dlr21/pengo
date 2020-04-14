@@ -25,12 +25,12 @@
 		std::cout<<this->states.size()<<"\n";
 
 	}
-	void Contexto::Event(sf::Event event, sf::RenderWindow &window){
-			this->states.back()->Event(event, window);
+	void Contexto::Event(sf::Event event, sf::RenderWindow &window, float time){
+			this->states.back()->Event(event, window, time);
 	}
-	void Contexto::Update(sf::RenderWindow &window){
+	void Contexto::Update(sf::RenderWindow &window, float time){
 		// let the state update the game
-      this->states.back()->Update(window);
+      this->states.back()->Update(window,time);
 	}
 	void Contexto::Draw(sf::RenderWindow &window){
 		// let the state draw the screen

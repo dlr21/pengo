@@ -53,7 +53,7 @@ Map::Map(string s,int puntos) {
   const char *filename=img->Attribute("source");
   std::cout<<filename<<endl;
 
-  _tilesettexture.loadFromFile("resources/tilebase.png");
+
   //capas
     TiXmlElement *layer = data->FirstChildElement("layer");
     _numlayers=0;
@@ -69,7 +69,8 @@ Map::Map(string s,int puntos) {
 
   //reserva memoria
   reservarMemoria(_numlayers);
-
+  _tilesettexture.loadFromFile("resources/bloques.png");
+   //_tilesettexture.loadFromFile("resources/tilebase.png");
   std::cout<<"reservado"<<endl;
   //cargando los gids
   TiXmlElement *aux;
@@ -88,8 +89,6 @@ Map::Map(string s,int puntos) {
           }
         }
     }
-
-      int cont=0;
       std::cout<<"gids";
       //crear matriz sprites del mapa 
       for(int l=0; l<_numlayers;l++){
@@ -100,17 +99,11 @@ Map::Map(string s,int puntos) {
             if(gid>-1){
               _tilemapSprite[l][y][x]=new sf::Sprite(_tilesettexture,{0+(gid*32),0+(gid*32),32,32});
               _tilemapSprite[l][y][x]->setPosition(112+(x*_tilewidth),64+(y*_tileheigh));
-              cont++;
             }
           }
         }
       }
-
-
-      std::cout<< cont;
       std::cout<<"arraysprites"<<endl;
-      
-
   }
   /*TiXmlElement *cambio(int l, TiXmlElement *layer){
       for(int i=0;i<l;i++){
@@ -233,8 +226,8 @@ void Map::anadirVector(std::vector<sf::Sprite*> &vectorS)
   for(unsigned int l=0; l<_numlayers;l++){
         for( unsigned int y=0; y<_height;y++){
           for(unsigned int x=0; x<_width;x++){
-            int gid=_tilemap [l][y][x]-1;
-            if(gid == 0 || gid == 2) //Si son piedras o paredes, lo metemos en el sprite de las colisiones.
+            int gid=_tilemap [l][y][x];
+            if(gid == 1 || gid == 2 || gid == 3 || gid == 4 || gid == 5 ||gid == 6 )
             {
               vectorS.push_back(_tilemapSprite[l][y][x]);
             }

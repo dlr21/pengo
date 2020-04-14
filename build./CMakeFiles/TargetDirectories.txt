@@ -8,8 +8,6 @@
 /home/fv2/Desktop/PENGO/pengo/build./mapa/CMakeFiles/rebuild_cache.dir
 /home/fv2/Desktop/PENGO/pengo/build./maquina/CMakeFiles/edit_cache.dir
 /home/fv2/Desktop/PENGO/pengo/build./maquina/CMakeFiles/rebuild_cache.dir
-/home/fv2/Desktop/PENGO/pengo/build./menu/CMakeFiles/edit_cache.dir
-/home/fv2/Desktop/PENGO/pengo/build./menu/CMakeFiles/rebuild_cache.dir
 /home/fv2/Desktop/PENGO/pengo/build./mundo/CMakeFiles/edit_cache.dir
 /home/fv2/Desktop/PENGO/pengo/build./mundo/CMakeFiles/rebuild_cache.dir
 /home/fv2/Desktop/PENGO/pengo/build./juego/CMakeFiles/edit_cache.dir
