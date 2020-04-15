@@ -32,64 +32,14 @@ void Colisiones::crearColisiones(sf::Sprite &jugador,std::vector<sf::Sprite*> ob
       }
 }
 
-void Colisiones::colisionesBombas(Jugador &jugador,std::vector<Bomba> &bombas, int direccion, float time)
-{
-  for(unsigned int i = 0;i < bombas.size();i++)
-  {
-    //Ha encontrado la bomba con la que esta colisionando.
-    if(bombas[i].getBomba().getGlobalBounds().intersects(jugador.getSprite()->getGlobalBounds()))
-    {
-      std::cout << "He entrado 1" << std::endl;
-      if(bombas[i].getColision() == true)
-      {
-        std::cout << "He entrado 2" << std::endl;
-      switch (direccion)
-              {
-                //Arriba
-                case 0:
-                  jugador.mover(1,time);
-                  break;
-                //Abajo
-                case 1:
-                  jugador.mover(0,time);
-                  break;
-                //Izquierda
-                case 2:
-                  jugador.mover(3,time);
-                  break;
-                //Derecha
-                case 3:
-                  jugador.mover(2,time);
-                  break;
-              }
-      }
-    }
-    else
-    {
-      //Si no colisiona con una bomba pero esa bomba es suya y aun no tiene colision, se la activamos.
-      if(bombas[i].getPropietario() == 1 && bombas[i].getColision() == false)
-      {
-        std::cout << bombas[i].getColision() << std::endl;
-        std::cout << "Acabo de activar una colision" << std::endl;
-        std::cout << bombas[i].setColision() << std::endl;
-      }
-    }
-  }
-}
-
-
-void Colisiones::update(sf::Clock &temporizador,std::vector<Dinosaurio*> &dinosaurios,Jugador &jugador,std::vector<sf::Sprite> &totalExplosiones,Map &mapa,  std::vector<sf::Sprite*> &todoSprites)
+void Colisiones::update(sf::Clock &temporizador,std::vector<Dinosaurio*> &dinosaurios,Jugador &jugador,std::vector<sf::Sprite> &totalExplosiones,Map &mapa,  std::vector<sf::Sprite*> &todoSprites,std::vector<sf::Sprite*> &paredesSprites, float time)
 {
   sf::Sprite**** mpSprite = mapa.gettilemapSprite();
   int*** tilemap= mapa.gettilemap();
   int lay=mapa.getnumlayers();
   int hei=mapa.getheight();
   int wid=mapa.getwidth();
-
-  for(unsigned int i = 0;i < totalExplosiones.size();i++)
-  {
-    //EXPLOSION DINOSAURIOS
-    for(unsigned int j = 0;j < dinosaurios.size();j++)
+    /*for(unsigned int j = 0;j < dinosaurios.size();j++)
     {
       if(dinosaurios[j]->getSprite()->getGlobalBounds().intersects(totalExplosiones[i].getGlobalBounds()))
       {
@@ -105,23 +55,51 @@ void Colisiones::update(sf::Clock &temporizador,std::vector<Dinosaurio*> &dinosa
               }
             }
             dinosaurios.erase(dinosaurios.begin() + j);
+            jugador.sumaPuntos();
           }
         }
       }
-    }
-    //EXPLOSION JUGADOR
-    if(jugador.getSprite()->getGlobalBounds().intersects(totalExplosiones[i].getGlobalBounds()))
+    }*/
+
+      for(unsigned int j = 0;j < paredesSprites.size();j++){
+        //JUGADOR CON PARED
+        if(jugador.getSprite()->getGlobalBounds().intersects(paredesSprites[j]->getGlobalBounds()))
+        {
+          
+        }
+
+      }
+
+
+
+      for(unsigned int j = 0;j < dinosaurios.size();j++)
     {
-      //El jugador tiene invencibilidad de un segundo cuando colisiona con una explosion.
-      if(jugador.getInvencibilidad() == -1 || temporizador.getElapsedTime().asSeconds() - jugador.getInvencibilidad() > 1)
+      //JUGADOR CON SNOBEE
+      if(jugador.getSprite()->getGlobalBounds().intersects(dinosaurios[j]->getSprite()->getGlobalBounds()))
       {
-        jugador.quitarVidas();
-        std::cout << jugador.getVidas() << std::endl;
-        jugador.setInvencibilidad(temporizador.getElapsedTime().asSeconds());
+        std::cout<<"colision"<<endl;
+        if(dinosaurios[j]->getvulnerable()){
+          dinosaurios[j]->modifyVida();
+          if(dinosaurios[j]->getVida() == 0)
+          {
+            for(unsigned int a = 0;a < todoSprites.size();a++){
+              if(todoSprites[a]==dinosaurios[j]->getSprite()){
+                todoSprites.erase(todoSprites.begin() + a);
+              }
+            }
+            dinosaurios.erase(dinosaurios.begin() + j);
+            jugador.sumaPuntos();
+          }
+        }else if(jugador.getInvencibilidad() == -1 || temporizador.getElapsedTime().asSeconds() - jugador.getInvencibilidad() > 2)
+        {
+          jugador.quitarVidas();
+          std::cout << jugador.getVidas() << std::endl;
+          jugador.setInvencibilidad(temporizador.getElapsedTime().asSeconds());
+        }
       }
     }
-    //EXPLOSION CON ROCAS
-    for(unsigned int l=0; l<lay;l++){
+
+    /*for(unsigned int l=0; l<lay;l++){
         for( unsigned int y=0; y<hei;y++){
           for(unsigned int x=0; x<wid;x++){
             int gid=tilemap [l][y][x]-1;
@@ -137,6 +115,6 @@ void Colisiones::update(sf::Clock &temporizador,std::vector<Dinosaurio*> &dinosa
             }
           }
         }
-      }
-  }
+      }*/
+  
 }

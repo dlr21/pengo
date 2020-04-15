@@ -47,6 +47,8 @@ class Mundo : public States {
     //Vector que almacena todos los sprites para comprobar las colisiones.
     std::vector<sf::Sprite*> todoSprites;
 
+    std::vector<sf::Sprite*> paredesSprites;
+
     int _cont = 0; // Contador de iteraciones del juego
   public:
     void Inicializar();
@@ -82,6 +84,12 @@ class Mundo : public States {
           todoSprites[i]=NULL;
         }
         todoSprites.clear();
+        for(unsigned int i=0;i<paredesSprites.size();i++){
+          std::cout<<"colisiones delete"<<endl;
+          delete paredesSprites[i];
+          paredesSprites[i]=NULL;
+        }
+        paredesSprites.clear();
     }
     void borrarmapas(){
       for(unsigned int i=0;i<mapas.size();i++){

@@ -14,7 +14,6 @@ Mundo* Mundo::jinstance=0;
 
 void Mundo::Inicializar() {
       std::cout<<"mundoiniciado\n";
-      //crear mundo
       dif=1;
       lvls=2; //numero de niveles
       play=1;//numero de jugadores      
@@ -29,13 +28,10 @@ void Mundo::Inicializar() {
         std::cout<<aleat<<endl;
         string s="resources/mapas/"+to_string(dif)+"mapa"+to_string(aleat)+".tmx";
         std::cout<<s<<endl;
-        ///std::cout<<"premap";
         Map* m=new Map(s,dif+3);
-        //std::cout<<"prepush"<<endl;
         std::cout<< mapas.size()<<endl;
         mapas.push_back(m);//meter los mapas en el vector de mapas
         std::cout<< mapas.size()<<endl;
-        //std::cout<<"postpush"<<endl;
       }
 
 
@@ -83,7 +79,6 @@ void Mundo::crearDinos(Map* m,int tot){
               Dinosaurio *dino1 = new Dinosaurio(); // Constructor del dinosaurio
               dino1->modifyPosition(112+(x*32),64+(y*32)); // Punto de spawn. Debe estar dentro del mapa
               dinosaurios.push_back(dino1); // Guardar en el vector de dinosaurios
-              todoSprites.push_back(dino1->getSprite()); //Lo añadimos al vector de colisiones.
               cont++;
               if (tot==cont) { todos=true; }
             }
@@ -103,21 +98,9 @@ void Mundo::Event(sf::Event event,sf::RenderWindow &window, float time){ //COSAS
         case sf::Event::KeyPressed:
               ///Verifico si se pulsa alguna tecla de movimiento
           switch (event.key.code) {  
-            case 57://Colocacion de una bomba pulsando tecla ESPACIO. //EMPUJAR
+            case 57: //EMPUJAR
             {
-              //Si el jugador no tiene una bomba ya puesta, le permitimos poner una.
-              if(jugador1->getPuesta() == false)
-              {
-                //Nos guardamos el segundo exacto en el que se pone la bomba.
-                tiemposBomba.push_back(temporizador.getElapsedTime().asSeconds());
-                //Creamos una instancia de bomba.
-                Bomba bomba(jugador1->getSprite()->getPosition().x, jugador1->getSprite()->getPosition().y);
-                bomba.setPropietario(jugador1->getIdentificador());
-                //Lo añadimos al vector de bombas.
-                totalBombas.push_back(bomba);
-
-                jugador1->setPuesta(true);
-              }
+              jugador1->setempujon(true);
               break;
             }
             case 13: //n siguiente nivel 13
@@ -139,28 +122,31 @@ void Mundo::Event(sf::Event event,sf::RenderWindow &window, float time){ //COSAS
             break;
             //Arriba
             case 73:
+            jugador1->animacion(0,time);
               jugador1->mover(0,time);
               Colisiones::crearColisiones(*jugador1->getSprite(),todoSprites,0,jugador1->getVelocidad(), time);
-              Colisiones::colisionesBombas(*jugador1,totalBombas,0,time);
+
             break;
             //Abajos
             case 74:
+            jugador1->animacion(1,time);
               jugador1->mover(1,time);
               Colisiones::crearColisiones(*jugador1->getSprite(),todoSprites,1,jugador1->getVelocidad(), time);
-              Colisiones::colisionesBombas(*jugador1,totalBombas,1,time);
+
             break;
             //Derecha
             case 72:
+            jugador1->animacion(2,time);
               jugador1->mover(2,time);
-              //jugador1->CAMBIAR SPRITE
               Colisiones::crearColisiones(*jugador1->getSprite(),todoSprites,2,jugador1->getVelocidad(), time);
-              Colisiones::colisionesBombas(*jugador1,totalBombas,2,time);
+
             break;
             //Izquierda
             case 71:
+            jugador1->animacion(3,time);
               jugador1->mover(3,time);
               Colisiones::crearColisiones(*jugador1->getSprite(),todoSprites,3,jugador1->getVelocidad(), time);
-              Colisiones::colisionesBombas(*jugador1,totalBombas,3,time);
+
             break;
 
           //Cualquier tecla desconocida se imprime por pantalla su código
@@ -205,13 +191,14 @@ void Mundo::Update(sf::RenderWindow &window, float time) {//COSAS DEL MUNDO QUE 
           }
           if(!colisiones){
             mapas[lvlactual]->anadirVector(todoSprites);
+            mapas[lvlactual]->anadirParedes(paredesSprites);
             colisiones=true;
           }
         }
     if(play==1){// UN JUGADOR O DOS JUGADORES UPDATEAN ELLOS Y SUS HUDS
       hud1->Update(jugador1);
           Bomba::update(temporizador,*jugador1,totalBombas,totalExplosiones,tiemposBomba,tiemposExplosiones);
-          Colisiones::update(temporizador,dinosaurios,*jugador1,totalExplosiones,*mapas[lvlactual],todoSprites); 
+          Colisiones::update(temporizador,dinosaurios,*jugador1,totalExplosiones,*mapas[lvlactual],todoSprites,paredesSprites,time); 
       if(jugador1->getVidas()==0){
         finjuego();
         std::cout<<"pierdes"<<endl;
@@ -260,16 +247,6 @@ void Mundo::Draw(sf::RenderWindow &window){//dibujar mapa y hud
         if(adns[l]->getvisible())adns[l]->draw(window);
       }
     }  
-    //DIBUJAR BOMBAS
-      for(unsigned int i = 0;i < totalBombas.size();i++)
-      {
-        totalBombas[i].draw(window);
-      }
-      //DIBUJAR EXPLOSIONES
-      for(unsigned int i = 0;i < totalExplosiones.size();i++)
-      {
-        window.draw(totalExplosiones[i]);
-      }
       //DIBUJAR DINOSAURIOS
       for(unsigned int i=0; i < dinosaurios.size(); i++)
       {

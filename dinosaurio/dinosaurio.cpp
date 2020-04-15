@@ -73,7 +73,6 @@ void Dinosaurio::setSpeed(){ // Cambiar la velocidad
 }
 
 void Dinosaurio::setVida(){ // Cambiar vida
-
         _Vida = 1;
 }
 

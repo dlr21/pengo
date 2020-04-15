@@ -29,6 +29,10 @@ class Jugador{
     void setInicio(){    sprite->setPosition(112+48, 64+48); }//DEPENDE DEL MAPA
     void mover(int direccion,float time);
     void quitarVidas(){if(vidas > 0)vidas--;}
+    int getmir(){return mir;}
+    void setmir(int i){mir=i;}
+    bool getempujon(){return empuja;}
+    void setempujon(bool i){empuja=i;}
 
     void draw(sf::RenderWindow &window);
     void animacion(int d,float time);
@@ -46,4 +50,6 @@ class Jugador{
     float switchtime=0.1;
     float totaltime=0;
     bool animal=true;
+    int mir=0;
+    bool empuja=false;
 };

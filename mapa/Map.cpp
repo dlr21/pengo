@@ -232,3 +232,17 @@ void Map::anadirVector(std::vector<sf::Sprite*> &vectorS)
         }
       }
 }
+void Map::anadirParedes(std::vector<sf::Sprite*> &vectorS)
+{
+  for(unsigned int l=0; l<_numlayers;l++){
+        for( unsigned int y=0; y<_height;y++){
+          for(unsigned int x=0; x<_width;x++){
+            int gid=_tilemap [l][y][x];
+            if(gid == 0 || gid == 1 || gid == 2 || gid == 3 || gid == 4 )
+            {
+              vectorS.push_back(_tilemapSprite[l][y][x]);
+            }
+          }
+        }
+      }
+}

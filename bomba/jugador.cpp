@@ -27,6 +27,25 @@ void Jugador::draw(sf::RenderWindow &window)
     window.draw(*sprite);
 }
 void Jugador::animacion(int dir,float deltatime){
+    if(mir!=dir){
+        mir=dir;
+            if(dir==0) {
+                            sprite->setTextureRect(sf::IntRect(4 * 32, 0 * 32, 32, 32));
+
+            }
+            if(dir==1) {
+                            sprite->setTextureRect(sf::IntRect(0 * 32, 0 * 32, 32, 32));
+
+            }
+            if(dir==2) {
+                            sprite->setTextureRect(sf::IntRect(7 * 32, 0 * 32, 32, 32));
+
+            }
+            if(dir==3) {
+                            sprite->setTextureRect(sf::IntRect(3 * 32, 0 * 32, 32, 32));
+
+            }
+    }
     totaltime+=deltatime;
     std::cout<<totaltime<<"tiempo total"<<std::endl;
     if(totaltime>switchtime){
@@ -77,22 +96,22 @@ void Jugador::mover(int direccion, float time)
 
     //Arriba
     case 0:
-        animacion(direccion,time);
+
         sprite->move(0, -kVel*time);
         break;
     //Abajo
     case 1:
-        animacion(direccion,time);
+
         sprite->move(0, kVel*time);
         break;
     //Derecha
     case 2:
-        animacion(direccion,time);
+
         sprite->move(kVel*time, 0);
         break;
     //Izquierda
     case 3:
-        animacion(direccion,time);
+
         sprite->move(-kVel*time, 0);
         break;
     }

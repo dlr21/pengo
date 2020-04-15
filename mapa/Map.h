@@ -48,6 +48,7 @@ public:
   sf::Sprite gettilemapSprite(int l, int y, int x); // Get sprite de los til
   sf::Sprite spawnDino(int pos_dino, int l, int y, int x);
   void anadirVector(std::vector<sf::Sprite*> &vectorS);
+  void anadirParedes(std::vector<sf::Sprite*> &vectorS);
   void moveRightDino();
   void moveLeftDino();
   void moveUpDino();
