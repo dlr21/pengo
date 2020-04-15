@@ -2,11 +2,6 @@
 #include <iostream>
 #include "dinosaurio.h"
 
-// Velocidades
-float velocidad_normal = 0.0015;
-
-
-
 
 Dinosaurio::Dinosaurio(){ // Constructor por defecto
     // Texturas de todos los movimientos del dinosaurio.
@@ -67,6 +62,7 @@ void Dinosaurio::modifyPosition(int x, int y){ // Cambiar posicion del dinosauri
 }
 
 
+
 int Dinosaurio::getVida(){ // Devolver vida
     return _Vida;
 }
@@ -80,81 +76,84 @@ sf::FloatRect Dinosaurio::getHitbox(){ // FloatRect devuelve coordenada superior
 }
 
 // Funciones de movimiento (salto y movimientos)
-int Dinosaurio::marriba(std::vector<sf::Sprite*> &todo){ // Movimiento arriba
-
-    _Sprite->setTextureRect(sf::IntRect(4 * 32, 9 * 32, 32, 32));
+int Dinosaurio::marriba(std::vector<sf::Sprite*> &todo, float time){ // Movimiento arriba
+    
     for(int i = 0; i < 160; i++){
         for(unsigned int j = 0;j < todo.size();j++)
         {
             if(_Sprite->getGlobalBounds().intersects(todo[j]->getGlobalBounds()) && _Sprite!=todo[j])
             {
                 //std::cout<<"dino no mueve arriba"<<std::endl;
-                _posdino = 0;
-                 _Sprite->move(0, _Speed);
+                
+                 _Sprite->move(0, _Speed*time);
                 return 0;
             }
         }
-        _Sprite->move(0, -(_Speed));
+        animacion(_posdino,time);
+        _Sprite->move(0, -(_Speed*time));
     }
-    _posdino = 0;
+   
     return 0; // Posicion arriba
 
 }
 
-int Dinosaurio::mabajo(std::vector<sf::Sprite*> &todo){ // Movimiento abajo
-        _Sprite->setTextureRect(sf::IntRect(0 * 32, 9 * 32, 32, 32));
+int Dinosaurio::mabajo(std::vector<sf::Sprite*> &todo, float time){ // Movimiento abajo
+        
     for(int i = 0; i < 160; i++){
         for(unsigned int j = 0;j < todo.size();j++)
         {
             if(_Sprite->getGlobalBounds().intersects(todo[j]->getGlobalBounds()) && _Sprite!=todo[j])
             {
                 //std::cout<<"dino no mueve abajo"<<std::endl;
-                _posdino = 1;
-                _Sprite->move(0, -(_Speed));
+                
+                _Sprite->move(0, -(_Speed*time));
                 return 1;
             }
         }
-        _Sprite->move(0, _Speed);
+        animacion(_posdino,time);
+        _Sprite->move(0, _Speed*time);
     }
-    _posdino = 1;
+    
     return 1; // Posicion abajo
 }
 
-int Dinosaurio::mderecha(std::vector<sf::Sprite*> &todo){ // Movimiento derecha
-        _Sprite->setTextureRect(sf::IntRect(6 * 32, 9 * 32, 32, 32));
+int Dinosaurio::mderecha(std::vector<sf::Sprite*> &todo, float time){ // Movimiento derecha
+        
     for(int i = 0; i < 160; i++){
         for(unsigned int j = 0;j < todo.size();j++)
         {
             if(_Sprite->getGlobalBounds().intersects(todo[j]->getGlobalBounds()) && _Sprite!=todo[j])
             {
                 //std::cout<<"dino no mueve dre"<<std::endl;
-                _posdino = 2;
-                    _Sprite->move(-(_Speed),0);
+
+                    _Sprite->move(-(_Speed*time),0);
                 return 2;
             }
         }
-        _Sprite->move(_Speed, 0);
+        animacion(_posdino,time);
+        _Sprite->move(_Speed*time, 0);
     }
-    _posdino = 2;
+
     return 2; // Posicion derecha
 }
 
-int Dinosaurio::mizquierda(std::vector<sf::Sprite*> &todo){ // Movimiento izquierda
-        _Sprite->setTextureRect(sf::IntRect(3 * 32, 9 * 32, 32, 32));
+int Dinosaurio::mizquierda(std::vector<sf::Sprite*> &todo, float time){ // Movimiento izquierda
+        
     for(int i = 0; i < 160; i++){
         for(unsigned int j = 0;j < todo.size();j++)
         {
             if(_Sprite->getGlobalBounds().intersects(todo[j]->getGlobalBounds()) && _Sprite!=todo[j])
             {
                 //std::cout<<"dino no mueve izq"<<std::endl;
-                _posdino = 3;
-                _Sprite->move(_Speed, 0);
+
+                _Sprite->move(_Speed*time, 0);
                 return 3;
             }
         }
-        _Sprite->move(-(_Speed),0);
+        animacion(_posdino,time);
+        _Sprite->move(-(_Speed*time),0);
     }
-    _posdino = 3;
+
     return 3; // Posicion izquierda
 }
 
@@ -180,22 +179,22 @@ void Dinosaurio::draw(sf::RenderWindow &window)
 
 
 void Dinosaurio::animacion(int dir,float deltatime){
-    if(mir!=dir){
-        mir=dir;
+    if(_posdino!=dir){
+        _posdino=dir;
             if(dir==0) {
-                            _Sprite->setTextureRect(sf::IntRect(4 * 32, 0 * 32, 32, 32));
+                            _Sprite->setTextureRect(sf::IntRect(4 * 32, 9 * 32, 32, 32));
 
             }
             if(dir==1) {
-                            _Sprite->setTextureRect(sf::IntRect(0 * 32, 0 * 32, 32, 32));
+                            _Sprite->setTextureRect(sf::IntRect(0 * 32, 9 * 32, 32, 32));
 
             }
             if(dir==2) {
-                            _Sprite->setTextureRect(sf::IntRect(7 * 32, 0 * 32, 32, 32));
+                            _Sprite->setTextureRect(sf::IntRect(7 * 32, 9 * 32, 32, 32));
 
             }
             if(dir==3) {
-                            _Sprite->setTextureRect(sf::IntRect(3 * 32, 0 * 32, 32, 32));
+                            _Sprite->setTextureRect(sf::IntRect(3 * 32, 9 * 32, 32, 32));
 
             }
     }
@@ -206,109 +205,41 @@ void Dinosaurio::animacion(int dir,float deltatime){
         if(animal){
             animal=false;
             if(dir==0) {
-                            _Sprite->setTextureRect(sf::IntRect(4 * 32, 0 * 32, 32, 32));
+                            _Sprite->setTextureRect(sf::IntRect(4 * 32, 9 * 32, 32, 32));
 
             }
             if(dir==1) {
-                            _Sprite->setTextureRect(sf::IntRect(0 * 32, 0 * 32, 32, 32));
+                            _Sprite->setTextureRect(sf::IntRect(0 * 32, 9 * 32, 32, 32));
 
             }
             if(dir==2) {
-                            _Sprite->setTextureRect(sf::IntRect(7 * 32, 0 * 32, 32, 32));
+                            _Sprite->setTextureRect(sf::IntRect(7 * 32, 9 * 32, 32, 32));
 
             }
             if(dir==3) {
-                            _Sprite->setTextureRect(sf::IntRect(3 * 32, 0 * 32, 32, 32));
+                            _Sprite->setTextureRect(sf::IntRect(3 * 32, 9 * 32, 32, 32));
 
             }
         }else{
             animal=true;
             if(dir==0) {
-                            _Sprite->setTextureRect(sf::IntRect(5 * 32, 0 * 32, 32, 32));
+                            _Sprite->setTextureRect(sf::IntRect(5 * 32, 9 * 32, 32, 32));
 
             }
             if(dir==1) {
-                            _Sprite->setTextureRect(sf::IntRect(1 * 32, 0 * 32, 32, 32));
+                            _Sprite->setTextureRect(sf::IntRect(1 * 32, 9 * 32, 32, 32));
 
             }
             if(dir==2) {
-                            _Sprite->setTextureRect(sf::IntRect(6 * 32, 0 * 32, 32, 32));
+                            _Sprite->setTextureRect(sf::IntRect(6 * 32, 9 * 32, 32, 32));
 
             }
             if(dir==3) {
-                            _Sprite->setTextureRect(sf::IntRect(2 * 32, 0 * 32, 32, 32));
+                            _Sprite->setTextureRect(sf::IntRect(2 * 32, 9 * 32, 32, 32));
 
             }
         }
     } 
-}
-
-void Dinosaurio::mover(std::vector<sf::Sprite*> &todoSprite,int direccion, float time)
-{
-    switch (direccion)
-    {
-    //Arriba
-    case 0:
-        for(unsigned int j = 0;j < todoSprite.size();j++)
-        {
-            if(_Sprite->getGlobalBounds().intersects(todoSprite[j]->getGlobalBounds()) && _Sprite!=todoSprite[j])
-            {
-                //std::cout<<"dino no mueve izq"<<std::endl;
-                _posdino = 0;
-                _Sprite->move(0, _Speed*time);
-                parado=true;
-            }
-        }
-        if(!parado)_Sprite->move(0, -_Speed*time);
-        break;
-    //Abajo
-    case 1:
-        for(unsigned int j = 0;j < todoSprite.size();j++)
-        {
-            if(_Sprite->getGlobalBounds().intersects(todoSprite[j]->getGlobalBounds()) && _Sprite!=todoSprite[j])
-            {
-                //std::cout<<"dino no mueve izq"<<std::endl;
-                _posdino = 1;
-                _Sprite->move(0, -_Speed*time);
-                parado=true;
-            }
-        }
-         if(!parado)_Sprite->move(0, _Speed*time);
-
-        break;
-    //Derecha
-    case 2:
-        for(unsigned int j = 0;j < todoSprite.size();j++)
-        {
-            if(_Sprite->getGlobalBounds().intersects(todoSprite[j]->getGlobalBounds()) && _Sprite!=todoSprite[j])
-            {
-                //std::cout<<"dino no mueve izq"<<std::endl;
-                _posdino = 2;
-                _Sprite->move(-_Speed*time, 0);
-                parado=true;
-            }
-        }
-         if(!parado)_Sprite->move(_Speed*time, 0);
-
-        break;
-    //Izquierda
-    case 3:
-        for(unsigned int j = 0;j < todoSprite.size();j++)
-        {
-            if(_Sprite->getGlobalBounds().intersects(todoSprite[j]->getGlobalBounds()) && _Sprite!=todoSprite[j])
-            {
-                //std::cout<<"dino no mueve izq"<<std::endl;
-                _posdino = 3;
-                _Sprite->move(_Speed*time, 0);
-                parado=true;
-            }
-        }
-         if(!parado)_Sprite->move(-_Speed*time, 0);
-
-        break;
-
-    }
-
 }
 
 

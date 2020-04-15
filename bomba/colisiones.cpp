@@ -1,12 +1,12 @@
 #include "colisiones.h"
 #include <iostream>
 
-void Colisiones::crearColisiones(sf::Sprite &jugador,std::vector<sf::Sprite*> objetos, int direccion, int velocidad,float time)
+void Colisiones::crearColisiones(sf::Sprite &jugador,std::vector<sf::Sprite*> todoSprites, int direccion, int velocidad,float time)
 {
-      for(unsigned int i = 0;i < objetos.size();i++)
+      for(unsigned int i = 0;i < todoSprites.size();i++)
       {
         //Ha encontrado un objeto del vector con el que esta colisionando actualmente.
-        if(jugador.getGlobalBounds().intersects(objetos[i]->getGlobalBounds()))
+        if(jugador.getGlobalBounds().intersects(todoSprites[i]->getGlobalBounds()))
             {
               //Contrarestar velocidad en la direccion en la que esta yendo.
                 switch (direccion)
