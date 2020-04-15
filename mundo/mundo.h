@@ -90,9 +90,6 @@ class Mundo : public States {
       }
       mapas.clear();
     }
-    void move_dinos();
-
-
 
 };
 

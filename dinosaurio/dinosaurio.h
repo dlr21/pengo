@@ -14,7 +14,6 @@ class Dinosaurio
       int mderecha(std::vector<sf::Sprite*> &c);
       int mizquierda(std::vector<sf::Sprite*> &c);
 
-      void salto(int pos_mirando);
 
       // Cambiar velocidad
       void setSpeed();
@@ -36,12 +35,6 @@ class Dinosaurio
 
       // Devolver hitbox
       sf::FloatRect getHitbox();
-
-      // Establecer tipo dinosaurio
-      void setTipodino(int tipodino);
-
-      // Devolver tipo dinosaurio
-      int getTipodino();
 
       //Devolver invencibilidad
       float getInvencibilidad(){return invencibilidad;}

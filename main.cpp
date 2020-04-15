@@ -38,7 +38,7 @@ int main() {
                           game->Event(event,window,clock2.restart().asSeconds());
                         }
                       game->Update(window,clock2.restart().asSeconds());  
-                      game->Draw(window);              
+                      game->Draw(window);   
             if(!window.isOpen())game->Quit();
             }
             timeStartUpdate=clock.getElapsedTime();

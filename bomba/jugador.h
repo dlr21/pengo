@@ -26,15 +26,16 @@ class Jugador{
              invencible=false;
           } 
    }
-    void setInicio(){    sprite->setPosition(160, 113); }//DEPENDE DEL MAPA
+    void setInicio(){    sprite->setPosition(112+48, 64+48); }//DEPENDE DEL MAPA
     void mover(int direccion,float time);
     void quitarVidas(){if(vidas > 0)vidas--;}
 
     void draw(sf::RenderWindow &window);
-
+    void animacion(int d,float time);
  private:
     sf::Texture* textura;
     sf::Sprite* sprite;
+    sf::Sprite* sprite2;
     int identificador;
     bool bomba;
     int kVel;
@@ -42,4 +43,7 @@ class Jugador{
     float invencibilidad = -1;
     bool invencible;
     int puntos;
+    float switchtime=0.1;
+    float totaltime=0;
+    bool animal=true;
 };

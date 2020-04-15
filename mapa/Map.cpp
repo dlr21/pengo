@@ -8,8 +8,6 @@ Map::Map(string s,int puntos) {
   //PARA EL MAPA
   std::cout << "Creando mi Map..."<< endl ;
   TiXmlDocument mapa(s);
-  
-
     bool loadOkay=mapa.LoadFile();
       std::cout << "load.."<< endl ;
     if (loadOkay)
@@ -97,7 +95,7 @@ Map::Map(string s,int puntos) {
           for(int x=0; x<_width;x++){
             int gid=_tilemap [l][y][x]-1;
             if(gid>-1){
-              _tilemapSprite[l][y][x]=new sf::Sprite(_tilesettexture,{0+(gid*32),0+(gid*32),32,32});
+              _tilemapSprite[l][y][x]=new sf::Sprite(_tilesettexture,{0+(gid*32),0+(0*32),32,32});
               _tilemapSprite[l][y][x]->setPosition(112+(x*_tilewidth),64+(y*_tileheigh));
             }
           }
@@ -198,8 +196,7 @@ void Map::reservarMemoria(int _numlayers){
   std::cout<<"reserva sprites";
   //reserva memoria Sprites
   std::cout<<_numlayers<<endl;
-  _tilemapSprite=new sf::Sprite***[_numlayers];///////////////////terminate called after throwing an instance of 'std::bad_array_new_length'
-  //////////////////////////////      what():  std::bad_array_new_length                            Aborted (core dumped)
+  _tilemapSprite=new sf::Sprite***[_numlayers];
 
   std::cout<<"AQUI NO LLEGA";
   for(int i=0;i<_numlayers;i++){
@@ -227,7 +224,7 @@ void Map::anadirVector(std::vector<sf::Sprite*> &vectorS)
         for( unsigned int y=0; y<_height;y++){
           for(unsigned int x=0; x<_width;x++){
             int gid=_tilemap [l][y][x];
-            if(gid == 1 || gid == 2 || gid == 3 || gid == 4 || gid == 5 ||gid == 6 )
+            if(gid == 0 || gid == 1 || gid == 2 || gid == 3 || gid == 4 || gid == 5 ||gid == 6 )
             {
               vectorS.push_back(_tilemapSprite[l][y][x]);
             }

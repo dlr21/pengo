@@ -4,8 +4,7 @@
 
 // Velocidades
 float velocidad_normal = 0.0015;
-float velocidad_trex = 0.00075;
-float velocidad_velociraptor = 0.00225;
+
 
 
 
@@ -20,30 +19,18 @@ Dinosaurio::Dinosaurio(){ // Constructor por defecto
 
     _Sprite = new sf::Sprite();
     _Sprite->setTexture(*textura);
-    _Sprite->setOrigin(32 / 2, 32 / 2);
+    _Sprite->setOrigin(0,0);
+    _Sprite->setScale(0.8,0.8);
     _Sprite->setTextureRect(sf::IntRect(0 * 32, 0 * 32, 32, 32));   
     srand (time(NULL));    
     _posdino = rand() % 5; // Posicion inicial por defecto hacia abajo
-    _Direccion = _Tipodino;
+    setSpeed(); // Poner velocidad del dinosaurio
+    setVida(); // Poner vida del dinosaurio
 }
 
 Dinosaurio::~Dinosaurio(){ // Destructor
   _Sprite=NULL;
   delete _Sprite; 
-}
-
-Dinosaurio::Dinosaurio(sf::Texture& textura_dino){ // Constructor con textura (no se usa)
-    _Sprite->setTexture(textura_dino);
-    _Sprite->setScale(0.5,0.5);
-    _Sprite->setPosition(320, 320);
-}
-
-void Dinosaurio::setTipodino(int tipodino){ // Tipo dinosaurio
-    _Tipodino = tipodino; // 0: T-Rex | 1: Velociraptor | 2: Pterodactilo | 3: Triceratops
-    _Direccion = _Tipodino; 
-
-    setSpeed(); // Poner velocidad del dinosaurio
-    setVida(); // Poner vida del dinosaurio
 }
 
 void Dinosaurio::modifyTexture(sf::Texture& textura){ // Establecer textura del dinosaurio
@@ -55,10 +42,6 @@ void Dinosaurio::modifyVida(){ // Quitar un punto de vida si toca la bomba
     if(_Vida >= 1){
         _Vida =_Vida - 1;
     }
-}
-
-int Dinosaurio::getTipodino(){ // Devuelve tipo de dinosaurio
-    return _Tipodino;
 }
 
 sf::Sprite* Dinosaurio::getSprite() { // Devuelve el sprite
@@ -86,24 +69,12 @@ void Dinosaurio::modifyPosition(int x, int y){ // Cambiar posicion del dinosauri
 }
 
 void Dinosaurio::setSpeed(){ // Cambiar la velocidad
-    if(_Tipodino == 0){ // T-rex
-        _Speed = velocidad_trex;
-    }
-    if(_Tipodino == 1){ // Velociraptor
-        _Speed = velocidad_velociraptor; 
-    }
-    if(_Tipodino == 2 || _Tipodino == 3){ // Resto de dinosaurios
         _Speed = velocidad_normal; 
-    }
 }
 
 void Dinosaurio::setVida(){ // Cambiar vida
-    if(_Tipodino == 0){ // T-rex tiene 2 de vida
-        _Vida = 2; 
-    }
-    else{ // El resto de dinosaurios tiene 1 de vida
+
         _Vida = 1;
-    }
 }
 
 int Dinosaurio::getVida(){ // Devolver vida
@@ -210,26 +181,6 @@ int Dinosaurio::getDireccion(){
     return _Direccion;
 }
 
-// Hacer que el dinosaurio salte
-void Dinosaurio::salto(int pos_mirando){
-    if(_Tipodino == 2){ // Solo puede saltar el pterodactilo
-        switch (pos_mirando){
-        case 0: // Mirando arriba
-            _Sprite->move(0, -(_Speed)*800);
-            break;
-        case 1: // Mirando abajo
-            _Sprite->move(0, (_Speed)*800);
-            break;
-        case 2: // Mirando derecha
-            _Sprite->move((_Speed)*800,0);
-            break;
-        case 3: // Mirando izquierda
-            _Sprite->move((-_Speed)*800,0);
-        default:
-            break;
-        }
-    }
-}
 void Dinosaurio::draw(sf::RenderWindow &window)
 {
     window.draw(*_Sprite);

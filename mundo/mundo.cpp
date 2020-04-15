@@ -81,12 +81,11 @@ void Mundo::crearDinos(Map* m,int tot){
               std::cout<<m->getnumlayers()<<m->getheight()<<m->getwidth()<<" "<<v1<<endl;
               if(gid==-1 && v1<150){//GID = camino
               Dinosaurio *dino1 = new Dinosaurio(); // Constructor del dinosaurio
-              dino1->setTipodino(cont%4); // Establece el tipo de dinosario, la vida y la velocidad en funcion de su tipo
               dino1->modifyPosition(112+(x*32),64+(y*32)); // Punto de spawn. Debe estar dentro del mapa
               dinosaurios.push_back(dino1); // Guardar en el vector de dinosaurios
               todoSprites.push_back(dino1->getSprite()); //Lo añadimos al vector de colisiones.
               cont++;
-              if (tot==cont) { todos=true; } //CONTROLA QUE NO FALTEN ADNS
+              if (tot==cont) { todos=true; }
             }
           }
         }
@@ -144,7 +143,7 @@ void Mundo::Event(sf::Event event,sf::RenderWindow &window, float time){ //COSAS
               Colisiones::crearColisiones(*jugador1->getSprite(),todoSprites,0,jugador1->getVelocidad(), time);
               Colisiones::colisionesBombas(*jugador1,totalBombas,0,time);
             break;
-            //Abajo
+            //Abajos
             case 74:
               jugador1->mover(1,time);
               Colisiones::crearColisiones(*jugador1->getSprite(),todoSprites,1,jugador1->getVelocidad(), time);
@@ -153,6 +152,7 @@ void Mundo::Event(sf::Event event,sf::RenderWindow &window, float time){ //COSAS
             //Derecha
             case 72:
               jugador1->mover(2,time);
+              //jugador1->CAMBIAR SPRITE
               Colisiones::crearColisiones(*jugador1->getSprite(),todoSprites,2,jugador1->getVelocidad(), time);
               Colisiones::colisionesBombas(*jugador1,totalBombas,2,time);
             break;
@@ -179,7 +179,6 @@ void Mundo::Update(sf::RenderWindow &window, float time) {//COSAS DEL MUNDO QUE 
   }
       if (mapas[lvlactual]->fin()){
             std::cout<<"cambiar mapa\n";
-            adnscreados=false;//DESTRuiR ADNS/////////////////////////////////////
             dinoscreados=false;
             colisiones=false;
             borrarcolisiones();
