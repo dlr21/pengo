@@ -56,17 +56,26 @@ class Dinosaurio
       void setDireccion(int i);
       int getDireccion();
       void draw(sf::RenderWindow &window);
-      bool getvulnerable(){return vulnerable;}
-
+      bool getparado(){return parado;}
+      void setparado(bool a){parado=a;}
+      bool getactivo(){return activo;}
+      void activar(){activo=true;}
+      void animacion(int d,float time);
+      void mover(std::vector<sf::Sprite*> &todoSprite,int direccion,float time);
     private:
-      float _Speed; // Velocidad
+      float _Speed=100; // Velocidad
       int _Direccion;
       sf::Sprite* _Sprite = new sf::Sprite; // Sprite
       sf::Texture* textura;
-      int _posdino; // Posicion a la que mira el dino ==> 0:Arriba | 1:Abajo | 2:Derecha | 3:Izquierda
-      int _Vida; // Vida del dino
+      int _posdino=1; // Posicion a la que mira el dino ==> 0:Arriba | 1:Abajo | 2:Derecha | 3:Izquierda
+      int _Vida=1; // Vida del dino
       float invencibilidad = -1; 
-      bool vulnerable=false;
+      bool parado=true;
+      bool activo=true;
+      int mir=0;
+      float switchtime=0.1;
+      float totaltime=0;
+      bool animal=true;
 };
 
 #endif

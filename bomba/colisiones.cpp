@@ -61,14 +61,14 @@ void Colisiones::update(sf::Clock &temporizador,std::vector<Dinosaurio*> &dinosa
       }
     }*/
 
-      for(unsigned int j = 0;j < paredesSprites.size();j++){
+      /*for(unsigned int j = 0;j < paredesSprites.size();j++){
         //JUGADOR CON PARED
         if(jugador.getSprite()->getGlobalBounds().intersects(paredesSprites[j]->getGlobalBounds()))
         {
           
         }
 
-      }
+      }*/
 
 
 
@@ -78,7 +78,7 @@ void Colisiones::update(sf::Clock &temporizador,std::vector<Dinosaurio*> &dinosa
       if(jugador.getSprite()->getGlobalBounds().intersects(dinosaurios[j]->getSprite()->getGlobalBounds()))
       {
         std::cout<<"colision"<<endl;
-        if(dinosaurios[j]->getvulnerable()){
+        if(jugador.getempujon()){
           dinosaurios[j]->modifyVida();
           if(dinosaurios[j]->getVida() == 0)
           {

@@ -50,6 +50,7 @@ class Mundo : public States {
     std::vector<sf::Sprite*> paredesSprites;
 
     int _cont = 0; // Contador de iteraciones del juego
+
   public:
     void Inicializar();
     static Mundo* Instance();
@@ -60,6 +61,13 @@ class Mundo : public States {
     void finjuego();
     void crearAdns(Map* m,int tot);
     void crearDinos(Map* m,int tot);
+    int getActivos(){
+      int cont=0;
+          for(unsigned int i=0;i<dinosaurios.size();i++){
+            if(dinosaurios[i]->getactivo())cont++;
+          }
+      return cont;
+    }
 
     void borraradns(){
         for(unsigned int i=0;i<adns.size();i++){
@@ -84,12 +92,6 @@ class Mundo : public States {
           todoSprites[i]=NULL;
         }
         todoSprites.clear();
-        for(unsigned int i=0;i<paredesSprites.size();i++){
-          std::cout<<"colisiones delete"<<endl;
-          delete paredesSprites[i];
-          paredesSprites[i]=NULL;
-        }
-        paredesSprites.clear();
     }
     void borrarmapas(){
       for(unsigned int i=0;i<mapas.size();i++){

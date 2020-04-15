@@ -100,7 +100,7 @@ void Mundo::Event(sf::Event event,sf::RenderWindow &window, float time){ //COSAS
           switch (event.key.code) {  
             case 57: //EMPUJAR
             {
-              jugador1->setempujon(true);
+              jugador1->setempujon(true);//PENDIENTE
               break;
             }
             case 13: //n siguiente nivel 13
@@ -191,7 +191,7 @@ void Mundo::Update(sf::RenderWindow &window, float time) {//COSAS DEL MUNDO QUE 
           }
           if(!colisiones){
             mapas[lvlactual]->anadirVector(todoSprites);
-            mapas[lvlactual]->anadirParedes(paredesSprites);
+            //mapas[lvlactual]->anadirParedes(paredesSprites);NO FUNCIONAN PAREDES
             colisiones=true;
           }
         }
@@ -208,9 +208,10 @@ void Mundo::Update(sf::RenderWindow &window, float time) {//COSAS DEL MUNDO QUE 
         cout<<"invencible"<<endl;
       }
     }
+
     // Mover los dinosaurios con la IA
     IA ia; // Genera una ia con cada iteracion
-    ia.movimientoDinos(dinosaurios, _cont,todoSprites); // Permite mover a los dinosaurios
+    ia.movimientoDinos(dinosaurios, _cont,todoSprites, time); // Permite mover a los dinosaurios
     _cont++; // Contador de iteraciones del programa
     //Detecta si le tiene que quitar vida a jugadores y dinosaurios si colisionan con una explosion.
 }
