@@ -19,9 +19,6 @@ CMakeFiles/libModulos.dir/adn/adn.cpp.o: ../tinyxml-master/tinyxml.h
 CMakeFiles/libModulos.dir/adn/adn.cpp.o: ../adn/adn.cpp
 CMakeFiles/libModulos.dir/adn/adn.cpp.o: ../adn/adn.h
 
-CMakeFiles/libModulos.dir/bomba/bombas.cpp.o: ../mapa/Map.h
-CMakeFiles/libModulos.dir/bomba/bombas.cpp.o: ../tinyxml-master/tinystr.h
-CMakeFiles/libModulos.dir/bomba/bombas.cpp.o: ../tinyxml-master/tinyxml.h
 CMakeFiles/libModulos.dir/bomba/bombas.cpp.o: ../bomba/bombas.cpp
 CMakeFiles/libModulos.dir/bomba/bombas.cpp.o: ../bomba/bombas.h
 CMakeFiles/libModulos.dir/bomba/bombas.cpp.o: ../bomba/jugador.h
@@ -35,9 +32,6 @@ CMakeFiles/libModulos.dir/bomba/colisiones.cpp.o: ../bomba/colisiones.h
 CMakeFiles/libModulos.dir/bomba/colisiones.cpp.o: ../bomba/jugador.h
 CMakeFiles/libModulos.dir/bomba/colisiones.cpp.o: ../dinosaurio/dinosaurio.h
 
-CMakeFiles/libModulos.dir/bomba/jugador.cpp.o: ../mapa/Map.h
-CMakeFiles/libModulos.dir/bomba/jugador.cpp.o: ../tinyxml-master/tinystr.h
-CMakeFiles/libModulos.dir/bomba/jugador.cpp.o: ../tinyxml-master/tinyxml.h
 CMakeFiles/libModulos.dir/bomba/jugador.cpp.o: ../bomba/jugador.cpp
 CMakeFiles/libModulos.dir/bomba/jugador.cpp.o: ../bomba/jugador.h
 
@@ -45,9 +39,6 @@ CMakeFiles/libModulos.dir/dinosaurio/dinosaurio.cpp.o: ../dinosaurio/dinosaurio.
 CMakeFiles/libModulos.dir/dinosaurio/dinosaurio.cpp.o: ../dinosaurio/dinosaurio.h
 
 CMakeFiles/libModulos.dir/ej_modulos/Tile.cpp.o: ../bomba/jugador.h
-CMakeFiles/libModulos.dir/ej_modulos/Tile.cpp.o: ../mapa/Map.h
-CMakeFiles/libModulos.dir/ej_modulos/Tile.cpp.o: ../tinyxml-master/tinystr.h
-CMakeFiles/libModulos.dir/ej_modulos/Tile.cpp.o: ../tinyxml-master/tinyxml.h
 CMakeFiles/libModulos.dir/ej_modulos/Tile.cpp.o: ../ej_modulos/Tile.cpp
 CMakeFiles/libModulos.dir/ej_modulos/Tile.cpp.o: ../ej_modulos/Tile.h
 
@@ -67,6 +58,7 @@ CMakeFiles/libModulos.dir/juego/juego.cpp.o: ../tinyxml-master/tinyxml.h
 CMakeFiles/libModulos.dir/juego/juego.cpp.o: ../juego/juego.cpp
 CMakeFiles/libModulos.dir/juego/juego.cpp.o: ../juego/juego.h
 
+CMakeFiles/libModulos.dir/mapa/Map.cpp.o: ../bomba/jugador.h
 CMakeFiles/libModulos.dir/mapa/Map.cpp.o: ../tinyxml-master/tinystr.h
 CMakeFiles/libModulos.dir/mapa/Map.cpp.o: ../tinyxml-master/tinyxml.h
 CMakeFiles/libModulos.dir/mapa/Map.cpp.o: ../mapa/Map.cpp

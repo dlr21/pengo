@@ -33,8 +33,6 @@ void Mundo::Inicializar() {
         mapas.push_back(m);//meter los mapas en el vector de mapas
         std::cout<< mapas.size()<<endl;
       }
-
-
 }
 /*void Mundo::crearAdns(Map* m,int tot){
   int v1=1;
@@ -99,8 +97,15 @@ void Mundo::Event(sf::Event event,sf::RenderWindow &window, float time){ //COSAS
           switch (event.key.code) {  
             case 57: //EMPUJAR
             {
-              if(!jugador1->getempujon())jugador1->setempujon(true);//PENDIENTE
-              std::cout<<"empujar"<<endl;
+              if(!jugador1->getempujon()) {
+                jugador1->setempujon(true);//PENDIENTE
+                if(mapas[lvlactual]->empujado(jugador1)!=NULL){
+                  std::cout<<"NO ES NULL"<<std::endl;
+                }
+                
+                std::cout<<"empujar"<<endl;
+              }
+              
               break;
             }
             case 13: //n siguiente nivel 13
@@ -195,7 +200,7 @@ void Mundo::Update(sf::RenderWindow &window, float time) {//COSAS DEL MUNDO QUE 
         }
     if(play==1){// UN JUGADOR O DOS JUGADORES UPDATEAN ELLOS Y SUS HUDS
       hud1->Update(jugador1);
-      jugador1->Update(time,mapas[lvlactual]);
+      jugador1->Update(time);
       Colisiones::crearColisiones(*jugador1->getSprite(),todoSprites,3,jugador1->getVelocidad(), time);
       if(jugador1->getVidas()==0){
          finjuego();

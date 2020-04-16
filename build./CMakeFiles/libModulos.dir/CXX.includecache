@@ -55,8 +55,6 @@ SFML/Graphics.hpp
 -
 iostream
 -
-Map.h
-../bomba/Map.h
 
 ../dinosaurio/dinosaurio.h
 
@@ -73,6 +71,8 @@ string
 -
 SFML/Graphics.hpp
 ../mapa/SFML/Graphics.hpp
+jugador.h
+../mapa/jugador.h
 
 ../maquina/contexto.h
 SFML/Graphics.hpp
@@ -219,8 +219,6 @@ SFML/Graphics.hpp
 -
 iostream
 -
-Map.h
-/home/fv2/Desktop/PENGO/pengo/bomba/Map.h
 
 /home/fv2/Desktop/PENGO/pengo/dinosaurio/dinosaurio.cpp
 SFML/Graphics.hpp
@@ -271,6 +269,8 @@ string
 -
 SFML/Graphics.hpp
 /home/fv2/Desktop/PENGO/pengo/mapa/SFML/Graphics.hpp
+jugador.h
+/home/fv2/Desktop/PENGO/pengo/mapa/jugador.h
 
 /home/fv2/Desktop/PENGO/pengo/maquina/contexto.cpp
 contexto.h

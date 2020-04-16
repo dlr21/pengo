@@ -11,7 +11,7 @@ Jugador::Jugador(int numero){
     sprite = new sf::Sprite();
     sprite->setTexture(*textura);
     sprite->setOrigin(16, 16);
-    sprite->setScale(0.8,0.8);
+    sprite->setScale(0.9,0.9);
     sprite->setTextureRect(sf::IntRect(0 * 32, 0 * 32, 32, 32));
     if (numero==1)
     {
@@ -167,7 +167,7 @@ void Jugador::mover(int direccion, float time){
     }
 
 }
-void Jugador::Update(float time,Map* m ){
+void Jugador::Update(float time ){
     
       if(getInvencible()){
         setVidas(3);
@@ -175,7 +175,7 @@ void Jugador::Update(float time,Map* m ){
       if(getempujon()){
         empujando(time);
       }        
-        //posredondeada(time);
+        posredondeada(time);
 
 }
 /*bool Jugador::frentevacio(Map* m){
@@ -202,8 +202,8 @@ void Jugador::Update(float time,Map* m ){
         if(x==15)return false;
                 if(m->gettilemap()[0][x+1][y]>0 || m->gettilemap()[1][x+1][y]>0){ //DRE
 
-std::cout<<m->gettilemap()[0][x+1][y]<<m->gettilemap()[1][x+1][y]<<" mir"<<mir<<std::endl;
-return false;
+ std::cout<<m->gettilemap()[0][x+1][y]<<m->gettilemap()[1][x+1][y]<<" mir"<<mir<<std::endl;
+ return false;
 
         }
     }else if(mir==3)
@@ -212,7 +212,7 @@ return false;
         std::cout<<x<<y<<std::endl;
                 if(m->gettilemap()[0][x-1][y]>0 || m->gettilemap()[1][x-1][y]>0){ //IZQ
 
-return false;
+ return false;
 
 
         }
@@ -225,12 +225,11 @@ void Jugador::posredondeada(float time){
 
     int x=getSprite()->getPosition().x+16;
     int y=getSprite()->getPosition().y;
-    std::cout<<x<<" "<<y<<std::endl;
-    if((x%32)>2){
+    if((x%32)>1){
         mover(getmir(),time);
         animacion(getmir(),time);
     }
-    if((y%32)>2){
+    if((y%32)>1){
         mover(getmir(),time);
         animacion(getmir(),time);
     }

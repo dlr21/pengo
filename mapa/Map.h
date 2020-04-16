@@ -4,6 +4,7 @@
 #include "tinyxml.h"
 #include <string>
 #include "SFML/Graphics.hpp"
+#include "jugador.h"
 
 using namespace std;
 class Map {
@@ -40,8 +41,7 @@ public:
   int getwidth(){
     return _width;
   };
-  void setTileMapa(int l,int y,int z,int valor)
-  {
+  void setTileMapa(int l,int y,int z,int valor){
     _tilemap[l][y][z] = valor;
   }
 
@@ -55,7 +55,7 @@ public:
   void moveDownDino();
   void Update();
   void reservarMemoria(int num);
-  void liberar();
+  sf::Sprite* empujado(Jugador* j);
 
 private:
   int puntosfin;

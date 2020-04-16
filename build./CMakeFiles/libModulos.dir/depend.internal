@@ -20,9 +20,6 @@ CMakeFiles/libModulos.dir/adn/adn.cpp.o
  /home/fv2/Desktop/PENGO/pengo/adn/adn.cpp
  /home/fv2/Desktop/PENGO/pengo/adn/adn.h
 CMakeFiles/libModulos.dir/bomba/bombas.cpp.o
- ../mapa/Map.h
- ../tinyxml-master/tinystr.h
- ../tinyxml-master/tinyxml.h
  /home/fv2/Desktop/PENGO/pengo/bomba/bombas.cpp
  /home/fv2/Desktop/PENGO/pengo/bomba/bombas.h
  /home/fv2/Desktop/PENGO/pengo/bomba/jugador.h
@@ -36,9 +33,6 @@ CMakeFiles/libModulos.dir/bomba/colisiones.cpp.o
  /home/fv2/Desktop/PENGO/pengo/bomba/jugador.h
  /home/fv2/Desktop/PENGO/pengo/dinosaurio/dinosaurio.h
 CMakeFiles/libModulos.dir/bomba/jugador.cpp.o
- ../mapa/Map.h
- ../tinyxml-master/tinystr.h
- ../tinyxml-master/tinyxml.h
  /home/fv2/Desktop/PENGO/pengo/bomba/jugador.cpp
  /home/fv2/Desktop/PENGO/pengo/bomba/jugador.h
 CMakeFiles/libModulos.dir/dinosaurio/dinosaurio.cpp.o
@@ -46,9 +40,6 @@ CMakeFiles/libModulos.dir/dinosaurio/dinosaurio.cpp.o
  /home/fv2/Desktop/PENGO/pengo/dinosaurio/dinosaurio.h
 CMakeFiles/libModulos.dir/ej_modulos/Tile.cpp.o
  ../bomba/jugador.h
- ../mapa/Map.h
- ../tinyxml-master/tinystr.h
- ../tinyxml-master/tinyxml.h
  /home/fv2/Desktop/PENGO/pengo/ej_modulos/Tile.cpp
  /home/fv2/Desktop/PENGO/pengo/ej_modulos/Tile.h
 CMakeFiles/libModulos.dir/juego/juego.cpp.o
@@ -68,6 +59,7 @@ CMakeFiles/libModulos.dir/juego/juego.cpp.o
  /home/fv2/Desktop/PENGO/pengo/juego/juego.cpp
  /home/fv2/Desktop/PENGO/pengo/juego/juego.h
 CMakeFiles/libModulos.dir/mapa/Map.cpp.o
+ ../bomba/jugador.h
  ../tinyxml-master/tinystr.h
  ../tinyxml-master/tinyxml.h
  /home/fv2/Desktop/PENGO/pengo/mapa/Map.cpp

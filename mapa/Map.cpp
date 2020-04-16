@@ -111,7 +111,7 @@ Map::Map(string s,int puntos) {
     return layer;
   }*/
 
-sf::Sprite Map::gettilemapSprite(int l, int y, int x){
+ sf::Sprite Map::gettilemapSprite(int l, int y, int x){
   return *_tilemapSprite[l][y][x];
 }
 
@@ -213,14 +213,49 @@ void Map::reservarMemoria(int _numlayers){
   }
 }
 
-void Map::liberar(){
+sf::Sprite* Map::empujado(Jugador* j){
 
+  int dir=j->getmir();//0 arriba 1 abajo 2 derecha 3 izq
+  int x=(j->getSprite()->getPosition().x-112)/32;
+  int y=(j->getSprite()->getPosition().y-64)/32;
 
+  std::cout<< x<<" "<<y<<endl;
+  
+  if(dir==0){
+    std::cout<< x<<" "<<y-1<<endl;
+    if(_tilemap[1][x][y-1]>0){
+      return _tilemapSprite[1][x][y-1];
+    }else{
+      return NULL;
+    }
+  }else if(dir==1){
+    std::cout<<x<<" "<<y+1<<endl;
+    if(_tilemap[1][x][y+1]>0){
+      return _tilemapSprite[1][x][y+1];
+    }else{
+      return NULL;
+    }
+  }else if(dir==2){
+    std::cout<<x+1<<" "<<y<<endl;
+    std::cout<<_tilemap[0][x+1][y]<<endl;
+    std::cout<<_tilemap[1][x+1][y]<<endl;
+    if(_tilemap[1][x+1][y]>0){
+      return _tilemapSprite[1][x+1][y];
+    }else{
+      return NULL;
+    }
+  }else if(dir==3){
+    std::cout<<x-1<<" "<<y<<endl;
+    if(_tilemap[1][x-1][y]>0){
+      return _tilemapSprite[1][x-1][y];
+    }else{
+      return NULL;
+    }
+  }
 
 }
 
-void Map::anadirVector(std::vector<sf::Sprite*> &vectorS)
-{
+void Map::anadirVector(std::vector<sf::Sprite*> &vectorS){
   for(unsigned int l=0; l<_numlayers;l++){
         for( unsigned int y=0; y<_height;y++){
           for(unsigned int x=0; x<_width;x++){
@@ -233,8 +268,7 @@ void Map::anadirVector(std::vector<sf::Sprite*> &vectorS)
         }
       }
 }
-void Map::anadirParedes(std::vector<sf::Sprite*> &vectorS)
-{
+void Map::anadirParedes(std::vector<sf::Sprite*> &vectorS){
   for(unsigned int l=0; l<_numlayers;l++){
         for( unsigned int y=0; y<_height;y++){
           for(unsigned int x=0; x<_width;x++){

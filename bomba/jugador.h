@@ -1,7 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include "Map.h"
+
 class Jugador{
     
  public:
@@ -43,7 +43,7 @@ class Jugador{
     void animacion(int d,float time);
     void setColision(bool f){colision=f;}
     void mover(int direccion,float time);
-    void Update(float time,Map* m );
+    void Update(float time );
     void posredondeada(float time);
     //bool frentevacio(Map* m);
  private:
