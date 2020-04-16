@@ -1,36 +1,48 @@
 #include "colisiones.h"
 #include <iostream>
 
-void Colisiones::crearColisiones(sf::Sprite &jugador,std::vector<sf::Sprite*> todoSprites, int direccion, int velocidad,float time)
+void Colisiones::crearColisiones(sf::Sprite &jugador,std::vector<sf::Sprite*> todoSprites, int direccion, int velocidad,float time, Jugador* j)
 {
+  bool movido=false;
       for(unsigned int i = 0;i < todoSprites.size();i++)
       {
         //Ha encontrado un objeto del vector con el que esta colisionando actualmente.
         if(jugador.getGlobalBounds().intersects(todoSprites[i]->getGlobalBounds()))
             {
               std::cout<<"colision bloque"<<std::endl;
+              j->setColision(true);
               //Contrarestar velocidad en la direccion en la que esta yendo.
-                switch (direccion)
-                {
-                  //Arriba
-                  case 0:
-                    jugador.move(0,velocidad*time);
-                    break;
-                  //Abajo
-                  case 1:
-                    jugador.move(0,-velocidad*time);
-                    break;
-                  //Derecha
-                  case 2:
-                    jugador.move(-velocidad*time, 0);
-                    break;
-                  //Izquierda
-                  case 3:
-                  jugador.move(velocidad*time, 0);
-                    break;
-                }
+                          j->setkx(0);
+                          j->setky(0);
+                          switch (direccion)
+                          {
+                          //Arriba
+                          case 0:
+                              j->setky(j->getVelocidad());
+                              movido=true;
+                              break;
+                          //Abajo
+                          case 1:
+                              j->setky(-j->getVelocidad());
+                              movido=true;
+                              break;
+                          //Derecha
+                          case 2:
+                              j->setkx(-j->getVelocidad());
+                              movido=true;
+                              break;
+                          //Izquierda
+                          case 3:
+                              j->setkx(j->getVelocidad());
+                              movido=true;
+                              break;
+                          }
+                          
+                          jugador.move(j->getkx()*time,j->getky()*time);
+                          jugador.move(0,0);
             }
       }
+      if(!movido)j->setColision(false);
 }
 
 void Colisiones::update(sf::Clock &temporizador,std::vector<Dinosaurio*> &dinosaurios,Jugador &jugador,std::vector<sf::Sprite> &totalExplosiones,Map &mapa,  std::vector<sf::Sprite*> &todoSprites,std::vector<sf::Sprite*> &paredesSprites, float time)

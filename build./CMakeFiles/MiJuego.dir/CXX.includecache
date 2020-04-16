@@ -47,6 +47,8 @@ bombas.h
 ../bomba/bombas.h
 Map.h
 ../bomba/Map.h
+jugador.h
+../bomba/jugador.h
 ../dinosaurio/dinosaurio.h
 ../dinosaurio/dinosaurio.h
 
@@ -129,6 +131,8 @@ bombas.h
 /home/fv2/Desktop/PENGO/pengo/bomba/bombas.h
 Map.h
 /home/fv2/Desktop/PENGO/pengo/bomba/Map.h
+jugador.h
+/home/fv2/Desktop/PENGO/pengo/bomba/jugador.h
 ../dinosaurio/dinosaurio.h
 /home/fv2/Desktop/PENGO/pengo/dinosaurio/dinosaurio.h
 

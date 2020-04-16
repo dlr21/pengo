@@ -31,6 +31,10 @@ class Jugador{
       }
     void empujando(float time);
     void setInicio(){    sprite->setPosition(112+32, 64+32); }//DEPENDE DEL MAPA
+    void setkx(float a){kVelx=a;}
+    void setky(float a){kVely=a;}
+    float getkx(){return kVelx;}
+    float getky(){return kVely;}
     
     void quitarVidas(){if(vidas > 0)vidas--;}
     void setmir(int i){mir=i;}
@@ -52,8 +56,9 @@ class Jugador{
     sf::Sprite* sprite2;
     int identificador;
     bool bomba;
-    
-    int kVel=1882/10;
+    float kVel=1882/10;
+    float kVelx=1882/10;
+    float kVely=1882/10;
     int vidas = 3;
     
     

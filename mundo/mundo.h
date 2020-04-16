@@ -17,7 +17,6 @@
 using namespace std;
 
 class Mundo : public States {
-
   private:    
     static Mundo* jinstance;
     int dif=0;//dificultad
@@ -25,6 +24,9 @@ class Mundo : public States {
     int lvlactual=0;//nivel en el que estamos
     int play=0;//numero de jugadores
     int modo=0;//modo de juego
+    int snototales=4;
+    int snovivos=2;
+    int snodurmiendo=4;
     std::vector<Map*> mapas;//vector de mapas para jugar
     Tile* hud1;//el hud
     Tile* hud2;//el hud
@@ -33,6 +35,7 @@ class Mundo : public States {
     bool adnscreados=false;
     bool dinoscreados=false;
     bool colisiones=false;
+    bool moverse=true;
     std::vector<Dinosaurio*> dinosaurios;
     std::vector<Adn*> adns;//array de adns(seguramente modificcable)
     sf::Clock temporizador;
@@ -46,11 +49,8 @@ class Mundo : public States {
     std::vector<float> tiemposExplosiones;
     //Vector que almacena todos los sprites para comprobar las colisiones.
     std::vector<sf::Sprite*> todoSprites;
-
     std::vector<sf::Sprite*> paredesSprites;
-
     int _cont = 0; // Contador de iteraciones del juego
-
   public:
     void Inicializar();
     static Mundo* Instance();
@@ -68,7 +68,6 @@ class Mundo : public States {
           }
       return cont;
     }
-
     void borraradns(){
         for(unsigned int i=0;i<adns.size();i++){
           std::cout<<"adn delete"<<endl;
@@ -100,7 +99,20 @@ class Mundo : public States {
       }
       mapas.clear();
     }
-
+    void todosno(){
+      int activados=0;
+      for (unsigned int i = 0; i < dinosaurios.size(); i++)
+      {
+        if (activados<2){
+            dinosaurios[i]->setactivo(true);
+            activados++;
+        } 
+      }
+      if(dinosaurios.size()<=0){
+        mapas[lvlactual]->terminar();
+        std::cout<<"ganasmapa"<<endl;
+      }
+    }
 };
 
 #endif

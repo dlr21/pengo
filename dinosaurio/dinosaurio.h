@@ -44,8 +44,9 @@ class Dinosaurio
       void animacion(int d,float time);
       void mover(std::vector<sf::Sprite*> &todoSprite,int direccion,float time);
       void setposdino(int i){_posdino=i;}
+      void setactivo(bool a){activo=a;}
     private:
-      float _Speed=150; // Velocidad
+      float _Speed=50; // Velocidad
       int _Direccion;
       sf::Sprite* _Sprite = new sf::Sprite; // Sprite
       sf::Texture* textura;
@@ -53,7 +54,7 @@ class Dinosaurio
       int _Vida=1; // Vida del dino
       float invencibilidad = -1; 
       bool parado=false;
-      bool activo=true;
+      bool activo=false;
       float switchtime=0.2;
       float totaltime=0;
       bool animal=true;

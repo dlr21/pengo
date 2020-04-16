@@ -105,7 +105,7 @@ void Jugador::animacion(int dir,float deltatime){
             }
     }
     totaltime+=deltatime;
-    if(totaltime>switchtime){
+    if(totaltime>=switchtime){
         totaltime=0;
         if(animal){
             animal=false;
@@ -141,30 +141,33 @@ void Jugador::animacion(int dir,float deltatime){
     }
 }
 void Jugador::mover(int direccion, float time){
+    kVelx=0;
+    kVely=0;
     switch (direccion)
     {
     //Arriba
     case 0:
-        sprite->move(0, -kVel*time);
-
+         kVely=-kVel*time;
         
         break;
     //Abajo
     case 1:
-        sprite->move(0, kVel*time);
+        kVely=kVel*time;
         
         break;
     //Derecha
     case 2:
-        sprite->move(kVel*time, 0);
+        kVelx=kVel*time;
         
         break;
     //Izquierda
     case 3:
-        sprite->move(-kVel*time, 0);
+        kVelx=-kVel*time;
         
         break;
     }
+
+    sprite->move(kVelx,kVely);
 
 }
 void Jugador::Update(float time ){
@@ -175,8 +178,9 @@ void Jugador::Update(float time ){
       if(getempujon()){
         empujando(time);
       }        
+        if(!colision){
         posredondeada(time);
-
+        }
 }
 /*bool Jugador::frentevacio(Map* m){
     int x=(getSprite()->getPosition().x-112)/32;
@@ -225,11 +229,12 @@ void Jugador::posredondeada(float time){
 
     int x=getSprite()->getPosition().x+16;
     int y=getSprite()->getPosition().y;
-    if((x%32)>1){
+
+    if((x%32)>0.1){
         mover(getmir(),time);
         animacion(getmir(),time);
     }
-    if((y%32)>1){
+    if((y%32)>0.1){
         mover(getmir(),time);
         animacion(getmir(),time);
     }

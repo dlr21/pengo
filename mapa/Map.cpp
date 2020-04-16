@@ -220,7 +220,7 @@ sf::Sprite* Map::empujado(Jugador* j){
   int y=(j->getSprite()->getPosition().y-64)/32;
 
   std::cout<< x<<" "<<y<<endl;
-  
+
   if(dir==0){
     std::cout<< x<<" "<<y-1<<endl;
     if(_tilemap[1][x][y-1]>0){

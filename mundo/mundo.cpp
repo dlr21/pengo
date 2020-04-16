@@ -101,6 +101,8 @@ void Mundo::Event(sf::Event event,sf::RenderWindow &window, float time){ //COSAS
                 jugador1->setempujon(true);//PENDIENTE
                 if(mapas[lvlactual]->empujado(jugador1)!=NULL){
                   std::cout<<"NO ES NULL"<<std::endl;
+                }else{
+                  std::cout<<"PUTAMENTIRA"<<std::endl;
                 }
                 
                 std::cout<<"empujar"<<endl;
@@ -125,32 +127,50 @@ void Mundo::Event(sf::Event event,sf::RenderWindow &window, float time){ //COSAS
               Contexto::Instance()->Quit();
               window.close();
             break;
+
+
+            case 15://matar sno
+                if(dinosaurios.size()>0){
+                    dinosaurios[0]->modifyVida();
+                    if(dinosaurios[0]->getVida() == 0)
+                {
+                  for(unsigned int a = 0;a < todoSprites.size();a++){
+                    if(todoSprites[a]==dinosaurios[0]->getSprite()){
+                      todoSprites.erase(todoSprites.begin() + a);
+                    }
+                  }
+                  dinosaurios.erase(dinosaurios.begin() + 0);
+                  jugador1->sumaPuntos();
+                }
+              }
+            break;
+
             //Arriba
-            case 73:  
+             case 73: 
             jugador1->animacion(0,time);
-              jugador1->mover(0,time);
-              Colisiones::crearColisiones(*jugador1->getSprite(),todoSprites,0,jugador1->getVelocidad(), time);
+            jugador1->mover(0,time);
+              Colisiones::crearColisiones(*jugador1->getSprite(),todoSprites,0,jugador1->getVelocidad(), time, jugador1);
 
             break;
             //Abajos
             case 74:
             jugador1->animacion(1,time);
-              jugador1->mover(1,time);
-              Colisiones::crearColisiones(*jugador1->getSprite(),todoSprites,1,jugador1->getVelocidad(), time);
+            jugador1->mover(1,time);
+              Colisiones::crearColisiones(*jugador1->getSprite(),todoSprites,1,jugador1->getVelocidad(), time, jugador1);
 
             break;
             //Derecha
             case 72:
             jugador1->animacion(2,time);
-              jugador1->mover(2,time);
-              Colisiones::crearColisiones(*jugador1->getSprite(),todoSprites,2,jugador1->getVelocidad(), time);
+            jugador1->mover(2,time);
+              Colisiones::crearColisiones(*jugador1->getSprite(),todoSprites,2,jugador1->getVelocidad(), time, jugador1);
 
             break;
             //Izquierda
             case 71:
             jugador1->animacion(3,time);
-              jugador1->mover(3,time);
-              Colisiones::crearColisiones(*jugador1->getSprite(),todoSprites,3,jugador1->getVelocidad(), time);
+            jugador1->mover(3,time);
+              Colisiones::crearColisiones(*jugador1->getSprite(),todoSprites,3,jugador1->getVelocidad(), time, jugador1);
 
             break;    
 
@@ -189,7 +209,7 @@ void Mundo::Update(sf::RenderWindow &window, float time) {//COSAS DEL MUNDO QUE 
             adnscreados=true;
           }*/
           if(!dinoscreados){//CREAR DINOS ESTO PUEDE DAR LAS PROBLEMAS
-            crearDinos(mapas[lvlactual],2);
+            crearDinos(mapas[lvlactual],snototales);
             dinoscreados=true;
           }
           if(!colisiones){
@@ -199,9 +219,11 @@ void Mundo::Update(sf::RenderWindow &window, float time) {//COSAS DEL MUNDO QUE 
           }
         }
     if(play==1){// UN JUGADOR O DOS JUGADORES UPDATEAN ELLOS Y SUS HUDS
+      todosno();
       hud1->Update(jugador1);
+      Colisiones::crearColisiones(*jugador1->getSprite(),todoSprites,3,jugador1->getVelocidad(), time, jugador1);
       jugador1->Update(time);
-      Colisiones::crearColisiones(*jugador1->getSprite(),todoSprites,3,jugador1->getVelocidad(), time);
+      Colisiones::crearColisiones(*jugador1->getSprite(),todoSprites,3,jugador1->getVelocidad(), time, jugador1);
       if(jugador1->getVidas()==0){
          finjuego();
         std::cout<<"pierdes"<<endl;
