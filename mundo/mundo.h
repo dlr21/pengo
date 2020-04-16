@@ -28,7 +28,7 @@ class Mundo : public States {
     std::vector<Map*> mapas;//vector de mapas para jugar
     Tile* hud1;//el hud
     Tile* hud2;//el hud
-
+    bool pulsada=false;//event de uno en uno
     bool nueva=false;//controla la nueva partida
     bool adnscreados=false;
     bool dinoscreados=false;

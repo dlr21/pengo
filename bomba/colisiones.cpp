@@ -8,6 +8,7 @@ void Colisiones::crearColisiones(sf::Sprite &jugador,std::vector<sf::Sprite*> to
         //Ha encontrado un objeto del vector con el que esta colisionando actualmente.
         if(jugador.getGlobalBounds().intersects(todoSprites[i]->getGlobalBounds()))
             {
+              std::cout<<"colision bloque"<<std::endl;
               //Contrarestar velocidad en la direccion en la que esta yendo.
                 switch (direccion)
                 {
@@ -77,7 +78,7 @@ void Colisiones::update(sf::Clock &temporizador,std::vector<Dinosaurio*> &dinosa
       //JUGADOR CON SNOBEE
       if(jugador.getSprite()->getGlobalBounds().intersects(dinosaurios[j]->getSprite()->getGlobalBounds()))
       {
-        std::cout<<"colision"<<endl;
+        std::cout<<"colision con snobe"<<endl;
         if(jugador.getempujon()){
           dinosaurios[j]->modifyVida();
           if(dinosaurios[j]->getVida() == 0)

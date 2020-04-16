@@ -45,7 +45,7 @@ class Dinosaurio
       void mover(std::vector<sf::Sprite*> &todoSprite,int direccion,float time);
       void setposdino(int i){_posdino=i;}
     private:
-      float _Speed=0.5; // Velocidad
+      float _Speed=150; // Velocidad
       int _Direccion;
       sf::Sprite* _Sprite = new sf::Sprite; // Sprite
       sf::Texture* textura;
@@ -54,9 +54,12 @@ class Dinosaurio
       float invencibilidad = -1; 
       bool parado=false;
       bool activo=true;
-      float switchtime=0.1;
+      float switchtime=0.2;
       float totaltime=0;
       bool animal=true;
+      //Si no existen snowbees en forma de huevo
+//Si quedan menos de 4 snowbees en pantalla
+//Si no ha perdido una vida el juegador en los últimos 2 minutos
 };
 
 #endif

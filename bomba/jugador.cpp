@@ -1,8 +1,8 @@
 #include "jugador.h"
+
 #include <iostream>
 
-Jugador::Jugador(int numero)
-{
+Jugador::Jugador(int numero){
     textura = new sf::Texture();
     if (!textura->loadFromFile("resources/pengos.png")) {
         std::cerr << "Error cargando la imagen sprites.png";
@@ -10,113 +10,229 @@ Jugador::Jugador(int numero)
     }
     sprite = new sf::Sprite();
     sprite->setTexture(*textura);
-    sprite->setOrigin(32 / 2, 32 / 2);
+    sprite->setOrigin(16, 16);
     sprite->setScale(0.8,0.8);
     sprite->setTextureRect(sf::IntRect(0 * 32, 0 * 32, 32, 32));
     if (numero==1)
     {
-            sprite->setPosition(112+48, 64+48);
+            sprite->setPosition(112+32, 64+32);
     }
     puntos=0;
     invencible=false;
     identificador = numero;
-    kVel = 150;
 }
-void Jugador::draw(sf::RenderWindow &window)
-{
+void Jugador::draw(sf::RenderWindow &window){
     window.draw(*sprite);
 }
-void Jugador::animacion(int dir,float deltatime){
-    if(mir!=dir){
-        mir=dir;
-            if(dir==0) {
+void Jugador::empujando(float time){
+    if(animal){animal=false;
+        timeempujar=0;
+        normal=false;
+                if(mir==0) {
+                                sprite->setTextureRect(sf::IntRect(4 * 32, 1 * 32, 32, 32));
+                                
+                }
+                if(mir==1) {
+                                sprite->setTextureRect(sf::IntRect(0 * 32, 1 * 32, 32, 32));
+                }
+                if(mir==2) {
+                                sprite->setTextureRect(sf::IntRect(6 * 32, 1 * 32, 32, 32));
+                }
+                if(mir==3) {
+                                sprite->setTextureRect(sf::IntRect(2 * 32, 1 * 32, 32, 32));
+                }
+                std::cout<<"empuja primer anim"<<std::endl;
+                //empuja=false;
+                
+    }else{
+    timeempujar+=time;
+        if(timeempujar>switchtime){
+            std::cout<<"cambiatime"<<std::endl;
+            if(!normal){
+                        if(mir==0) {
+                                        sprite->setTextureRect(sf::IntRect(5 * 32, 1 * 32, 32, 32));
+
+                        }
+                        if(mir==1) {
+                                        sprite->setTextureRect(sf::IntRect(1 * 32, 1 * 32, 32, 32));
+
+                        }
+                        if(mir==2) {
+                                        sprite->setTextureRect(sf::IntRect(7 * 32, 1 * 32, 32, 32));
+
+                        }
+                        if(mir==3) {
+                                        sprite->setTextureRect(sf::IntRect(3 * 32, 1 * 32, 32, 32));
+
+                        }
+                        timeempujar=0;
+                        normal=true;
+            }else{
+                        if(mir==0) {
                             sprite->setTextureRect(sf::IntRect(4 * 32, 0 * 32, 32, 32));
-
-            }
-            if(dir==1) {
+                        }
+                        if(mir==1) {
                             sprite->setTextureRect(sf::IntRect(0 * 32, 0 * 32, 32, 32));
-
-            }
-            if(dir==2) {
+                        }
+                        if(mir==2) {
                             sprite->setTextureRect(sf::IntRect(7 * 32, 0 * 32, 32, 32));
-
-            }
-            if(dir==3) {
+                        }
+                        if(mir==3) {
                             sprite->setTextureRect(sf::IntRect(3 * 32, 0 * 32, 32, 32));
-
-            }
-    }
-    totaltime+=deltatime;
-    std::cout<<totaltime<<"tiempo total"<<std::endl;
-    if(totaltime>switchtime){
-        totaltime=0;
-        if(animal){
-            animal=false;
-            if(dir==0) {
-                            sprite->setTextureRect(sf::IntRect(4 * 32, 0 * 32, 32, 32));
-
-            }
-            if(dir==1) {
-                            sprite->setTextureRect(sf::IntRect(0 * 32, 0 * 32, 32, 32));
-
-            }
-            if(dir==2) {
-                            sprite->setTextureRect(sf::IntRect(7 * 32, 0 * 32, 32, 32));
-
-            }
-            if(dir==3) {
-                            sprite->setTextureRect(sf::IntRect(3 * 32, 0 * 32, 32, 32));
-
-            }
-        }else{
-            animal=true;
-            if(dir==0) {
-                            sprite->setTextureRect(sf::IntRect(5 * 32, 0 * 32, 32, 32));
-
-            }
-            if(dir==1) {
-                            sprite->setTextureRect(sf::IntRect(1 * 32, 0 * 32, 32, 32));
-
-            }
-            if(dir==2) {
-                            sprite->setTextureRect(sf::IntRect(6 * 32, 0 * 32, 32, 32));
-
-            }
-            if(dir==3) {
-                            sprite->setTextureRect(sf::IntRect(2 * 32, 0 * 32, 32, 32));
-
+                        }
+                    std::cout<<"normalidad time"<<std::endl;
+                    empuja=false; 
+                    animal=true;
             }
         }
     } 
 }
-void Jugador::mover(int direccion, float time)
-{
+void Jugador::animacion(int dir,float deltatime){
+    if(mir!=dir){
+        mir=dir;
+            std::cout<<"normalidad"<<std::endl;
+            if(dir==0) {
+                            sprite->setTextureRect(sf::IntRect(4 * 32, 0 * 32, 32, 32));
+            }
+            if(dir==1) {
+                            sprite->setTextureRect(sf::IntRect(0 * 32, 0 * 32, 32, 32));
+            }
+            if(dir==2) {
+                            sprite->setTextureRect(sf::IntRect(7 * 32, 0 * 32, 32, 32));
+            }
+            if(dir==3) {
+                            sprite->setTextureRect(sf::IntRect(3 * 32, 0 * 32, 32, 32));
+            }
+    }
+    totaltime+=deltatime;
+    if(totaltime>switchtime){
+        totaltime=0;
+        if(animal){
+            animal=false;
+                if(dir==0) {
+                                sprite->setTextureRect(sf::IntRect(4 * 32, 0 * 32, 32, 32));
+                }
+                if(dir==1) {
+                                sprite->setTextureRect(sf::IntRect(0 * 32, 0 * 32, 32, 32));
+                }
+                if(dir==2) {
+                                sprite->setTextureRect(sf::IntRect(7 * 32, 0 * 32, 32, 32));
+                }
+                if(dir==3) {
+                                sprite->setTextureRect(sf::IntRect(3 * 32, 0 * 32, 32, 32));
+                }
+            
+        }else{
+            totaltime=0;
+                if(dir==0) {
+                                sprite->setTextureRect(sf::IntRect(5 * 32, 0 * 32, 32, 32));
+                }
+                if(dir==1) {
+                                sprite->setTextureRect(sf::IntRect(1 * 32, 0 * 32, 32, 32));
+                }
+                if(dir==2) {
+                                sprite->setTextureRect(sf::IntRect(6 * 32, 0 * 32, 32, 32));
+                }
+                if(dir==3) {
+                                sprite->setTextureRect(sf::IntRect(2 * 32, 0 * 32, 32, 32));
+                }
+                animal=true;
+            }
+    }
+}
+void Jugador::mover(int direccion, float time){
     switch (direccion)
     {
-
     //Arriba
     case 0:
-
         sprite->move(0, -kVel*time);
+
+        
         break;
     //Abajo
     case 1:
-
         sprite->move(0, kVel*time);
+        
         break;
     //Derecha
     case 2:
-
         sprite->move(kVel*time, 0);
+        
         break;
     //Izquierda
     case 3:
-
         sprite->move(-kVel*time, 0);
+        
         break;
     }
 
 }
+void Jugador::Update(float time,Map* m ){
+    
+      if(getInvencible()){
+        setVidas(3);
+      }
+      if(getempujon()){
+        empujando(time);
+      }        
+        //posredondeada(time);
+
+}
+/*bool Jugador::frentevacio(Map* m){
+    int x=(getSprite()->getPosition().x-112)/32;
+    int y=(getSprite()->getPosition().y-64)/32;
+
+    if(x==0)x=1;
+    std::cout<<x<<y<<" mir"<<mir<<std::endl;
+
+    if(mir==0){
+        if(y==0)return false;
+        if(m->gettilemap()[0][x][y-1]>0 || m->gettilemap()[1][x][y-1]>0){ //ARRIBA
+            return false;
+        }
+    }else if(mir==1)
+    {
+        if(y==17)return false;
+        if(m->gettilemap()[0][x][y+1]>0 || m->gettilemap()[1][x][y+1]>0){ //ABAJO
+        std::cout<<m->gettilemap()[0][x][y+1]<<m->gettilemap()[1][x][y+1]<<" mir"<<mir<<std::endl;
+            return false;
+        }
+    }else if(mir==2)
+    {
+        if(x==15)return false;
+                if(m->gettilemap()[0][x+1][y]>0 || m->gettilemap()[1][x+1][y]>0){ //DRE
+
+std::cout<<m->gettilemap()[0][x+1][y]<<m->gettilemap()[1][x+1][y]<<" mir"<<mir<<std::endl;
+return false;
+
+        }
+    }else if(mir==3)
+    {
+        if(x==0)return false;
+        std::cout<<x<<y<<std::endl;
+                if(m->gettilemap()[0][x-1][y]>0 || m->gettilemap()[1][x-1][y]>0){ //IZQ
+
+return false;
 
 
+        }
+    }
+    
+    return true;
+
+}*/
+void Jugador::posredondeada(float time){
+
+    int x=getSprite()->getPosition().x+16;
+    int y=getSprite()->getPosition().y;
+    std::cout<<x<<" "<<y<<std::endl;
+    if((x%32)>2){
+        mover(getmir(),time);
+        animacion(getmir(),time);
+    }
+    if((y%32)>2){
+        mover(getmir(),time);
+        animacion(getmir(),time);
+    }
+}
 

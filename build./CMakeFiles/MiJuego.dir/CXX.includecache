@@ -53,6 +53,10 @@ Map.h
 ../bomba/jugador.h
 SFML/Graphics.hpp
 -
+iostream
+-
+Map.h
+../bomba/Map.h
 
 ../dinosaurio/dinosaurio.h
 

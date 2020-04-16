@@ -53,6 +53,10 @@ Map.h
 ../bomba/jugador.h
 SFML/Graphics.hpp
 -
+iostream
+-
+Map.h
+../bomba/Map.h
 
 ../dinosaurio/dinosaurio.h
 
@@ -213,6 +217,10 @@ iostream
 /home/fv2/Desktop/PENGO/pengo/bomba/jugador.h
 SFML/Graphics.hpp
 -
+iostream
+-
+Map.h
+/home/fv2/Desktop/PENGO/pengo/bomba/Map.h
 
 /home/fv2/Desktop/PENGO/pengo/dinosaurio/dinosaurio.cpp
 SFML/Graphics.hpp

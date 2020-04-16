@@ -1,12 +1,15 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-
+#include <iostream>
+#include "Map.h"
 class Jugador{
     
  public:
     Jugador(int num);
     sf::Sprite* getSprite(){return sprite;};
     int getIdentificador(){return identificador;};
+    bool getempujon(){return empuja;}
+    int getmir(){return mir;}
     bool getPuesta(){return bomba;};
     int getVelocidad(){return kVel;}
     int getVidas(){return vidas;}
@@ -25,31 +28,45 @@ class Jugador{
           {
              invencible=false;
           } 
-   }
-    void setInicio(){    sprite->setPosition(112+48, 64+48); }//DEPENDE DEL MAPA
-    void mover(int direccion,float time);
+      }
+    void empujando(float time);
+    void setInicio(){    sprite->setPosition(112+32, 64+32); }//DEPENDE DEL MAPA
+    
     void quitarVidas(){if(vidas > 0)vidas--;}
-    int getmir(){return mir;}
     void setmir(int i){mir=i;}
-    bool getempujon(){return empuja;}
-    void setempujon(bool i){empuja=i;}
-
+    void setempujon(bool i){
+       animal=true;
+       timeempujar=0;
+       empuja=i;
+      }
     void draw(sf::RenderWindow &window);
     void animacion(int d,float time);
+    void setColision(bool f){colision=f;}
+    void mover(int direccion,float time);
+    void Update(float time,Map* m );
+    void posredondeada(float time);
+    //bool frentevacio(Map* m);
  private:
     sf::Texture* textura;
     sf::Sprite* sprite;
     sf::Sprite* sprite2;
     int identificador;
     bool bomba;
-    int kVel;
+    
+    int kVel=1882/10;
     int vidas = 3;
-    float invencibilidad = -1;
-    bool invencible;
+    
+    
     int puntos;
+    int mir=1;
     float switchtime=0.1;
     float totaltime=0;
-    bool animal=true;
-    int mir=0;
+    float timeempujar=0;
+    float invencibilidad = -1;
+    
+    bool invencible;
     bool empuja=false;
+    bool normal=true;
+    bool colision=false;
+    bool animal=true;
 };

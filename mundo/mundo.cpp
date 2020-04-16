@@ -88,7 +88,6 @@ void Mundo::crearDinos(Map* m,int tot){
 }
 
 void Mundo::Event(sf::Event event,sf::RenderWindow &window, float time){ //COSAS DEL MUNDO CUANDO PULSAS ALGO
-      std::cout<<time<<endl;
       switch (event.type) {
         case sf::Event::Closed:
           Contexto::Instance()->Quit();
@@ -100,7 +99,8 @@ void Mundo::Event(sf::Event event,sf::RenderWindow &window, float time){ //COSAS
           switch (event.key.code) {  
             case 57: //EMPUJAR
             {
-              jugador1->setempujon(true);//PENDIENTE
+              if(!jugador1->getempujon())jugador1->setempujon(true);//PENDIENTE
+              std::cout<<"empujar"<<endl;
               break;
             }
             case 13: //n siguiente nivel 13
@@ -121,7 +121,7 @@ void Mundo::Event(sf::Event event,sf::RenderWindow &window, float time){ //COSAS
               window.close();
             break;
             //Arriba
-            case 73:
+            case 73:  
             jugador1->animacion(0,time);
               jugador1->mover(0,time);
               Colisiones::crearColisiones(*jugador1->getSprite(),todoSprites,0,jugador1->getVelocidad(), time);
@@ -147,7 +147,7 @@ void Mundo::Event(sf::Event event,sf::RenderWindow &window, float time){ //COSAS
               jugador1->mover(3,time);
               Colisiones::crearColisiones(*jugador1->getSprite(),todoSprites,3,jugador1->getVelocidad(), time);
 
-            break;
+            break;    
 
           //Cualquier tecla desconocida se imprime por pantalla su código
           default:
@@ -155,9 +155,7 @@ void Mundo::Event(sf::Event event,sf::RenderWindow &window, float time){ //COSAS
           break;
         }
       }
-
 }
-
 void Mundo::Update(sf::RenderWindow &window, float time) {//COSAS DEL MUNDO QUE SE ACTUALIZAN SIEMPRE
 
   if(hud1->getTerminada()){
@@ -197,18 +195,14 @@ void Mundo::Update(sf::RenderWindow &window, float time) {//COSAS DEL MUNDO QUE 
         }
     if(play==1){// UN JUGADOR O DOS JUGADORES UPDATEAN ELLOS Y SUS HUDS
       hud1->Update(jugador1);
-          Bomba::update(temporizador,*jugador1,totalBombas,totalExplosiones,tiemposBomba,tiemposExplosiones);
-          Colisiones::update(temporizador,dinosaurios,*jugador1,totalExplosiones,*mapas[lvlactual],todoSprites,paredesSprites,time); 
+      jugador1->Update(time,mapas[lvlactual]);
+      Colisiones::crearColisiones(*jugador1->getSprite(),todoSprites,3,jugador1->getVelocidad(), time);
       if(jugador1->getVidas()==0){
-        finjuego();
+         finjuego();
         std::cout<<"pierdes"<<endl;
       }
-      if(jugador1->getInvencible()){
-        jugador1->setVidas(3);
-        cout<<"invencible"<<endl;
-      }
+          Colisiones::update(temporizador,dinosaurios,*jugador1,totalExplosiones,*mapas[lvlactual],todoSprites,paredesSprites,time); 
     }
-
     // Mover los dinosaurios con la IA
     IA ia; // Genera una ia con cada iteracion
     ia.movimientoDinos(dinosaurios, _cont,todoSprites, time); // Permite mover a los dinosaurios
@@ -216,7 +210,6 @@ void Mundo::Update(sf::RenderWindow &window, float time) {//COSAS DEL MUNDO QUE 
     //Detecta si le tiene que quitar vida a jugadores y dinosaurios si colisionan con una explosion.
 }
 
- 
 void Mundo::finjuego(){
         std::cout<<"fin"<<endl;
         //RENICIAR MUNDO

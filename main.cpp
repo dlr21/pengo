@@ -25,7 +25,6 @@ int main() {
     sf::Clock clock;
     sf::Clock clock2;
     sf::Time timeStartUpdate=clock.getElapsedTime();
-
      
     //Bucle del juego
       while (window.isOpen()) {

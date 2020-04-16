@@ -78,7 +78,7 @@ sf::FloatRect Dinosaurio::getHitbox(){ // FloatRect devuelve coordenada superior
 // Funciones de movimiento (salto y movimientos)
 int Dinosaurio::marriba(std::vector<sf::Sprite*> &todo, float time){ // Movimiento arriba
     
-    for(int i = 0; i < 160; i++){
+    
         for(unsigned int j = 0;j < todo.size();j++)
         {
             if(_Sprite->getGlobalBounds().intersects(todo[j]->getGlobalBounds()) && _Sprite!=todo[j])
@@ -91,7 +91,7 @@ int Dinosaurio::marriba(std::vector<sf::Sprite*> &todo, float time){ // Movimien
         }
         animacion(_posdino,time);
         _Sprite->move(0, -(_Speed*time));
-    }
+    
    
     return 0; // Posicion arriba
 
@@ -99,7 +99,7 @@ int Dinosaurio::marriba(std::vector<sf::Sprite*> &todo, float time){ // Movimien
 
 int Dinosaurio::mabajo(std::vector<sf::Sprite*> &todo, float time){ // Movimiento abajo
         
-    for(int i = 0; i < 160; i++){
+    
         for(unsigned int j = 0;j < todo.size();j++)
         {
             if(_Sprite->getGlobalBounds().intersects(todo[j]->getGlobalBounds()) && _Sprite!=todo[j])
@@ -112,14 +112,14 @@ int Dinosaurio::mabajo(std::vector<sf::Sprite*> &todo, float time){ // Movimient
         }
         animacion(_posdino,time);
         _Sprite->move(0, _Speed*time);
-    }
+    
     
     return 1; // Posicion abajo
 }
 
 int Dinosaurio::mderecha(std::vector<sf::Sprite*> &todo, float time){ // Movimiento derecha
         
-    for(int i = 0; i < 160; i++){
+   
         for(unsigned int j = 0;j < todo.size();j++)
         {
             if(_Sprite->getGlobalBounds().intersects(todo[j]->getGlobalBounds()) && _Sprite!=todo[j])
@@ -132,14 +132,14 @@ int Dinosaurio::mderecha(std::vector<sf::Sprite*> &todo, float time){ // Movimie
         }
         animacion(_posdino,time);
         _Sprite->move(_Speed*time, 0);
-    }
+    
 
     return 2; // Posicion derecha
 }
 
 int Dinosaurio::mizquierda(std::vector<sf::Sprite*> &todo, float time){ // Movimiento izquierda
         
-    for(int i = 0; i < 160; i++){
+    
         for(unsigned int j = 0;j < todo.size();j++)
         {
             if(_Sprite->getGlobalBounds().intersects(todo[j]->getGlobalBounds()) && _Sprite!=todo[j])
@@ -152,7 +152,7 @@ int Dinosaurio::mizquierda(std::vector<sf::Sprite*> &todo, float time){ // Movim
         }
         animacion(_posdino,time);
         _Sprite->move(-(_Speed*time),0);
-    }
+    
 
     return 3; // Posicion izquierda
 }
@@ -199,7 +199,6 @@ void Dinosaurio::animacion(int dir,float deltatime){
             }
     }
     totaltime+=deltatime;
-    std::cout<<totaltime<<"tiempo total"<<std::endl;
     if(totaltime>switchtime){
         totaltime=0;
         if(animal){
