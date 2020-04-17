@@ -60,7 +60,10 @@ public:
   void reservarMemoria(int num);
   sf::Sprite* empujado(sf::Sprite* j,int dir);
   void deslizarbloque(sf::Sprite* s, int dir,float time);
-
+  void borrardemapa(int i, int x, int y){
+              _tilemapSprite[i][y][x]=NULL;
+            delete[] _tilemapSprite[i][y][x];
+  }
 private:
   int puntosfin;
   bool finalizado;

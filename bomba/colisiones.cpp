@@ -51,7 +51,19 @@ void Colisiones::update(sf::Clock &temporizador,sf::Sprite* deslizado,std::vecto
       for(unsigned int j = 0;j < todoSprites.size();j++)
       {
         if(todoSprites[j]->getGlobalBounds().intersects(deslizado->getGlobalBounds()) && deslizado!=todoSprites[j]){
-          mapa.settilemapSprite(deslizado,(deslizado->getPosition().x-112)/32,(deslizado->getPosition().y-64)/32);
+          //mapa.settilemapSprite(deslizado,(deslizado->getPosition().x-112)/32,(deslizado->getPosition().y-64)/32);
+
+    
+       int x=deslizado->getPosition().x-112;
+       if(x%32<=16)x=x/32;
+       if(x%32>16)x=(x/32)+1;
+    
+    
+       int y=deslizado->getPosition().y-64;
+       if(y%32<=16)y=y/32;
+       if(y%32>16)y=(y/32)+1;
+
+      deslizado->setPosition(x*32+112,y*32+64);
           jugador.setmoviendo(false);
         }
       }

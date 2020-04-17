@@ -214,7 +214,8 @@ sf::Sprite* Map::empujado(sf::Sprite* j, int dir){
 
   if(dir==0){
     std::cout<< x<<" "<<y-1<<endl;
-    if(_tilemap[1][y-1][x]==5 || _tilemap[1][y-1][x]==6){
+    if(y-1>-1 && (_tilemap[1][y-1][x]==5 || _tilemap[1][y-1][x]==6) ){
+      std::cout<<"sigue"<<endl;
       return _tilemapSprite[1][y-1][x];
 
     }else{
@@ -222,7 +223,7 @@ sf::Sprite* Map::empujado(sf::Sprite* j, int dir){
     }
   }else if(dir==1){
     std::cout<<x<<" "<<y+1<<endl;
-    if(_tilemap[1][y+1][x]==5){
+     if( y+1<18 && (_tilemap[1][y+1][x]==5 || _tilemap[1][y+1][x]==6) ){
 
       return _tilemapSprite[1][y+1][x];
     }else{
@@ -230,7 +231,7 @@ sf::Sprite* Map::empujado(sf::Sprite* j, int dir){
     }
   }else if(dir==2){
     std::cout<<x+1<<" "<<y<<endl;
-    if(_tilemap[1][y][x+1]==5 || _tilemap[1][y][x+1]==6){
+    if( x+1<16 && (_tilemap[1][y][x+1]==5 || _tilemap[1][y][x+1]==6) ){
 
       return _tilemapSprite[1][y][x+1];
     }else{
@@ -238,7 +239,7 @@ sf::Sprite* Map::empujado(sf::Sprite* j, int dir){
     }
   }else if(dir==3){
     std::cout<<x-1<<" "<<y<<endl;
-    if(_tilemap[1][y][x-1]==5 || _tilemap[1][y][x-1]==6){
+    if( x-1>-1 && (_tilemap[1][y][x-1]==5 || _tilemap[1][y][x-1]==6) ){
 
       return _tilemapSprite[1][y][x-1];
     }else{

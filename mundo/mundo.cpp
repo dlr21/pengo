@@ -99,19 +99,22 @@ void Mundo::Event(sf::Event event,sf::RenderWindow &window, float time){ //COSAS
             std::cout<<"pulsa"<<std::endl;
             case 57: //EMPUJAR
             {
-              if(!jugador1->getempujon()) {
-                std::cout<<"empujar?"<<endl;
+              if(!jugador1->getempujon() && !jugador1->getmoviendo()) {
+                std::cout<<"empujar?";
                 jugador1->setempujon(true);//PENDIENTE
                 dirbloque=jugador1->getmir();
                 if(mapas[lvlactual]->empujado(jugador1->getSprite(),dirbloque)){
                   std::cout<<"SI EMPUJA"<<std::endl;
                   bloqueadeslizar=(mapas[lvlactual]->empujado(jugador1->getSprite(),dirbloque));
                   if(mapas[lvlactual]->empujado(bloqueadeslizar,dirbloque)){
-
-                    borradetodoSprites(mapas[lvlactual]->empujado(bloqueadeslizar,dirbloque));
-                    //DESTRUIR TODAVIA
+                    //BORAR BLOQUE
+                    mapas[lvlactual]->borrardemapa(1,(bloqueadeslizar->getPosition().x-112)/32,(bloqueadeslizar->getPosition().y-64)/32);
+                    borradetodoSprites(bloqueadeslizar);
+                              bloqueadeslizar=NULL;
+                              delete[] bloqueadeslizar;
                   }else{
                     jugador1->setmoviendo(true);
+                    std::cout<<"moviendo"<<endl;
                   }
                 }
               }else{std::cout<<"ya estaba empujando"<<endl;}
@@ -233,19 +236,14 @@ void Mundo::Update(sf::RenderWindow &window, float time) {//COSAS DEL MUNDO QUE 
       Colisiones::crearColisiones(*jugador1->getSprite(),todoSprites,3,jugador1->getVelocidad(), time, jugador1);
       todosno();
       hud1->Update(jugador1);
-      
       jugador1->Update(time);
-      
       if(jugador1->getVidas()==0){
          finjuego();
         std::cout<<"PIERDES"<<endl;
       }
       if(bloqueadeslizar!=NULL && jugador1->getmoviendo()){
-
           mapas[lvlactual]->deslizarbloque(bloqueadeslizar,dirbloque,time);
-          aSprites(bloqueadeslizar);
       }
-      
       Colisiones::crearColisiones(*jugador1->getSprite(),todoSprites,3,jugador1->getVelocidad(), time, jugador1);
       Colisiones::update(temporizador,bloqueadeslizar,dinosaurios,*jugador1,totalExplosiones,*mapas[lvlactual],todoSprites,paredesSprites,time); 
       
