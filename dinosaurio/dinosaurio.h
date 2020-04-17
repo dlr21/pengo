@@ -45,6 +45,16 @@ class Dinosaurio
       void mover(std::vector<sf::Sprite*> &todoSprite,int direccion,float time);
       void setposdino(int i){_posdino=i;}
       void setactivo(bool a){activo=a;}
+          int getposimapax(){
+       int x=_Sprite->getPosition().x-112;
+       if(x%32<=16)return x/32;
+       if(x%32>16)return (x/32)+1;
+    }
+    int getposimapay(){
+       int y=_Sprite->getPosition().y-64;
+       if(y%32<=16)return y/32;
+       if(y%32>16)return (y/32)+1;
+    }
     private:
       float _Speed=50; // Velocidad
       int _Direccion;

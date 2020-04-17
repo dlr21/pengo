@@ -172,15 +172,16 @@ void Jugador::mover(int direccion, float time){
 }
 void Jugador::Update(float time ){
     
-      if(getInvencible()){
+    if(getInvencible()){
         setVidas(3);
-      }
-      if(getempujon()){
+    }
+    if(getempujon()){
         empujando(time);
-      }        
-        if(!colision){
-        posredondeada(time);
-        }
+    }        
+    if(!colision && !movido && !tecla){
+            posredondeada(time);
+    }
+    settecla(false);
 }
 /*bool Jugador::frentevacio(Map* m){
     int x=(getSprite()->getPosition().x-112)/32;
@@ -230,13 +231,16 @@ void Jugador::posredondeada(float time){
     int x=getSprite()->getPosition().x+16;
     int y=getSprite()->getPosition().y;
 
-    if((x%32)>0.1){
+    if((x%32)>1){
         mover(getmir(),time);
         animacion(getmir(),time);
     }
-    if((y%32)>0.1){
+    if((y%32)>1){
         mover(getmir(),time);
         animacion(getmir(),time);
     }
+    
 }
+
+
 

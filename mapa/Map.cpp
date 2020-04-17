@@ -98,6 +98,8 @@ Map::Map(string s,int puntos) {
               _tilemapSprite[l][y][x]=new sf::Sprite(_tilesettexture,{0+(gid*32),0+(0*32),32,32});
               _tilemapSprite[l][y][x]->setOrigin(16,16);
               _tilemapSprite[l][y][x]->setPosition(112+(x*_tilewidth),64+(y*_tileheigh));
+            }else{
+              _tilemapSprite[l][y][x]==NULL;
             }
           }
         }
@@ -152,9 +154,9 @@ void Map::draw(sf::RenderWindow& window){
  for(int l=0; l<_numlayers;l++){
     for(int y=0; y<_height;y++){
       for(int x=0; x<_width;x++){
-       // if(_tilemapSprite[_activelayer][y][x]!=NULL){
+        if(_tilemapSprite[l][y][x]!=NULL){
           window.draw(*(_tilemapSprite[l][y][x]));
-        //}
+        }
       }
     }
   }

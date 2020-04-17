@@ -14,11 +14,10 @@ Dinosaurio::Dinosaurio(){ // Constructor por defecto
 
     _Sprite = new sf::Sprite();
     _Sprite->setTexture(*textura);
-    _Sprite->setOrigin(0,0);
-    _Sprite->setScale(0.8,0.8);
+    _Sprite->setOrigin(16,16);
+    _Sprite->setScale(0.9,0.9);
     _Sprite->setTextureRect(sf::IntRect(0 * 32, 9 * 32, 32, 32));   
-    srand (time(NULL));    
-    _posdino = rand() % 5; // Posicion inicial por defecto hacia abajo
+
 }
 
 Dinosaurio::~Dinosaurio(){ // Destructor
@@ -84,8 +83,7 @@ int Dinosaurio::marriba(std::vector<sf::Sprite*> &todo, float time){ // Movimien
             if(_Sprite->getGlobalBounds().intersects(todo[j]->getGlobalBounds()) && _Sprite!=todo[j])
             {
                 //std::cout<<"dino no mueve arriba"<<std::endl;
-                
-                 _Sprite->move(0, _Speed*time);
+                _Sprite->setPosition(getposimapax()*32+112,getposimapay()*32+64);
                 return 0;
             }
         }
@@ -106,7 +104,7 @@ int Dinosaurio::mabajo(std::vector<sf::Sprite*> &todo, float time){ // Movimient
             {
                 //std::cout<<"dino no mueve abajo"<<std::endl;
                 
-                _Sprite->move(0, -(_Speed*time));
+                _Sprite->setPosition(getposimapax()*32+112,getposimapay()*32+64);
                 return 1;
             }
         }
@@ -126,7 +124,7 @@ int Dinosaurio::mderecha(std::vector<sf::Sprite*> &todo, float time){ // Movimie
             {
                 //std::cout<<"dino no mueve dre"<<std::endl;
 
-                    _Sprite->move(-(_Speed*time),0);
+                _Sprite->setPosition(getposimapax()*32+112,getposimapay()*32+64);
                 return 2;
             }
         }
@@ -145,8 +143,7 @@ int Dinosaurio::mizquierda(std::vector<sf::Sprite*> &todo, float time){ // Movim
             if(_Sprite->getGlobalBounds().intersects(todo[j]->getGlobalBounds()) && _Sprite!=todo[j])
             {
                 //std::cout<<"dino no mueve izq"<<std::endl;
-
-                _Sprite->move(_Speed*time, 0);
+                    _Sprite->setPosition(getposimapax()*32+112,getposimapay()*32+64);
                 return 3;
             }
         }

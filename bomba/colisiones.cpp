@@ -1,57 +1,31 @@
 #include "colisiones.h"
 #include <iostream>
 
-void Colisiones::crearColisiones(sf::Sprite &jugador,std::vector<sf::Sprite*> todoSprites, int direccion, int velocidad,float time, Jugador* j)
-{
-  bool movido=false;
+void Colisiones::crearColisiones(sf::Sprite &jugador,std::vector<sf::Sprite*> todoSprites, int direccion, int velocidad,float time, Jugador* j){
+   j->setmovido(false);
       for(unsigned int i = 0;i < todoSprites.size();i++)
       {
         //Ha encontrado un objeto del vector con el que esta colisionando actualmente.
         if(jugador.getGlobalBounds().intersects(todoSprites[i]->getGlobalBounds()))
             {
               std::cout<<"colision bloque"<<std::endl;
-              j->setColision(true);
-              //Contrarestar velocidad en la direccion en la que esta yendo.
-                          j->setkx(0);
-                          j->setky(0);
-                          switch (direccion)
-                          {
-                          //Arriba
-                          case 0:
-                              j->setky(j->getVelocidad());
-                              movido=true;
-                              break;
-                          //Abajo
-                          case 1:
-                              j->setky(-j->getVelocidad());
-                              movido=true;
-                              break;
-                          //Derecha
-                          case 2:
-                              j->setkx(-j->getVelocidad());
-                              movido=true;
-                              break;
-                          //Izquierda
-                          case 3:
-                              j->setkx(j->getVelocidad());
-                              movido=true;
-                              break;
-                          }
-                          
-                          jugador.move(j->getkx()*time,j->getky()*time);
-                          jugador.move(0,0);
+                          j->setColision(true);
+                          std::cout<<j->getSprite()->getPosition().x+112<<" "<<j->getSprite()->getPosition().y+64<<std::endl;
+                          jugador.setPosition(j->getposimapax()*32+112,j->getposimapay()*32+64);
+                          std::cout<<j->getposimapax()*32+112<<" "<<j->getposimapay()*32+64<<std::endl;
+                          j->setmovido(true);
             }
       }
-      if(!movido)j->setColision(false);
+      if(!j->getmovido())j->setColision(false);
 }
 
-void Colisiones::update(sf::Clock &temporizador,std::vector<Dinosaurio*> &dinosaurios,Jugador &jugador,std::vector<sf::Sprite> &totalExplosiones,Map &mapa,  std::vector<sf::Sprite*> &todoSprites,std::vector<sf::Sprite*> &paredesSprites, float time)
-{
+void Colisiones::update(sf::Clock &temporizador,std::vector<Dinosaurio*> &dinosaurios,Jugador &jugador,std::vector<sf::Sprite> &totalExplosiones,Map &mapa,  std::vector<sf::Sprite*> &todoSprites,std::vector<sf::Sprite*> &paredesSprites, float time){
   sf::Sprite**** mpSprite = mapa.gettilemapSprite();
   int*** tilemap= mapa.gettilemap();
   int lay=mapa.getnumlayers();
   int hei=mapa.getheight();
   int wid=mapa.getwidth();
+
     /*for(unsigned int j = 0;j < dinosaurios.size();j++)
     {
       if(dinosaurios[j]->getSprite()->getGlobalBounds().intersects(totalExplosiones[i].getGlobalBounds()))
@@ -74,21 +48,11 @@ void Colisiones::update(sf::Clock &temporizador,std::vector<Dinosaurio*> &dinosa
       }
     }*/
 
-      /*for(unsigned int j = 0;j < paredesSprites.size();j++){
-        //JUGADOR CON PARED
-        if(jugador.getSprite()->getGlobalBounds().intersects(paredesSprites[j]->getGlobalBounds()))
-        {
-          
-        }
-
-      }*/
-
-
-
+      
       for(unsigned int j = 0;j < dinosaurios.size();j++)
     {
       //JUGADOR CON SNOBEE
-      if(jugador.getSprite()->getGlobalBounds().intersects(dinosaurios[j]->getSprite()->getGlobalBounds()))
+      if(jugador.getSprite()->getGlobalBounds().intersects(dinosaurios[j]->getSprite()->getGlobalBounds()) && dinosaurios[j]->getactivo())
       {
         std::cout<<"colision con snobe"<<endl;
         if(jugador.getempujon()){

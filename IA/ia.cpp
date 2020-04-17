@@ -7,7 +7,7 @@
 
 void IA::movimientoDinos(vector<Dinosaurio*> dinosaurios, int _cont,std::vector<sf::Sprite*> &todoSprite, float times){
 
-    if(_cont%50==0){ // Contador de iteraciones del programa
+    if(_cont%20==0){ // Contador de iteraciones del programa
         for(int i=0; i < dinosaurios.size(); i++){
             if(dinosaurios[i]->getactivo()){
                 int cosas [5] = { 0, 1, 2, 3, 4 };
@@ -40,8 +40,7 @@ void IA::movimientoDinos(vector<Dinosaurio*> dinosaurios, int _cont,std::vector<
                 }
             }
         }
-    }
-    else{ // Contador de iteraciones del programa
+    }else{ // Contador de iteraciones del programa
         for(int i=0; i < dinosaurios.size(); i++){
             if(dinosaurios[i]->getactivo()){
                 int cosas [5] = { 0, 1, 2, 3, 4 };

@@ -86,6 +86,7 @@ void Mundo::crearDinos(Map* m,int tot){
 }
 
 void Mundo::Event(sf::Event event,sf::RenderWindow &window, float time){ //COSAS DEL MUNDO CUANDO PULSAS ALGO
+    std::cout<<"pulsa"<<std::endl;
       switch (event.type) {
         case sf::Event::Closed:
           Contexto::Instance()->Quit();
@@ -110,6 +111,11 @@ void Mundo::Event(sf::Event event,sf::RenderWindow &window, float time){ //COSAS
               
               break;
             }
+            case 16: //n siguiente nivel 13
+              if(lvlactual<mapas.size()){
+                  mapas[lvlactual]->terminar();
+              }
+              break;
             case 13: //n siguiente nivel 13
               if(lvlactual<mapas.size()){
                   mapas[lvlactual]->terminar();
@@ -146,34 +152,42 @@ void Mundo::Event(sf::Event event,sf::RenderWindow &window, float time){ //COSAS
             break;
 
             //Arriba
-             case 73: 
+             case 73:
+                     if(!jugador1->getColision() && !jugador1->gettecla()){ 
             jugador1->animacion(0,time);
             jugador1->mover(0,time);
               Colisiones::crearColisiones(*jugador1->getSprite(),todoSprites,0,jugador1->getVelocidad(), time, jugador1);
-
+              jugador1->settecla(true);
+                     }
             break;
             //Abajos
             case 74:
+                    if(!jugador1->getColision() && !jugador1->gettecla()){
             jugador1->animacion(1,time);
             jugador1->mover(1,time);
               Colisiones::crearColisiones(*jugador1->getSprite(),todoSprites,1,jugador1->getVelocidad(), time, jugador1);
-
+              jugador1->settecla(true);
+                    }
             break;
             //Derecha
             case 72:
+                    if(!jugador1->getColision() && !jugador1->gettecla()){
             jugador1->animacion(2,time);
             jugador1->mover(2,time);
               Colisiones::crearColisiones(*jugador1->getSprite(),todoSprites,2,jugador1->getVelocidad(), time, jugador1);
-
+              jugador1->settecla(true);
+                    }
             break;
             //Izquierda
             case 71:
+                    if(!jugador1->getColision() && !jugador1->gettecla()){
             jugador1->animacion(3,time);
             jugador1->mover(3,time);
               Colisiones::crearColisiones(*jugador1->getSprite(),todoSprites,3,jugador1->getVelocidad(), time, jugador1);
-
+              jugador1->settecla(true);
+                    }
             break;    
-
+        
           //Cualquier tecla desconocida se imprime por pantalla su código
           default:
             std::cout << " code " << event.key.code << std::endl;

@@ -35,7 +35,24 @@ class Jugador{
     void setky(float a){kVely=a;}
     float getkx(){return kVelx;}
     float getky(){return kVely;}
-    
+    int getposimapax(){
+       int x=sprite->getPosition().x-112;
+       if(x%32<=16)return x/32;
+       if(x%32>16)return (x/32)+1;
+    }
+    int getposimapay(){
+       int y=sprite->getPosition().y-64;
+       if(y%32<=16)return y/32;
+       if(y%32>16)return (y/32)+1;
+    }
+    bool getColision(){return colision;}
+    bool getmovido(){return movido;}
+
+    void setmovido(bool a){movido=a;}
+     void settecla(bool a){tecla=a;}
+       bool gettecla(){return tecla;}
+     
+           
     void quitarVidas(){if(vidas > 0)vidas--;}
     void setmir(int i){mir=i;}
     void setempujon(bool i){
@@ -74,4 +91,6 @@ class Jugador{
     bool normal=true;
     bool colision=false;
     bool animal=true;
+    bool movido=false;
+    bool tecla=false;
 };
