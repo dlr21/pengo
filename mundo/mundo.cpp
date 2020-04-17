@@ -67,13 +67,13 @@ void Mundo::crearDinos(Map* m,int tot){
   int cont=0;
   bool todos=false;
   std::cout<<m->getnumlayers()<<m->getheight()<<m->getwidth()<<endl;
-    for(unsigned int l=0; l<m->getnumlayers() && !todos;l++){
-        for( unsigned int y=2; y<m->getheight() && !todos;y++){
-          for(unsigned int x=2; x<m->getwidth() && !todos;x++){
+    for(unsigned int l=1; l<m->getnumlayers() && !todos;l++){
+        for( unsigned int y=2; y<m->getheight()-1 && !todos;y++){
+          for(unsigned int x=2; x<m->getwidth()-1 && !todos;x++){
             int gid=m->gettilemap()[l][y][x]-1;
               v1 = rand() % 999;
-              std::cout<<m->getnumlayers()<<m->getheight()<<m->getwidth()<<" "<<v1<<endl;
-              if(gid==-1 && v1<150){//GID = camino
+              if(gid==-1 && v1<100){//GID = camino
+              std::cout<<"coloca dino"<<endl;
               Dinosaurio *dino1 = new Dinosaurio(); // Constructor del dinosaurio
               dino1->modifyPosition(112+(x*32),64+(y*32)); // Punto de spawn. Debe estar dentro del mapa
               dinosaurios.push_back(dino1); // Guardar en el vector de dinosaurios
@@ -86,7 +86,7 @@ void Mundo::crearDinos(Map* m,int tot){
 }
 
 void Mundo::Event(sf::Event event,sf::RenderWindow &window, float time){ //COSAS DEL MUNDO CUANDO PULSAS ALGO
-    std::cout<<"pulsa"<<std::endl;
+    std::cout<<"event"<<std::endl;
       switch (event.type) {
         case sf::Event::Closed:
           Contexto::Instance()->Quit();
@@ -96,19 +96,25 @@ void Mundo::Event(sf::Event event,sf::RenderWindow &window, float time){ //COSAS
         case sf::Event::KeyPressed:
               ///Verifico si se pulsa alguna tecla de movimiento
           switch (event.key.code) {  
+            std::cout<<"pulsa"<<std::endl;
             case 57: //EMPUJAR
             {
               if(!jugador1->getempujon()) {
+                std::cout<<"empujar?"<<endl;
                 jugador1->setempujon(true);//PENDIENTE
-                if(mapas[lvlactual]->empujado(jugador1)!=NULL){
-                  std::cout<<"NO ES NULL"<<std::endl;
-                }else{
-                  std::cout<<"PUTAMENTIRA"<<std::endl;
+                dirbloque=jugador1->getmir();
+                if(mapas[lvlactual]->empujado(jugador1->getSprite(),dirbloque)){
+                  std::cout<<"SI EMPUJA"<<std::endl;
+                  bloqueadeslizar=(mapas[lvlactual]->empujado(jugador1->getSprite(),dirbloque));
+                  if(mapas[lvlactual]->empujado(bloqueadeslizar,dirbloque)){
+
+                    borradetodoSprites(mapas[lvlactual]->empujado(bloqueadeslizar,dirbloque));
+                    //DESTRUIR TODAVIA
+                  }else{
+                    jugador1->setmoviendo(true);
+                  }
                 }
-                
-                std::cout<<"empujar"<<endl;
-              }
-              
+              }else{std::cout<<"ya estaba empujando"<<endl;}
               break;
             }
             case 16: //n siguiente nivel 13
@@ -128,13 +134,10 @@ void Mundo::Event(sf::Event event,sf::RenderWindow &window, float time){ //COSAS
             case 23://x muerte 23
               jugador1->setVidas(0);
             break;
-
             case 36://esc salir 31
               Contexto::Instance()->Quit();
               window.close();
             break;
-
-
             case 15://matar sno
                 if(dinosaurios.size()>0){
                     dinosaurios[0]->modifyVida();
@@ -216,33 +219,36 @@ void Mundo::Update(sf::RenderWindow &window, float time) {//COSAS DEL MUNDO QUE 
       }
       if(!(lvlactual<mapas.size())){//TERMINAR Y VOLVER A MENU FIN DEL JUEGO   
           finjuego();
-          std::cout<<"tras findejuego"<<endl;
         }else{
-          /*if(!adnscreados){//CREAR ADNS ESTO PUEDE DAR LAS PROBLEMAS
-            crearAdns(mapas[lvlactual],2);
-            adnscreados=true;
-          }*/
           if(!dinoscreados){//CREAR DINOS ESTO PUEDE DAR LAS PROBLEMAS
             crearDinos(mapas[lvlactual],snototales);
             dinoscreados=true;
           }
           if(!colisiones){
             mapas[lvlactual]->anadirVector(todoSprites);
-            //mapas[lvlactual]->anadirParedes(paredesSprites);NO FUNCIONAN PAREDES
             colisiones=true;
           }
         }
     if(play==1){// UN JUGADOR O DOS JUGADORES UPDATEAN ELLOS Y SUS HUDS
+      Colisiones::crearColisiones(*jugador1->getSprite(),todoSprites,3,jugador1->getVelocidad(), time, jugador1);
       todosno();
       hud1->Update(jugador1);
-      Colisiones::crearColisiones(*jugador1->getSprite(),todoSprites,3,jugador1->getVelocidad(), time, jugador1);
+      
       jugador1->Update(time);
-      Colisiones::crearColisiones(*jugador1->getSprite(),todoSprites,3,jugador1->getVelocidad(), time, jugador1);
+      
       if(jugador1->getVidas()==0){
          finjuego();
-        std::cout<<"pierdes"<<endl;
+        std::cout<<"PIERDES"<<endl;
       }
-          Colisiones::update(temporizador,dinosaurios,*jugador1,totalExplosiones,*mapas[lvlactual],todoSprites,paredesSprites,time); 
+      if(bloqueadeslizar!=NULL && jugador1->getmoviendo()){
+
+          mapas[lvlactual]->deslizarbloque(bloqueadeslizar,dirbloque,time);
+          aSprites(bloqueadeslizar);
+      }
+      
+      Colisiones::crearColisiones(*jugador1->getSprite(),todoSprites,3,jugador1->getVelocidad(), time, jugador1);
+      Colisiones::update(temporizador,bloqueadeslizar,dinosaurios,*jugador1,totalExplosiones,*mapas[lvlactual],todoSprites,paredesSprites,time); 
+      
     }
     // Mover los dinosaurios con la IA
     IA ia; // Genera una ia con cada iteracion
@@ -276,12 +282,6 @@ void Mundo::renicio(){ //reiniciar el mundo
 void Mundo::Draw(sf::RenderWindow &window){//dibujar mapa y hud
   if(lvlactual<mapas.size()){
       mapas[lvlactual]->draw(window);
-    //ARRAY DE ADNS  se recorre y se dibuja 
-    for(unsigned int l=0; l<adns.size();l++){
-      if(adns[l]!=NULL){
-        if(adns[l]->getvisible())adns[l]->draw(window);
-      }
-    }  
       //DIBUJAR DINOSAURIOS
       for(unsigned int i=0; i < dinosaurios.size(); i++)
       {
@@ -293,3 +293,4 @@ void Mundo::Draw(sf::RenderWindow &window){//dibujar mapa y hud
       }
   }
 }
+

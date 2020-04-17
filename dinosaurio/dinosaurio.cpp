@@ -169,8 +169,7 @@ int Dinosaurio::getDireccion(){
     return _Direccion;
 }
 
-void Dinosaurio::draw(sf::RenderWindow &window)
-{
+void Dinosaurio::draw(sf::RenderWindow &window){
     if(activo)window.draw(*_Sprite);
 }
 

@@ -87,7 +87,7 @@ void Tile::Update(Jugador* j){
         segundero=temporizador.getElapsedTime().asSeconds();
         if(s2<segundero){             
             seg-=1;
-                std::cout<<seg<<"\n";
+                std::cout<<seg;
                 if(seg<10){
                     texto.setString("0"+std::to_string(min)+":0"+std::to_string(seg));
                 }else{

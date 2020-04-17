@@ -47,8 +47,11 @@ class Jugador{
     }
     bool getColision(){return colision;}
     bool getmovido(){return movido;}
-
-    void setmovido(bool a){movido=a;}
+     bool getmoviendo(){return moviendo;}
+    
+   
+void setmovido(bool a){movido=a;}
+    void setmoviendo(bool a){moviendo=a;}
      void settecla(bool a){tecla=a;}
        bool gettecla(){return tecla;}
      
@@ -93,4 +96,5 @@ class Jugador{
     bool animal=true;
     bool movido=false;
     bool tecla=false;
+    bool moviendo=false;
 };

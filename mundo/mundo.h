@@ -27,6 +27,7 @@ class Mundo : public States {
     int snototales=4;
     int snovivos=2;
     int snodurmiendo=4;
+    int dirbloque=0;
     std::vector<Map*> mapas;//vector de mapas para jugar
     Tile* hud1;//el hud
     Tile* hud2;//el hud
@@ -51,6 +52,8 @@ class Mundo : public States {
     std::vector<sf::Sprite*> todoSprites;
     std::vector<sf::Sprite*> paredesSprites;
     int _cont = 0; // Contador de iteraciones del juego
+    sf::Sprite* bloqueadeslizar=NULL;
+
   public:
     void Inicializar();
     static Mundo* Instance();
@@ -112,6 +115,17 @@ class Mundo : public States {
         mapas[lvlactual]->terminar();
         std::cout<<"ganasmapa"<<endl;
       }
+    }
+    void borradetodoSprites(sf::Sprite* s){
+      std::cout<<"borrado?"<<std::endl;
+              for(unsigned int a = 0;a < todoSprites.size();a++){
+                if(todoSprites[a]==s){
+                  todoSprites.erase(todoSprites.begin() + a);
+                }
+              }
+    }
+    void aSprites(sf::Sprite* d){
+      todoSprites.push_back(d);
     }
 };
 

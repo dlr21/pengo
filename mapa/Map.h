@@ -12,7 +12,7 @@ class Map {
 public:
   Map(string s, int puntos);
   ~Map();
-  void Update(sf::Event event,sf::RenderWindow &window);
+  void Update(sf::RenderWindow &window);
   void draw(sf::RenderWindow &window);
   void setactivelayer(int layer);
   TiXmlElement* cambio(int l, TiXmlElement &d);
@@ -45,7 +45,10 @@ public:
     _tilemap[l][y][z] = valor;
   }
 
-  sf::Sprite gettilemapSprite(int l, int y, int x); // Get sprite de los til
+  sf::Sprite* gettilemapSprite(int l, int y, int x); // Get sprite de los til
+   void settilemapSprite(sf::Sprite* s, int y, int x){
+     _tilemapSprite[1][y][x]=s;
+   } // Get sprite de los til
   sf::Sprite spawnDino(int pos_dino, int l, int y, int x);
   void anadirVector(std::vector<sf::Sprite*> &vectorS);
   void anadirParedes(std::vector<sf::Sprite*> &vectorS);
@@ -55,7 +58,8 @@ public:
   void moveDownDino();
   void Update();
   void reservarMemoria(int num);
-  sf::Sprite* empujado(Jugador* j);
+  sf::Sprite* empujado(sf::Sprite* j,int dir);
+  void deslizarbloque(sf::Sprite* s, int dir,float time);
 
 private:
   int puntosfin;
@@ -72,7 +76,9 @@ private:
   sf::Text texto;
   sf::VertexArray m_vertices;
   sf::Texture _tilesettexture;
-  
+    float kVel=1882/10;
+    float kVelx=1882/10;
+    float kVely=1882/10;  
   sf::Sprite ****_tilemapSprite;
 
 

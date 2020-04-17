@@ -92,9 +92,12 @@ Map::Map(string s,int puntos) {
       for(int l=0; l<_numlayers;l++){
               std::cout<<"guarda capas"<<endl;
         for(int y=0; y<_height;y++){
+          std::cout<<std::endl;
           for(int x=0; x<_width;x++){
-            int gid=_tilemap [l][y][x]-1;
-            if(gid>-1){
+            int gid=_tilemap [l][y][x];
+            std::cout<<gid;
+            if(gid>0){
+              gid--;
               _tilemapSprite[l][y][x]=new sf::Sprite(_tilesettexture,{0+(gid*32),0+(0*32),32,32});
               _tilemapSprite[l][y][x]->setOrigin(16,16);
               _tilemapSprite[l][y][x]->setPosition(112+(x*_tilewidth),64+(y*_tileheigh));
@@ -113,8 +116,8 @@ Map::Map(string s,int puntos) {
     return layer;
   }*/
 
- sf::Sprite Map::gettilemapSprite(int l, int y, int x){
-  return *_tilemapSprite[l][y][x];
+ sf::Sprite* Map::gettilemapSprite(int l, int y, int x){
+  return _tilemapSprite[l][y][x];
 }
 
 
@@ -165,21 +168,7 @@ void Map::draw(sf::RenderWindow& window){
 void Map::setactivelayer(int layer){
   _activelayer=layer;
 }
-void Map::Update(sf::Event event,sf::RenderWindow &window){
-
-  switch (event.type) {
-              case sf::Event::KeyPressed:
-              ///Verifico si se pulsa alguna tecla de movimiento
-              switch (event.key.code) {
-              //Cualquier tecla desconocida se imprime por pantalla su código
-
-               case sf::Keyboard::Return:
-                  finalizado=true;
-                default:
-                  std::cout <<  " code " << event.key.code << std::endl;
-                break;
-              }
-  }
+void Map::Update(sf::RenderWindow &window){
 
 }
 void Map::reservarMemoria(int _numlayers){
@@ -215,41 +204,43 @@ void Map::reservarMemoria(int _numlayers){
   }
 }
 
-sf::Sprite* Map::empujado(Jugador* j){
+sf::Sprite* Map::empujado(sf::Sprite* j, int dir){
 
-  int dir=j->getmir();//0 arriba 1 abajo 2 derecha 3 izq
-  int x=(j->getSprite()->getPosition().x-112)/32;
-  int y=(j->getSprite()->getPosition().y-64)/32;
+  //0 arriba 1 abajo 2 derecha 3 izq
+  int x=(j->getPosition().x-112)/32;
+  int y=(j->getPosition().y-64)/32;
 
   std::cout<< x<<" "<<y<<endl;
 
   if(dir==0){
     std::cout<< x<<" "<<y-1<<endl;
-    if(_tilemap[1][x][y-1]>0){
-      return _tilemapSprite[1][x][y-1];
+    if(_tilemap[1][y-1][x]==5 || _tilemap[1][y-1][x]==6){
+      return _tilemapSprite[1][y-1][x];
+
     }else{
       return NULL;
     }
   }else if(dir==1){
     std::cout<<x<<" "<<y+1<<endl;
-    if(_tilemap[1][x][y+1]>0){
-      return _tilemapSprite[1][x][y+1];
+    if(_tilemap[1][y+1][x]==5){
+
+      return _tilemapSprite[1][y+1][x];
     }else{
       return NULL;
     }
   }else if(dir==2){
     std::cout<<x+1<<" "<<y<<endl;
-    std::cout<<_tilemap[0][x+1][y]<<endl;
-    std::cout<<_tilemap[1][x+1][y]<<endl;
-    if(_tilemap[1][x+1][y]>0){
-      return _tilemapSprite[1][x+1][y];
+    if(_tilemap[1][y][x+1]==5 || _tilemap[1][y][x+1]==6){
+
+      return _tilemapSprite[1][y][x+1];
     }else{
       return NULL;
     }
   }else if(dir==3){
     std::cout<<x-1<<" "<<y<<endl;
-    if(_tilemap[1][x-1][y]>0){
-      return _tilemapSprite[1][x-1][y];
+    if(_tilemap[1][y][x-1]==5 || _tilemap[1][y][x-1]==6){
+
+      return _tilemapSprite[1][y][x-1];
     }else{
       return NULL;
     }
@@ -282,4 +273,37 @@ void Map::anadirParedes(std::vector<sf::Sprite*> &vectorS){
           }
         }
       }
+}
+
+void Map::deslizarbloque(sf::Sprite* s, int j, float time){
+
+    kVelx=0;
+    kVely=0;
+    switch (j)
+    {
+    //Arriba
+    case 0:
+         kVely=-kVel*time;
+        
+        break;
+    //Abajo
+    case 1:
+        kVely=kVel*time;
+        
+        break;
+    //Derecha
+    case 2:
+        kVelx=kVel*time;
+        
+        break;
+    //Izquierda
+    case 3:
+        kVelx=-kVel*time;
+        
+        break;
+    }
+
+    s->move(kVelx,kVely);
+    s->move(0,0);
+  
 }

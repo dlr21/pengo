@@ -41,13 +41,11 @@ void Jugador::empujando(float time){
                 if(mir==3) {
                                 sprite->setTextureRect(sf::IntRect(2 * 32, 1 * 32, 32, 32));
                 }
-                std::cout<<"empuja primer anim"<<std::endl;
                 //empuja=false;
                 
     }else{
     timeempujar+=time;
         if(timeempujar>switchtime){
-            std::cout<<"cambiatime"<<std::endl;
             if(!normal){
                         if(mir==0) {
                                         sprite->setTextureRect(sf::IntRect(5 * 32, 1 * 32, 32, 32));
@@ -80,7 +78,6 @@ void Jugador::empujando(float time){
                         if(mir==3) {
                             sprite->setTextureRect(sf::IntRect(3 * 32, 0 * 32, 32, 32));
                         }
-                    std::cout<<"normalidad time"<<std::endl;
                     empuja=false; 
                     animal=true;
             }
