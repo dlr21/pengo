@@ -84,7 +84,7 @@ void setmovido(bool a){movido=a;}
     
     int puntos;
     int mir=1;
-    float switchtime=0.1;
+    float switchtime=0.15;
     float totaltime=0;
     float timeempujar=0;
     float invencibilidad = -1;

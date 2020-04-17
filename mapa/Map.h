@@ -61,8 +61,10 @@ public:
   sf::Sprite* empujado(sf::Sprite* j,int dir);
   void deslizarbloque(sf::Sprite* s, int dir,float time);
   void borrardemapa(int i, int x, int y){
+    if(_tilemap[i][y][x]==5){
               _tilemapSprite[i][y][x]=NULL;
             delete[] _tilemapSprite[i][y][x];
+    }
   }
 private:
   int puntosfin;

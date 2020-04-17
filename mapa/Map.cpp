@@ -68,7 +68,6 @@ Map::Map(string s,int puntos) {
   //reserva memoria
   reservarMemoria(_numlayers);
   _tilesettexture.loadFromFile("resources/bloques.png");
-   //_tilesettexture.loadFromFile("resources/tilebase.png");
   std::cout<<"reservado"<<endl;
   //cargando los gids
   TiXmlElement *aux;

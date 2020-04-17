@@ -180,49 +180,7 @@ void Jugador::Update(float time ){
     }
     settecla(false);
 }
-/*bool Jugador::frentevacio(Map* m){
-    int x=(getSprite()->getPosition().x-112)/32;
-    int y=(getSprite()->getPosition().y-64)/32;
 
-    if(x==0)x=1;
-    std::cout<<x<<y<<" mir"<<mir<<std::endl;
-
-    if(mir==0){
-        if(y==0)return false;
-        if(m->gettilemap()[0][x][y-1]>0 || m->gettilemap()[1][x][y-1]>0){ //ARRIBA
-            return false;
-        }
-    }else if(mir==1)
-    {
-        if(y==17)return false;
-        if(m->gettilemap()[0][x][y+1]>0 || m->gettilemap()[1][x][y+1]>0){ //ABAJO
-        std::cout<<m->gettilemap()[0][x][y+1]<<m->gettilemap()[1][x][y+1]<<" mir"<<mir<<std::endl;
-            return false;
-        }
-    }else if(mir==2)
-    {
-        if(x==15)return false;
-                if(m->gettilemap()[0][x+1][y]>0 || m->gettilemap()[1][x+1][y]>0){ //DRE
-
- std::cout<<m->gettilemap()[0][x+1][y]<<m->gettilemap()[1][x+1][y]<<" mir"<<mir<<std::endl;
- return false;
-
-        }
-    }else if(mir==3)
-    {
-        if(x==0)return false;
-        std::cout<<x<<y<<std::endl;
-                if(m->gettilemap()[0][x-1][y]>0 || m->gettilemap()[1][x-1][y]>0){ //IZQ
-
- return false;
-
-
-        }
-    }
-    
-    return true;
-
-}*/
 void Jugador::posredondeada(float time){
 
     int x=getSprite()->getPosition().x+16;

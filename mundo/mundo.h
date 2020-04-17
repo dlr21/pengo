@@ -19,24 +19,23 @@ using namespace std;
 class Mundo : public States {
   private:    
     static Mundo* jinstance;
-    int dif=0;//dificultad
-    int lvls=0;//numero de niveles
+    int dif;//dificultad
+    int lvls;//numero de niveles
     int lvlactual=0;//nivel en el que estamos
-    int play=0;//numero de jugadores
-    int modo=0;//modo de juego
-    int snototales=4;
-    int snovivos=2;
-    int snodurmiendo=4;
-    int dirbloque=0;
+    int play;//numero de jugadores
+    int snototales;
+    int snovivos;
+    int snodurmiendo;
+    int dirbloque;
     std::vector<Map*> mapas;//vector de mapas para jugar
     Tile* hud1;//el hud
     Tile* hud2;//el hud
-    bool pulsada=false;//event de uno en uno
-    bool nueva=false;//controla la nueva partida
-    bool adnscreados=false;
-    bool dinoscreados=false;
-    bool colisiones=false;
-    bool moverse=true;
+    bool pulsada;//event de uno en uno
+    bool nueva;//controla la nueva partida
+    bool adnscreados;
+    bool dinoscreados;
+    bool colisiones;
+    bool moverse;
     std::vector<Dinosaurio*> dinosaurios;
     std::vector<Adn*> adns;//array de adns(seguramente modificcable)
     sf::Clock temporizador;
@@ -52,7 +51,7 @@ class Mundo : public States {
     std::vector<sf::Sprite*> todoSprites;
     std::vector<sf::Sprite*> paredesSprites;
     int _cont = 0; // Contador de iteraciones del juego
-    sf::Sprite* bloqueadeslizar=NULL;
+    sf::Sprite* bloqueadeslizar;
 
   public:
     void Inicializar();

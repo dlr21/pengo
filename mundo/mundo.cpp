@@ -22,6 +22,17 @@ void Mundo::Inicializar() {
         hud1=new Tile();
         jugador1=new Jugador(1);
       }
+     bloqueadeslizar=NULL;
+     pulsada=false;//event de uno en uno
+     nueva=false;//controla la nueva partida
+     adnscreados=false;
+     dinoscreados=false;
+     colisiones=false;
+     moverse=true;
+     dirbloque=0;
+     snototales=4;
+     snovivos=2;
+     snodurmiendo=4;
       srand (time(NULL));   //para el rand 
       for(int a=0;a<lvls;a++){//cargar los mapas dependiendo del nombre
         int aleat=rand() % 9;
@@ -34,35 +45,8 @@ void Mundo::Inicializar() {
         std::cout<< mapas.size()<<endl;
       }
 }
-/*void Mundo::crearAdns(Map* m,int tot){
-  int v1=1;
-  int cont=0;
-  bool todos=false;
-  std::cout<<m->getnumlayers()<<m->getheight()<<m->getwidth()<<endl;
-    for(unsigned int l=0; l<m->getnumlayers() && !todos;l++){
-        for( unsigned int y=0; y<m->getheight() && !todos;y++){
-          for(unsigned int x=0; x<m->getwidth() && !todos;x++){
-            int gid=m->gettilemap()[l][y][x]-1;
-              v1 = rand() % 999;
-              std::cout<<m->getnumlayers()<<m->getheight()<<m->getwidth()<<" "<<v1<<endl;
-            if(gid==2 && v1<190){//GID = PIEDRAS
-              std::cout<<v1<<endl;
-              Adn* prueba=new Adn(1,x,y);
-              adns.push_back(prueba);
-              cont++;
-              if (tot==cont) { todos=true; } //CONTROLA QUE NO FALTEN ADNS
-            }
-          }
-        }
-     }   
-}*/
-void Mundo::crearDinos(Map* m,int tot){
-      sf::Texture dino_abajo;
-      if(!dino_abajo.loadFromFile("resources/dino_abajo.png")){
-        std::cerr << "Error cargando dino_abajo.png";
-        exit(0);
-      }
 
+void Mundo::crearDinos(Map* m,int tot){
   int v1=1;
   int cont=0;
   bool todos=false;
@@ -156,7 +140,6 @@ void Mundo::Event(sf::Event event,sf::RenderWindow &window, float time){ //COSAS
                 }
               }
             break;
-
             //Arriba
              case 73:
                      if(!jugador1->getColision() && !jugador1->gettecla()){ 
