@@ -67,7 +67,7 @@ int Dinosaurio::getVida(){ // Devolver vida
 }
 
 int Dinosaurio::getSpeed(){ // Devolver velocidad
-    return _Speed;
+    return kVel;
 }
 
 sf::FloatRect Dinosaurio::getHitbox(){ // FloatRect devuelve coordenada superior izq
@@ -75,83 +75,65 @@ sf::FloatRect Dinosaurio::getHitbox(){ // FloatRect devuelve coordenada superior
 }
 
 // Funciones de movimiento (salto y movimientos)
-int Dinosaurio::marriba(std::vector<sf::Sprite*> &todo, float time){ // Movimiento arriba
+bool Dinosaurio::marriba(std::vector<sf::Sprite*> &todo, float time){ // Movimiento arriba
     
     
         for(unsigned int j = 0;j < todo.size();j++)
         {
             if(_Sprite->getGlobalBounds().intersects(todo[j]->getGlobalBounds()) && _Sprite!=todo[j])
             {
-                //std::cout<<"dino no mueve arriba"<<std::endl;
-                _Sprite->setPosition(getposimapax()*32+112,getposimapay()*32+64);
-                return 0;
+                setparado(false);
+                return false;
             }
         }
-        animacion(_posdino,time);
-        _Sprite->move(0, -(_Speed*time));
-    
-   
-    return 0; // Posicion arriba
+    _posdino=0;
+    return true; // Posicion arriba
 
 }
 
-int Dinosaurio::mabajo(std::vector<sf::Sprite*> &todo, float time){ // Movimiento abajo
+bool Dinosaurio::mabajo(std::vector<sf::Sprite*> &todo, float time){ // Movimiento abajo
         
     
         for(unsigned int j = 0;j < todo.size();j++)
         {
             if(_Sprite->getGlobalBounds().intersects(todo[j]->getGlobalBounds()) && _Sprite!=todo[j])
             {
-                //std::cout<<"dino no mueve abajo"<<std::endl;
-                
-                _Sprite->setPosition(getposimapax()*32+112,getposimapay()*32+64);
-                return 1;
+                setparado(false);
+                return false;
             }
         }
-        animacion(_posdino,time);
-        _Sprite->move(0, _Speed*time);
-    
-    
-    return 1; // Posicion abajo
+    _posdino=1;
+    return true; // Posicion abajo
 }
 
-int Dinosaurio::mderecha(std::vector<sf::Sprite*> &todo, float time){ // Movimiento derecha
+bool Dinosaurio::mderecha(std::vector<sf::Sprite*> &todo, float time){ // Movimiento derecha
         
    
         for(unsigned int j = 0;j < todo.size();j++)
         {
             if(_Sprite->getGlobalBounds().intersects(todo[j]->getGlobalBounds()) && _Sprite!=todo[j])
             {
-                //std::cout<<"dino no mueve dre"<<std::endl;
-
-                _Sprite->setPosition(getposimapax()*32+112,getposimapay()*32+64);
-                return 2;
+                setparado(false);
+                return false;
             }
         }
-        animacion(_posdino,time);
-        _Sprite->move(_Speed*time, 0);
-    
-
-    return 2; // Posicion derecha
+    _posdino=2;
+    return true; // Posicion derecha
 }
 
-int Dinosaurio::mizquierda(std::vector<sf::Sprite*> &todo, float time){ // Movimiento izquierda
+bool Dinosaurio::mizquierda(std::vector<sf::Sprite*> &todo, float time){ // Movimiento izquierda
         
     
         for(unsigned int j = 0;j < todo.size();j++)
         {
             if(_Sprite->getGlobalBounds().intersects(todo[j]->getGlobalBounds()) && _Sprite!=todo[j])
             {
-                //std::cout<<"dino no mueve izq"<<std::endl;
-                    _Sprite->setPosition(getposimapax()*32+112,getposimapay()*32+64);
-                return 3;
+                setparado(false);
+                return false;
             }
         }
-        animacion(_posdino,time);
-        _Sprite->move(-(_Speed*time),0);
-    
-
-    return 3; // Posicion izquierda
+    _posdino=3;
+    return true; // Posicion izquierda
 }
 
 void Dinosaurio::sumaPasos(){
@@ -161,12 +143,9 @@ void Dinosaurio::sumaPasos(){
     }
 };
 
-void Dinosaurio::setDireccion(int i){
-    _Direccion = i;
-}
 
 int Dinosaurio::getDireccion(){
-    return _Direccion;
+    return _posdino;
 }
 
 void Dinosaurio::draw(sf::RenderWindow &window){
@@ -237,6 +216,35 @@ void Dinosaurio::animacion(int dir,float deltatime){
     } 
 }
 
+void Dinosaurio::mover(int dir,float deltatime){
+    kVelx=0;
+    kVely=0;
+    animacion(dir,deltatime);
+    switch (dir)
+    {
+    //Arriba
+    case 0:
+         kVely=-kVel*deltatime;
+        
+        break;
+    //Abajo
+    case 1:
+        kVely=kVel*deltatime;
+        
+        break;
+    //Derecha
+    case 2:
+        kVelx=kVel*deltatime;
+        
+        break;
+    //Izquierda
+    case 3:
+        kVelx=-kVel*deltatime;
+        
+        break;
+    }
+
+    _Sprite->move(kVelx,kVely);
 
 
-
+}

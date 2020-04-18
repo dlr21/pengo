@@ -4,7 +4,6 @@ file(REMOVE_RECURSE
   "CMakeFiles/libModulos.dir/maquina/contexto.cpp.o"
   "CMakeFiles/libModulos.dir/mundo/mundo.cpp.o"
   "CMakeFiles/libModulos.dir/juego/juego.cpp.o"
-  "CMakeFiles/libModulos.dir/bomba/bombas.cpp.o"
   "CMakeFiles/libModulos.dir/bomba/jugador.cpp.o"
   "CMakeFiles/libModulos.dir/bomba/colisiones.cpp.o"
   "CMakeFiles/libModulos.dir/dinosaurio/dinosaurio.cpp.o"

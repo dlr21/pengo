@@ -101,7 +101,9 @@ void Mundo::Event(sf::Event event,sf::RenderWindow &window, float time){ //COSAS
                     std::cout<<"moviendo"<<endl;
                   }
                 }
-              }else{std::cout<<"ya estaba empujando"<<endl;}
+              }else{
+                std::cout<<"ya estaba empujando"<<endl;
+                }
               break;
             }
             case 16: //n siguiente nivel 13

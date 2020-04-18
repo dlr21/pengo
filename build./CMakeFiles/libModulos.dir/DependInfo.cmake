@@ -6,7 +6,6 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_CHECK_CXX
   "/home/fv2/Desktop/PENGO/pengo/IA/ia.cpp" "/home/fv2/Desktop/PENGO/pengo/build./CMakeFiles/libModulos.dir/IA/ia.cpp.o"
   "/home/fv2/Desktop/PENGO/pengo/adn/adn.cpp" "/home/fv2/Desktop/PENGO/pengo/build./CMakeFiles/libModulos.dir/adn/adn.cpp.o"
-  "/home/fv2/Desktop/PENGO/pengo/bomba/bombas.cpp" "/home/fv2/Desktop/PENGO/pengo/build./CMakeFiles/libModulos.dir/bomba/bombas.cpp.o"
   "/home/fv2/Desktop/PENGO/pengo/bomba/colisiones.cpp" "/home/fv2/Desktop/PENGO/pengo/build./CMakeFiles/libModulos.dir/bomba/colisiones.cpp.o"
   "/home/fv2/Desktop/PENGO/pengo/bomba/jugador.cpp" "/home/fv2/Desktop/PENGO/pengo/build./CMakeFiles/libModulos.dir/bomba/jugador.cpp.o"
   "/home/fv2/Desktop/PENGO/pengo/dinosaurio/dinosaurio.cpp" "/home/fv2/Desktop/PENGO/pengo/build./CMakeFiles/libModulos.dir/dinosaurio/dinosaurio.cpp.o"

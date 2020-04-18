@@ -8,7 +8,6 @@
 #include "Map.h"
 #include "Tile.h"
 #include "jugador.h"
-#include "bombas.h"
 #include "dinosaurio.h"
 #include "colisiones.h"
 #include "ia.h"
@@ -42,8 +41,6 @@ class Mundo : public States {
     //Jugador//
     Jugador* jugador1;
     Jugador* jugador2;
-    /////Control de las bombas y explosiones/////
-    std::vector<Bomba> totalBombas;
     std::vector<sf::Sprite> totalExplosiones;
     std::vector<float> tiemposBomba;
     std::vector<float> tiemposExplosiones;

@@ -8,10 +8,10 @@ class Dinosaurio
       Dinosaurio(sf::Texture&); // Constructor con textura
       ~Dinosaurio(); // Destructor
       // Movimiento
-      int marriba(std::vector<sf::Sprite*> &c, float time);
-      int mabajo(std::vector<sf::Sprite*> &c, float time);
-      int mderecha(std::vector<sf::Sprite*> &c, float time);
-      int mizquierda(std::vector<sf::Sprite*> &c, float time);
+      bool marriba(std::vector<sf::Sprite*> &c, float time);
+      bool mabajo(std::vector<sf::Sprite*> &c, float time);
+      bool mderecha(std::vector<sf::Sprite*> &c, float time);
+      bool mizquierda(std::vector<sf::Sprite*> &c, float time);
   
       // Devolver sprite
       sf::Sprite* getSprite() ;
@@ -34,7 +34,6 @@ class Dinosaurio
       int generaRandom(int max);
       int movimiento();
       void sumaPasos();
-      void setDireccion(int i);
       int getDireccion();
       void draw(sf::RenderWindow &window);
       bool getparado(){return parado;}
@@ -42,22 +41,24 @@ class Dinosaurio
       bool getactivo(){return activo;}
       void activar(){activo=true;}
       void animacion(int d,float time);
-      void mover(std::vector<sf::Sprite*> &todoSprite,int direccion,float time);
+      void mover(int dir,float deltatime);
       void setposdino(int i){_posdino=i;}
       void setactivo(bool a){activo=a;}
-          int getposimapax(){
+      int getposimapax(){
        int x=_Sprite->getPosition().x-112;
        if(x%32<=16)return x/32;
        if(x%32>16)return (x/32)+1;
-    }
-    int getposimapay(){
+      }
+      int getposimapay(){
        int y=_Sprite->getPosition().y-64;
        if(y%32<=16)return y/32;
        if(y%32>16)return (y/32)+1;
-    }
+      }
+
     private:
-      float _Speed=50; // Velocidad
-      int _Direccion;
+      float kVel=1882/10;
+      float kVelx=1882/10;
+      float kVely=1882/10;
       sf::Sprite* _Sprite = new sf::Sprite; // Sprite
       sf::Texture* textura;
       int _posdino=1; // Posicion a la que mira el dino ==> 0:Arriba | 1:Abajo | 2:Derecha | 3:Izquierda
@@ -69,8 +70,8 @@ class Dinosaurio
       float totaltime=0;
       bool animal=true;
       //Si no existen snowbees en forma de huevo
-//Si quedan menos de 4 snowbees en pantalla
-//Si no ha perdido una vida el juegador en los últimos 2 minutos
+      //Si quedan menos de 4 snowbees en pantalla
+      //Si no ha perdido una vida el juegador en los últimos 2 minutos
 };
 
 #endif

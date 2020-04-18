@@ -190,33 +190,6 @@ adn/adn.cpp.s:
 	$(MAKE) -f CMakeFiles/libModulos.dir/build.make CMakeFiles/libModulos.dir/adn/adn.cpp.s
 .PHONY : adn/adn.cpp.s
 
-bomba/bombas.o: bomba/bombas.cpp.o
-
-.PHONY : bomba/bombas.o
-
-# target to build an object file
-bomba/bombas.cpp.o:
-	$(MAKE) -f CMakeFiles/libModulos.dir/build.make CMakeFiles/libModulos.dir/bomba/bombas.cpp.o
-.PHONY : bomba/bombas.cpp.o
-
-bomba/bombas.i: bomba/bombas.cpp.i
-
-.PHONY : bomba/bombas.i
-
-# target to preprocess a source file
-bomba/bombas.cpp.i:
-	$(MAKE) -f CMakeFiles/libModulos.dir/build.make CMakeFiles/libModulos.dir/bomba/bombas.cpp.i
-.PHONY : bomba/bombas.cpp.i
-
-bomba/bombas.s: bomba/bombas.cpp.s
-
-.PHONY : bomba/bombas.s
-
-# target to generate assembly for a file
-bomba/bombas.cpp.s:
-	$(MAKE) -f CMakeFiles/libModulos.dir/build.make CMakeFiles/libModulos.dir/bomba/bombas.cpp.s
-.PHONY : bomba/bombas.cpp.s
-
 bomba/colisiones.o: bomba/colisiones.cpp.o
 
 .PHONY : bomba/colisiones.o
@@ -584,9 +557,6 @@ help:
 	@echo "... adn/adn.o"
 	@echo "... adn/adn.i"
 	@echo "... adn/adn.s"
-	@echo "... bomba/bombas.o"
-	@echo "... bomba/bombas.i"
-	@echo "... bomba/bombas.s"
 	@echo "... bomba/colisiones.o"
 	@echo "... bomba/colisiones.i"
 	@echo "... bomba/colisiones.s"

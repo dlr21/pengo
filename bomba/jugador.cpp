@@ -15,10 +15,9 @@ Jugador::Jugador(int numero){
     sprite->setTextureRect(sf::IntRect(0 * 32, 0 * 32, 32, 32));
     if (numero==1)
     {
-            sprite->setPosition(112+32, 64+32);
+            setInicio();
     }
-    puntos=0;
-    invencible=false;
+
     identificador = numero;
 }
 void Jugador::draw(sf::RenderWindow &window){

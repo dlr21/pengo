@@ -7,13 +7,14 @@
 #include "Map.h"
 #include "Tile.h"
 #include "jugador.h"
-#include "bombas.h"
 #include "dinosaurio.h"
 #include "colisiones.h"
 
 class IA
 {
     private:
+    float switchtime=2;
+    float totaltime=2;
     public:
         void arriba(Dinosaurio *dino, int max);
         void abajo(Dinosaurio *dino, int max);

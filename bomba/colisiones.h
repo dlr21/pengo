@@ -1,6 +1,5 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "bombas.h"
 #include "Map.h"
 #include "jugador.h"
 #include "../dinosaurio/dinosaurio.h"

@@ -19,8 +19,6 @@ Tile.h
 ../IA/Tile.h
 jugador.h
 ../IA/jugador.h
-bombas.h
-../IA/bombas.h
 dinosaurio.h
 ../IA/dinosaurio.h
 colisiones.h
@@ -34,17 +32,9 @@ string
 SFML/Graphics.hpp
 ../adn/SFML/Graphics.hpp
 
-../bomba/bombas.h
-SFML/Graphics.hpp
--
-jugador.h
-../bomba/jugador.h
-
 ../bomba/colisiones.h
 SFML/Graphics.hpp
 -
-bombas.h
-../bomba/bombas.h
 Map.h
 ../bomba/Map.h
 jugador.h
@@ -105,8 +95,6 @@ Tile.h
 ../mundo/Tile.h
 jugador.h
 ../mundo/jugador.h
-bombas.h
-../mundo/bombas.h
 dinosaurio.h
 ../mundo/dinosaurio.h
 colisiones.h
@@ -161,8 +149,6 @@ Tile.h
 /home/fv2/Desktop/PENGO/pengo/IA/Tile.h
 jugador.h
 /home/fv2/Desktop/PENGO/pengo/IA/jugador.h
-bombas.h
-/home/fv2/Desktop/PENGO/pengo/IA/bombas.h
 dinosaurio.h
 /home/fv2/Desktop/PENGO/pengo/IA/dinosaurio.h
 colisiones.h
@@ -182,18 +168,6 @@ string
 SFML/Graphics.hpp
 /home/fv2/Desktop/PENGO/pengo/adn/SFML/Graphics.hpp
 
-/home/fv2/Desktop/PENGO/pengo/bomba/bombas.cpp
-bombas.h
-/home/fv2/Desktop/PENGO/pengo/bomba/bombas.h
-iostream
--
-
-/home/fv2/Desktop/PENGO/pengo/bomba/bombas.h
-SFML/Graphics.hpp
--
-jugador.h
-/home/fv2/Desktop/PENGO/pengo/bomba/jugador.h
-
 /home/fv2/Desktop/PENGO/pengo/bomba/colisiones.cpp
 colisiones.h
 /home/fv2/Desktop/PENGO/pengo/bomba/colisiones.h
@@ -203,8 +177,6 @@ iostream
 /home/fv2/Desktop/PENGO/pengo/bomba/colisiones.h
 SFML/Graphics.hpp
 -
-bombas.h
-/home/fv2/Desktop/PENGO/pengo/bomba/bombas.h
 Map.h
 /home/fv2/Desktop/PENGO/pengo/bomba/Map.h
 jugador.h
@@ -315,8 +287,6 @@ Tile.h
 /home/fv2/Desktop/PENGO/pengo/mundo/Tile.h
 jugador.h
 /home/fv2/Desktop/PENGO/pengo/mundo/jugador.h
-bombas.h
-/home/fv2/Desktop/PENGO/pengo/mundo/bombas.h
 dinosaurio.h
 /home/fv2/Desktop/PENGO/pengo/mundo/dinosaurio.h
 colisiones.h

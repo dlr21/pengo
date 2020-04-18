@@ -30,7 +30,21 @@ class Jugador{
           } 
       }
     void empujando(float time);
-    void setInicio(){    sprite->setPosition(112+32, 64+32); }//DEPENDE DEL MAPA
+    void setInicio(){  
+         sprite->setPosition(112+32, 64+32);
+         moviendo=false;
+         empuja=false;  
+         empuja=false;
+         normal=true;
+         colision=false;
+         animal=true;
+         movido=false;
+         tecla=false;
+         moviendo=false;
+         puntos=0;
+         invencible=false;
+         mir=1;
+         }//DEPENDE DEL MAPA
     void setkx(float a){kVelx=a;}
     void setky(float a){kVely=a;}
     float getkx(){return kVelx;}
@@ -50,7 +64,7 @@ class Jugador{
      bool getmoviendo(){return moviendo;}
     
    
-void setmovido(bool a){movido=a;}
+   void setmovido(bool a){movido=a;}
     void setmoviendo(bool a){moviendo=a;}
      void settecla(bool a){tecla=a;}
        bool gettecla(){return tecla;}
@@ -69,7 +83,6 @@ void setmovido(bool a){movido=a;}
     void mover(int direccion,float time);
     void Update(float time );
     void posredondeada(float time);
-    //bool frentevacio(Map* m);
  private:
     sf::Texture* textura;
     sf::Sprite* sprite;
@@ -83,18 +96,18 @@ void setmovido(bool a){movido=a;}
     
     
     int puntos;
-    int mir=1;
+    int mir;
     float switchtime=0.15;
     float totaltime=0;
     float timeempujar=0;
     float invencibilidad = -1;
     
     bool invencible;
-    bool empuja=false;
-    bool normal=true;
-    bool colision=false;
-    bool animal=true;
-    bool movido=false;
-    bool tecla=false;
-    bool moviendo=false;
+    bool empuja;
+    bool normal;
+    bool colision;
+    bool animal;
+    bool movido;
+    bool tecla;
+    bool moviendo;
 };
