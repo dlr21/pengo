@@ -13,16 +13,11 @@
 class IA
 {
     private:
-    float switchtime=2;
-    float totaltime=2;
+
     public:
-        void arriba(Dinosaurio *dino, int max);
-        void abajo(Dinosaurio *dino, int max);
-        void derecha(Dinosaurio *dino, int max);
-        void izquierda(Dinosaurio *dino, int max);
-        void quieto(Dinosaurio *dino, int max);
-        void anda(Dinosaurio *dino);
-        void movimientoDinos(vector<Dinosaurio*> dinosaurios, int _cont,std::vector<sf::Sprite*> &todoSprite, float time);
+
+        void movimientoDinos(vector<Dinosaurio*> dinosaurios, int _cont,std::vector<sf::Sprite*> &todoSprite, float time,Map* m);
+        bool elegirdireccion(Dinosaurio* dinosaurio, Map* m);
 };
 
 #endif

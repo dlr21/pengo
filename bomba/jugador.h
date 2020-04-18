@@ -17,6 +17,7 @@ class Jugador{
     bool getInvencible(){return invencible;}
     int getPuntos(){return puntos;}
     void sumaPuntos(){puntos+=100;}
+    void maspuntos(int a){puntos+=(60-a)*10;};
     void setPuesta(bool estado){bomba = estado;}
     void setVelocidad(int velocidad){kVel = velocidad;}
     void setVidas(int v){vidas = v;}
@@ -41,7 +42,6 @@ class Jugador{
          movido=false;
          tecla=false;
          moviendo=false;
-         puntos=0;
          invencible=false;
          mir=1;
          }//DEPENDE DEL MAPA
@@ -95,7 +95,7 @@ class Jugador{
     int vidas = 3;
     
     
-    int puntos;
+    int puntos=0;;
     int mir;
     float switchtime=0.15;
     float totaltime=0;

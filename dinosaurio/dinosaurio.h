@@ -8,10 +8,10 @@ class Dinosaurio
       Dinosaurio(sf::Texture&); // Constructor con textura
       ~Dinosaurio(); // Destructor
       // Movimiento
-      bool marriba(std::vector<sf::Sprite*> &c, float time);
-      bool mabajo(std::vector<sf::Sprite*> &c, float time);
-      bool mderecha(std::vector<sf::Sprite*> &c, float time);
-      bool mizquierda(std::vector<sf::Sprite*> &c, float time);
+      int marriba(std::vector<sf::Sprite*> &c, float time);
+      int mabajo(std::vector<sf::Sprite*> &c, float time);
+      int mderecha(std::vector<sf::Sprite*> &c, float time);
+      int mizquierda(std::vector<sf::Sprite*> &c, float time);
   
       // Devolver sprite
       sf::Sprite* getSprite() ;
@@ -54,11 +54,14 @@ class Dinosaurio
        if(y%32<=16)return y/32;
        if(y%32>16)return (y/32)+1;
       }
+      float getcambiodir(){return cambiodir;}
+      float gettotalcambio(){return totalcambio;}
+      void settotalcambio(float a){totalcambio=a;}
 
     private:
-      float kVel=1882/10;
-      float kVelx=1882/10;
-      float kVely=1882/10;
+      float kVel=1500/10;
+      float kVelx=1500/10;
+      float kVely=1500/10;
       sf::Sprite* _Sprite = new sf::Sprite; // Sprite
       sf::Texture* textura;
       int _posdino=1; // Posicion a la que mira el dino ==> 0:Arriba | 1:Abajo | 2:Derecha | 3:Izquierda
@@ -66,8 +69,10 @@ class Dinosaurio
       float invencibilidad = -1; 
       bool parado=false;
       bool activo=false;
-      float switchtime=0.2;
+      float switchtime=0.15;
+        float cambiodir=1;
       float totaltime=0;
+        float totalcambio=0;
       bool animal=true;
       //Si no existen snowbees en forma de huevo
       //Si quedan menos de 4 snowbees en pantalla

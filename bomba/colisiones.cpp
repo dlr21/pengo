@@ -29,7 +29,7 @@ void Colisiones::update(sf::Clock &temporizador,sf::Sprite* deslizado,std::vecto
     if(deslizado!=NULL && jugador.getmoviendo()==true){
       for(unsigned int j = 0;j < dinosaurios.size();j++)
       {
-        if(dinosaurios[j]->getSprite()->getGlobalBounds().intersects(deslizado->getGlobalBounds()))
+        if(dinosaurios[j]->getSprite()->getGlobalBounds().intersects(deslizado->getGlobalBounds()) && dinosaurios[j]->getactivo())
         {
           if(dinosaurios[j]->getInvencibilidad() == -1 || temporizador.getElapsedTime().asSeconds() - dinosaurios[j]->getInvencibilidad() > 1)
           {
@@ -51,20 +51,19 @@ void Colisiones::update(sf::Clock &temporizador,sf::Sprite* deslizado,std::vecto
       for(unsigned int j = 0;j < todoSprites.size();j++)
       {
         if(todoSprites[j]->getGlobalBounds().intersects(deslizado->getGlobalBounds()) && deslizado!=todoSprites[j]){
-          //mapa.settilemapSprite(deslizado,(deslizado->getPosition().x-112)/32,(deslizado->getPosition().y-64)/32);
-
     
-       int x=deslizado->getPosition().x-112;
-       if(x%32<=16)x=x/32;
-       if(x%32>16)x=(x/32)+1;
-    
-    
-       int y=deslizado->getPosition().y-64;
-       if(y%32<=16)y=y/32;
-       if(y%32>16)y=(y/32)+1;
-
-      deslizado->setPosition(x*32+112,y*32+64);
-          jugador.setmoviendo(false);
+        int x=deslizado->getPosition().x-112;
+        if(x%32<=16)x=x/32;
+        if(x%32>16)x=(x/32)+1;
+      
+        int y=deslizado->getPosition().y-64;
+        if(y%32<=16)y=y/32;
+        if(y%32>16)y=(y/32)+1;
+        std::cout<<x<<" "<<y<<endl;
+        deslizado->setPosition(x*32+112,y*32+64);
+        mapa.setid(x,y,5);
+        mapa.settilemapSprite(deslizado,x,y);
+        jugador.setmoviendo(false);
         }
       }
     }
@@ -83,21 +82,4 @@ void Colisiones::update(sf::Clock &temporizador,sf::Sprite* deslizado,std::vecto
         }
       }
     }
-    /*for(unsigned int l=0; l<lay;l++){
-        for( unsigned int y=0; y<hei;y++){
-          for(unsigned int x=0; x<wid;x++){
-            int gid=tilemap [l][y][x]-1;
-            if(gid==2 && mpSprite[l][y][x]->getGlobalBounds().intersects(totalExplosiones[i].getGlobalBounds())){//GID = PIEDRAS
-              std::cout << "Rompo una piedra" << std::endl;
-              mapa.setTileMapa(l,y,x,2);
-                  for(unsigned int a = 0;a < todoSprites.size();a++){
-                    if(todoSprites[a]==mpSprite[l][y][x]){
-                      todoSprites.erase(todoSprites.begin()+a);
-                    }
-                  }
-              mapa.gettilemapSprite()[l][y][x]->setTextureRect(sf::IntRect(32,32,32,32));
-            }
-          }
-        }
-      }*/
 }

@@ -49,7 +49,7 @@ class Mundo : public States {
     std::vector<sf::Sprite*> paredesSprites;
     int _cont = 0; // Contador de iteraciones del juego
     sf::Sprite* bloqueadeslizar;
-
+    sf::Clock clock;
   public:
     void Inicializar();
     static Mundo* Instance();

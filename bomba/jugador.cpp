@@ -1,5 +1,4 @@
 #include "jugador.h"
-
 #include <iostream>
 
 Jugador::Jugador(int numero){
@@ -137,6 +136,7 @@ void Jugador::animacion(int dir,float deltatime){
     }
 }
 void Jugador::mover(int direccion, float time){
+    animacion(direccion,time);
     kVelx=0;
     kVely=0;
     switch (direccion)
@@ -164,7 +164,6 @@ void Jugador::mover(int direccion, float time){
     }
 
     sprite->move(kVelx,kVely);
-
 }
 void Jugador::Update(float time ){
     
@@ -183,15 +182,16 @@ void Jugador::Update(float time ){
 void Jugador::posredondeada(float time){
 
     int x=getSprite()->getPosition().x+16;
-    int y=getSprite()->getPosition().y;
+    
 
     if((x%32)>1){
         mover(getmir(),time);
-        animacion(getmir(),time);
     }
+
+    int y=getSprite()->getPosition().y;
+    
     if((y%32)>1){
         mover(getmir(),time);
-        animacion(getmir(),time);
     }
     
 }

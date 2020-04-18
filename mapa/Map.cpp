@@ -108,12 +108,7 @@ Map::Map(string s,int puntos) {
       }
       std::cout<<"arraysprites"<<endl;
   }
-  /*TiXmlElement *cambio(int l, TiXmlElement *layer){
-      for(int i=0;i<l;i++){
-        layer=layer->NextSiblingElement("layer");
-      }
-    return layer;
-  }*/
+
 
  sf::Sprite* Map::gettilemapSprite(int l, int y, int x){
   return _tilemapSprite[l][y][x];
@@ -209,19 +204,14 @@ sf::Sprite* Map::empujado(sf::Sprite* j, int dir){
   int x=(j->getPosition().x-112)/32;
   int y=(j->getPosition().y-64)/32;
 
-  std::cout<< x<<" "<<y<<endl;
-
   if(dir==0){
-    std::cout<< x<<" "<<y-1<<endl;
     if(y-1>-1 && (_tilemap[1][y-1][x]==5 || _tilemap[1][y-1][x]==6) ){
       std::cout<<"sigue"<<endl;
       return _tilemapSprite[1][y-1][x];
-
     }else{
       return NULL;
     }
   }else if(dir==1){
-    std::cout<<x<<" "<<y+1<<endl;
      if( y+1<18 && (_tilemap[1][y+1][x]==5 || _tilemap[1][y+1][x]==6) ){
 
       return _tilemapSprite[1][y+1][x];
@@ -229,17 +219,14 @@ sf::Sprite* Map::empujado(sf::Sprite* j, int dir){
       return NULL;
     }
   }else if(dir==2){
-    std::cout<<x+1<<" "<<y<<endl;
+    std::cout<<_tilemap[1][y][x+1]<<endl;
     if( x+1<16 && (_tilemap[1][y][x+1]==5 || _tilemap[1][y][x+1]==6) ){
-
       return _tilemapSprite[1][y][x+1];
     }else{
       return NULL;
     }
   }else if(dir==3){
-    std::cout<<x-1<<" "<<y<<endl;
     if( x-1>-1 && (_tilemap[1][y][x-1]==5 || _tilemap[1][y][x-1]==6) ){
-
       return _tilemapSprite[1][y][x-1];
     }else{
       return NULL;
@@ -261,19 +248,7 @@ void Map::anadirVector(std::vector<sf::Sprite*> &vectorS){
         }
       }
 }
-void Map::anadirParedes(std::vector<sf::Sprite*> &vectorS){
-  for(unsigned int l=0; l<_numlayers;l++){
-        for( unsigned int y=0; y<_height;y++){
-          for(unsigned int x=0; x<_width;x++){
-            int gid=_tilemap [l][y][x];
-            if(gid == 0 || gid == 1 || gid == 2 || gid == 3 || gid == 4 )
-            {
-              vectorS.push_back(_tilemapSprite[l][y][x]);
-            }
-          }
-        }
-      }
-}
+
 
 void Map::deslizarbloque(sf::Sprite* s, int j, float time){
 

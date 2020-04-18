@@ -41,28 +41,23 @@ public:
   int getwidth(){
     return _width;
   };
-  void setTileMapa(int l,int y,int z,int valor){
-    _tilemap[l][y][z] = valor;
-  }
 
   sf::Sprite* gettilemapSprite(int l, int y, int x); // Get sprite de los til
    void settilemapSprite(sf::Sprite* s, int y, int x){
-     _tilemapSprite[1][y][x]=s;
+     _tilemapSprite[1][x][y]=s;
    } // Get sprite de los til
+   void setid(int x, int y, int id){
+     _tilemap[1][x][y]=id;
+   };
   sf::Sprite spawnDino(int pos_dino, int l, int y, int x);
   void anadirVector(std::vector<sf::Sprite*> &vectorS);
-  void anadirParedes(std::vector<sf::Sprite*> &vectorS);
-  void moveRightDino();
-  void moveLeftDino();
-  void moveUpDino();
-  void moveDownDino();
   void Update();
   void reservarMemoria(int num);
   sf::Sprite* empujado(sf::Sprite* j,int dir);
   void deslizarbloque(sf::Sprite* s, int dir,float time);
   void borrardemapa(int i, int x, int y){
     if(_tilemap[i][y][x]==5){
-              _tilemapSprite[i][y][x]=NULL;
+            _tilemapSprite[i][y][x]=NULL;
             delete[] _tilemapSprite[i][y][x];
     }
   }

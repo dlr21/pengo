@@ -75,65 +75,74 @@ sf::FloatRect Dinosaurio::getHitbox(){ // FloatRect devuelve coordenada superior
 }
 
 // Funciones de movimiento (salto y movimientos)
-bool Dinosaurio::marriba(std::vector<sf::Sprite*> &todo, float time){ // Movimiento arriba
+int Dinosaurio::marriba(std::vector<sf::Sprite*> &todo, float time){ // Movimiento arriba
     
     
         for(unsigned int j = 0;j < todo.size();j++)
         {
             if(_Sprite->getGlobalBounds().intersects(todo[j]->getGlobalBounds()) && _Sprite!=todo[j])
             {
-                setparado(false);
-                return false;
+                //std::cout<<"dino no mueve arriba"<<std::endl;
+                _Sprite->setPosition(getposimapax()*32+112,getposimapay()*32+64);
+                setparado(true);
+                return 0;
             }
         }
-    _posdino=0;
-    return true; // Posicion arriba
-
+         mover(0,time);    
+  
+    return 0; // Posicion arriba
 }
-
-bool Dinosaurio::mabajo(std::vector<sf::Sprite*> &todo, float time){ // Movimiento abajo
+int Dinosaurio::mabajo(std::vector<sf::Sprite*> &todo, float time){ // Movimiento abajo
         
     
         for(unsigned int j = 0;j < todo.size();j++)
         {
             if(_Sprite->getGlobalBounds().intersects(todo[j]->getGlobalBounds()) && _Sprite!=todo[j])
             {
-                setparado(false);
-                return false;
+                //std::cout<<"dino no mueve abajo"<<std::endl;
+                
+                _Sprite->setPosition(getposimapax()*32+112,getposimapay()*32+64);
+                setparado(true);
+                return 1;
             }
         }
-    _posdino=1;
-    return true; // Posicion abajo
+         mover(1,time);    
+    
+    
+    return 1; // Posicion abajo
 }
-
-bool Dinosaurio::mderecha(std::vector<sf::Sprite*> &todo, float time){ // Movimiento derecha
+int Dinosaurio::mderecha(std::vector<sf::Sprite*> &todo, float time){ // Movimiento derecha
         
    
         for(unsigned int j = 0;j < todo.size();j++)
         {
             if(_Sprite->getGlobalBounds().intersects(todo[j]->getGlobalBounds()) && _Sprite!=todo[j])
             {
-                setparado(false);
-                return false;
+                //std::cout<<"dino no mueve dre"<<std::endl;
+                _Sprite->setPosition(getposimapax()*32+112,getposimapay()*32+64);
+                setparado(true);
+                return 2;
             }
         }
-    _posdino=2;
-    return true; // Posicion derecha
+         mover(2,time);    
+    
+    return 2; // Posicion derecha
 }
-
-bool Dinosaurio::mizquierda(std::vector<sf::Sprite*> &todo, float time){ // Movimiento izquierda
+int Dinosaurio::mizquierda(std::vector<sf::Sprite*> &todo, float time){ // Movimiento izquierda
         
     
         for(unsigned int j = 0;j < todo.size();j++)
         {
             if(_Sprite->getGlobalBounds().intersects(todo[j]->getGlobalBounds()) && _Sprite!=todo[j])
             {
-                setparado(false);
-                return false;
+                //std::cout<<"dino no mueve izq"<<std::endl;
+                _Sprite->setPosition(getposimapax()*32+112,getposimapay()*32+64);
+                setparado(true);
+                return 3;
             }
         }
-    _posdino=3;
-    return true; // Posicion izquierda
+        mover(3,time);    
+        return 3; // Posicion izquierda
 }
 
 void Dinosaurio::sumaPasos(){
@@ -217,34 +226,35 @@ void Dinosaurio::animacion(int dir,float deltatime){
 }
 
 void Dinosaurio::mover(int dir,float deltatime){
-    kVelx=0;
-    kVely=0;
-    animacion(dir,deltatime);
-    switch (dir)
-    {
-    //Arriba
-    case 0:
-         kVely=-kVel*deltatime;
-        
-        break;
-    //Abajo
-    case 1:
-        kVely=kVel*deltatime;
-        
-        break;
-    //Derecha
-    case 2:
-        kVelx=kVel*deltatime;
-        
-        break;
-    //Izquierda
-    case 3:
-        kVelx=-kVel*deltatime;
-        
-        break;
+    if(!parado){
+        kVelx=0;
+        kVely=0;
+        animacion(dir,deltatime);
+        switch (dir)
+        {
+        //Arriba
+        case 0:
+            kVely=-kVel*deltatime;
+            
+            break;
+        //Abajo
+        case 1:
+            kVely=kVel*deltatime;
+            
+            break;
+        //Derecha
+        case 2:
+            kVelx=kVel*deltatime;
+            
+            break;
+        //Izquierda
+        case 3:
+            kVelx=-kVel*deltatime;
+            
+            break;
+        }
+
+        _Sprite->move(kVelx,kVely);
     }
-
-    _Sprite->move(kVelx,kVely);
-
 
 }

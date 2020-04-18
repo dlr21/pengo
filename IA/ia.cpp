@@ -5,42 +5,41 @@
  * Usa un contador de iteraciones del programa para que no dependa del tiempo
  */
 
-void IA::movimientoDinos(vector<Dinosaurio*> dinosaurios, int _cont,std::vector<sf::Sprite*> &todoSprite, float times){
-totaltime+=times;
-if(totaltime>=switchtime){
+void IA::movimientoDinos(vector<Dinosaurio*> dinosaurios, int _cont,std::vector<sf::Sprite*> &todoSprite, float times, Map* m){
         for(int i=0; i < dinosaurios.size(); i++){
             if(dinosaurios[i]->getactivo()){
-                int cosas [5] = { 0, 1, 2, 3, 4 };
-                int meh = cosas[i];
-                
-                srand (time(NULL));
-                int num1 = dinosaurios[i]->getDireccion();
-                int num2 = rand() % 5;
-                int dir = abs(num1 - num2);
-                dinosaurios[i]->setposdino(dir);
-                if(dir == 0){ 
+                dinosaurios[i]->settotalcambio(dinosaurios[i]->gettotalcambio()+times);
+                if(dinosaurios[i]->gettotalcambio() >=dinosaurios[i]->getcambiodir() || dinosaurios[i]->getparado()){
+                    dinosaurios[i]->settotalcambio(0);
+                    srand (time(NULL));
+                    int num1 = dinosaurios[i]->getDireccion();
+                    int num2 = (i+rand()) % 4;
+                    int dir = abs(num1 - num2);
+                    if(dir!=dinosaurios[i]->getDireccion()){
+                    dinosaurios[i]->setposdino(dir);
+                    dinosaurios[i]->setparado(false);
+                    }
+                }
+                if(dinosaurios[i]->getDireccion() == 0 && !dinosaurios[i]->getparado() && elegirdireccion(dinosaurios[i],m)){ 
                     dinosaurios[i]->marriba(todoSprite,times);
                 }
-                if(dir == 1){
-                    dinosaurios[i]->mabajo(todoSprite,times);   
+                if(dinosaurios[i]->getDireccion() == 1 &&  !dinosaurios[i]->getparado() && elegirdireccion(dinosaurios[i],m)){
+                    dinosaurios[i]->mabajo(todoSprite,times);
                 }
-                if(dir == 2){
-                    dinosaurios[i]->mderecha(todoSprite,times);               
+                if(dinosaurios[i]->getDireccion() == 2 &&  !dinosaurios[i]->getparado() && elegirdireccion(dinosaurios[i],m)){
+                    dinosaurios[i]->mderecha(todoSprite,times);          
                 }
-                if(dir == 3){   
-                    dinosaurios[i]->mizquierda(todoSprite,times);
-                }
-                else{
-                    dinosaurios[i]->sumaPasos();
+                if(dinosaurios[i]->getDireccion() == 3 &&  !dinosaurios[i]->getparado() && elegirdireccion(dinosaurios[i],m)){
+                   dinosaurios[i]->mizquierda(todoSprite,times);
                 }
             }
-        }
-}else{
-            for(int i=0; i < dinosaurios.size(); i++){
-                if(dinosaurios[i]->getactivo() && !dinosaurios[i]->getparado()){
-                    dinosaurios[i]->mover(dinosaurios[i]->getDireccion(),times); 
-                }
-            }
+        }      
 }
 
+
+bool IA::elegirdireccion(Dinosaurio* dinosaurio, Map* m){
+        if(m->empujado(dinosaurio->getSprite(),dinosaurio->getDireccion()) == NULL){
+            return true;
+        }    
+    return false;
 }
