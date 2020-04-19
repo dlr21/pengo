@@ -89,6 +89,7 @@ void Mundo::Event(sf::Event event,sf::RenderWindow &window, float time){ //COSAS
                 if(mapas[lvlactual]->empujado(jugador1->getSprite(),dirbloque) != NULL){
                   std::cout<<"SI EMPUJA"<<std::endl;
                   bloqueadeslizar=(mapas[lvlactual]->empujado(jugador1->getSprite(),dirbloque));
+                  mapas[lvlactual]->settilemap0((bloqueadeslizar->getPosition().x-112)/32,(bloqueadeslizar->getPosition().y-64)/32);
                   //BORRAR BLOQUE O MOVER
                   if(mapas[lvlactual]->empujado(bloqueadeslizar,dirbloque)){//BORAR BLOQUE
                     if(mapas[lvlactual]->borrardemapa((bloqueadeslizar->getPosition().x-112)/32,(bloqueadeslizar->getPosition().y-64)/32)){

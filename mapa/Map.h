@@ -29,6 +29,12 @@ public:
   int*** gettilemap(){
     return _tilemap;
   };
+
+   
+  void settilemap0(int x,int y){
+     _tilemap[1][y][x]=0;
+  };
+
   sf::Sprite**** gettilemapSprite(){
     return _tilemapSprite;
   };
