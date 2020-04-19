@@ -46,23 +46,29 @@ public:
   void settilemapSprite(sf::Sprite* s, int x, int y){
      _tilemapSprite[1][y][x]=s;
   } // Get sprite de los til
-  void setid(int x, int y, int id){
-     _tilemap[1][y][x]=id;
-      std::cout<<_tilemap[1][y][x]<<"nuevo tile id"<<std::endl;
+  void setid(int x, int y){
+     _tilemap[1][y][x]=idmovido;
+      std::cout<<_tilemap[1][y][x]<<"SET id"<<std::endl;
+      idmovido=0;
   };
   sf::Sprite spawnDino(int pos_dino, int l, int y, int x);
   void anadirVector(std::vector<sf::Sprite*> &vectorS);
   void Update();
   void reservarMemoria(int num);
   sf::Sprite* empujado(sf::Sprite* j,int dir);
+  sf::Sprite* dinomira(sf::Sprite* j, int dir);
   void deslizarbloque(sf::Sprite* s, int dir,float time);
-  void borrardemapa(int x, int y){
+  bool borrardemapa(int x, int y){
     if(_tilemap[1][y][x]==5){
         _tilemap[1][y][x]=0;
         _tilemapSprite[1][y][x]=NULL;
-        std::cout<<"borrado de mapa"<<std::endl;
+        std::cout<<"borrado SPRITE de mapa"<<std::endl;
+        return true;
+    }else{
+      return false;
     }
   }
+  int getid(){return idmovido;}
 private:
   int puntosfin;
   bool finalizado;
@@ -82,7 +88,8 @@ private:
     float kVelx=1882/10;
     float kVely=1882/10;  
   sf::Sprite ****_tilemapSprite;
-
+  int idmovido=0;
+  
 
 };
 

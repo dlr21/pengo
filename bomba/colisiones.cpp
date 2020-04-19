@@ -46,7 +46,7 @@ void Colisiones::update(sf::Clock &temporizador,sf::Sprite* deslizado,std::vecto
           }
         }
       }
-      for(unsigned int j = 0;j < todoSprites.size();j++)
+      for(unsigned int j = 0;j < todoSprites.size();j++)//BLOQUE MOVIDO CON BLOQUE PARADO
       {
         if(todoSprites[j]->getGlobalBounds().intersects(deslizado->getGlobalBounds()) && deslizado!=todoSprites[j]){
         int x=deslizado->getPosition().x-112;
@@ -57,7 +57,8 @@ void Colisiones::update(sf::Clock &temporizador,sf::Sprite* deslizado,std::vecto
         if(y%32>16)y=(y/32)+1;
         std::cout<<x<<" "<<y<<endl;
         deslizado->setPosition(x*32+112,y*32+64);
-        mapa.setid(x,y,5);
+        std::cout<<mapa.getid()<<"presetid"<<std::endl;
+        mapa.setid(x,y);
         mapa.settilemapSprite(deslizado,x,y);
         jugador.setmoviendo(false);
         }
@@ -73,7 +74,6 @@ void Colisiones::update(sf::Clock &temporizador,sf::Sprite* deslizado,std::vecto
         if(jugador.getInvencibilidad() == -1 || temporizador.getElapsedTime().asSeconds() - jugador.getInvencibilidad() > 2)
         {
           jugador.quitarVidas();
-          std::cout << jugador.getVidas() << std::endl;
           jugador.setInvencibilidad(temporizador.getElapsedTime().asSeconds());
         }
       }

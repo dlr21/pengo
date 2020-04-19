@@ -34,7 +34,7 @@ void IA::movimientoDinos(vector<Dinosaurio*> dinosaurios, int _cont,std::vector<
 
 
 bool IA::elegirdireccion(Dinosaurio* dinosaurio, Map* m){
-        if(m->empujado(dinosaurio->getSprite(),dinosaurio->getDireccion()) == NULL){
+        if(m->dinomira(dinosaurio->getSprite(),dinosaurio->getDireccion()) == NULL){
             return true;
         }    
     return false;

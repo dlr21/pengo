@@ -18,28 +18,26 @@ void Mundo::Inicializar() {
       lvls=2; //numero de niveles
       play=1;//numero de jugadores      
       //CREAR JUGADORES
-      if(play==1){
-        hud1=new Tile();
+      hud1=new Tile();
+      if (nueva)
+      {
         jugador1=new Jugador(1);
-        clock.restart();
       }
-     ia=new IA();
-     bloqueadeslizar=NULL;
-     pulsada=false;//event de uno en uno
-     nueva=false;//controla la nueva partida
-     adnscreados=false;
-     dinoscreados=false;
-     colisiones=false;
-     moverse=true;
-     dirbloque=0;
-     snototales=4;
-     snovivos=2;
-     snodurmiendo=4;
-      srand (time(NULL));   //para el rand 
+      jugador1->setInicio();
+      clock.restart();
+      ia=new IA();
+      bloqueadeslizar=NULL;
+      pulsada=false;//event de uno en uno
+      adnscreados=false;
+      dinoscreados=false;
+      colisiones=false;
+      moverse=true;
+      dirbloque=0;
+      snototales=4;
+      snovivos=2;
+      snodurmiendo=4;
       for(int a=0;a<lvls;a++){//cargar los mapas dependiendo del nombre
-        int aleat=rand() % 9;
-        std::cout<<aleat<<endl;
-        string s="resources/mapas/"+to_string(dif)+"mapa"+to_string(aleat)+".tmx";
+        string s="resources/mapas/"+to_string(dif)+"mapa"+to_string(a)+".tmx";
         std::cout<<s<<endl;
         Map* m=new Map(s,dif+3);
         std::cout<< mapas.size()<<endl;
@@ -58,8 +56,7 @@ void Mundo::crearDinos(Map* m,int tot){
           for(unsigned int x=2; x<m->getwidth()-1 && !todos;x++){
             int gid=m->gettilemap()[l][y][x]-1;
               v1 = rand() % 999;
-              if(gid==-1 && v1<100){//GID = camino
-              std::cout<<"coloca dino"<<endl;
+              if(gid==-1 && v1<80){//GID = camino
               Dinosaurio *dino1 = new Dinosaurio(); // Constructor del dinosaurio
               dino1->modifyPosition(112+(x*32),64+(y*32)); // Punto de spawn. Debe estar dentro del mapa
               dinosaurios.push_back(dino1); // Guardar en el vector de dinosaurios
@@ -94,10 +91,11 @@ void Mundo::Event(sf::Event event,sf::RenderWindow &window, float time){ //COSAS
                   bloqueadeslizar=(mapas[lvlactual]->empujado(jugador1->getSprite(),dirbloque));
                   //BORRAR BLOQUE O MOVER
                   if(mapas[lvlactual]->empujado(bloqueadeslizar,dirbloque)){//BORAR BLOQUE
-                    mapas[lvlactual]->borrardemapa((bloqueadeslizar->getPosition().x-112)/32,(bloqueadeslizar->getPosition().y-64)/32);
-                    borradetodoSprites(bloqueadeslizar);
-                    bloqueadeslizar->setPosition(-50,-50);
-                    bloqueadeslizar=NULL;
+                    if(mapas[lvlactual]->borrardemapa((bloqueadeslizar->getPosition().x-112)/32,(bloqueadeslizar->getPosition().y-64)/32)){
+                      borradetodoSprites(bloqueadeslizar);
+                      bloqueadeslizar->setPosition(-50,-50);
+                      bloqueadeslizar=NULL;
+                    }
                   }else{//MOVER BLOQUE
                     jugador1->setmoviendo(true);
                     std::cout<<"moviendo"<<endl;
@@ -108,10 +106,8 @@ void Mundo::Event(sf::Event event,sf::RenderWindow &window, float time){ //COSAS
                 }
               break;
             }
-            case 16: //n siguiente nivel 13
-              if(lvlactual<mapas.size()){
-                  mapas[lvlactual]->terminar();
-              }
+            case 59: //delete reinicio nivel 59
+                this->reinicionivel();
               break;
             case 13: //n siguiente nivel 13
               if(lvlactual<mapas.size()){
@@ -146,34 +142,33 @@ void Mundo::Event(sf::Event event,sf::RenderWindow &window, float time){ //COSAS
             break;
             //Arriba
              case 73:
-                     if(!jugador1->getColision() && !jugador1->gettecla()){ 
-            jugador1->mover(0,time);
-              Colisiones::crearColisiones(*jugador1->getSprite(),todoSprites,0,jugador1->getVelocidad(), time, jugador1);
-              jugador1->settecla(true);
-                     }
+              if(!jugador1->getColision() && jugador1->colocado()){ 
+                jugador1->mover(0,time);
+                Colisiones::crearColisiones(*jugador1->getSprite(),todoSprites,0,jugador1->getVelocidad(), time, jugador1);
+              }
             break;
             //Abajos
             case 74:
-                    if(!jugador1->getColision() && !jugador1->gettecla()){
+                    if(!jugador1->getColision() && jugador1->colocado()){
             jugador1->mover(1,time);
               Colisiones::crearColisiones(*jugador1->getSprite(),todoSprites,1,jugador1->getVelocidad(), time, jugador1);
-              jugador1->settecla(true);
+
                     }
             break;
             //Derecha
             case 72:
-                    if(!jugador1->getColision() && !jugador1->gettecla()){
+                    if(!jugador1->getColision() &&  jugador1->colocado()){
             jugador1->mover(2,time);
               Colisiones::crearColisiones(*jugador1->getSprite(),todoSprites,2,jugador1->getVelocidad(), time, jugador1);
-              jugador1->settecla(true);
+
                     }
             break;
             //Izquierda
             case 71:
-                    if(!jugador1->getColision() && !jugador1->gettecla()){
+                    if(!jugador1->getColision() && jugador1->colocado()){
             jugador1->mover(3,time);
               Colisiones::crearColisiones(*jugador1->getSprite(),todoSprites,3,jugador1->getVelocidad(), time, jugador1);
-              jugador1->settecla(true);
+
                     }
             break;    
         
@@ -183,9 +178,9 @@ void Mundo::Event(sf::Event event,sf::RenderWindow &window, float time){ //COSAS
           break;
         }
       }
+
 }
 void Mundo::Update(sf::RenderWindow &window, float time) {//COSAS DEL MUNDO QUE SE ACTUALIZAN SIEMPRE
-
   if(hud1->getTerminada()){
     std::cout<<"terminado el tiempo"<<endl;//HAS PERDIDO
   }
@@ -200,9 +195,7 @@ void Mundo::Update(sf::RenderWindow &window, float time) {//COSAS DEL MUNDO QUE 
             lvlactual++;
             //Reiniciar contador
             hud1->reiniciocrono();
-            if(play==1){
-              jugador1->setInicio();
-            }     
+            jugador1->setInicio();
       }
       if(!(lvlactual<mapas.size())){//TERMINAR Y VOLVER A MENU FIN DEL JUEGO   
           finjuego();
@@ -216,12 +209,15 @@ void Mundo::Update(sf::RenderWindow &window, float time) {//COSAS DEL MUNDO QUE 
             colisiones=true;
           }
         }
-      
       Colisiones::crearColisiones(*jugador1->getSprite(),todoSprites,3,jugador1->getVelocidad(), time, jugador1);
-      if(play==1){// UN JUGADOR O DOS JUGADORES UPDATEAN ELLOS Y SUS HUDS
+      // UN JUGADOR O DOS JUGADORES UPDATEAN ELLOS Y SUS HUDS
         todosno();
         hud1->Update(jugador1);
         jugador1->Update(time);
+        if(jugador1->getVidas()!=vidas){
+          reinicionivel();
+          std::cout<<"PIERDES"<<endl;
+        }
         if(jugador1->getVidas()==0){
           finjuego();
           std::cout<<"PIERDES"<<endl;
@@ -231,12 +227,10 @@ void Mundo::Update(sf::RenderWindow &window, float time) {//COSAS DEL MUNDO QUE 
         }
         Colisiones::crearColisiones(*jugador1->getSprite(),todoSprites,3,jugador1->getVelocidad(), time, jugador1);
         Colisiones::update(temporizador,bloqueadeslizar,dinosaurios,*jugador1,totalExplosiones,*mapas[lvlactual],todoSprites,paredesSprites,time); 
-      }
+      
     // Mover los dinosaurios con la IA
-
     ia->movimientoDinos(dinosaurios, _cont,todoSprites, time, mapas[lvlactual]); // Permite mover a los dinosaurios
     _cont++; 
-    //Detecta si le tiene que quitar vida a jugadores y dinosaurios si colisionan con una explosion.
 }
 
 void Mundo::finjuego(){
@@ -244,14 +238,11 @@ void Mundo::finjuego(){
         //RENICIAR MUNDO
         this->renicio();
         this->Inicializar();
-       /*//MENU INICIAL
-        Menu::Instance()->reinicio();
-        ChangeState(Contexto::Instance(),Menu::Instance());*/
 }
 
 void Mundo::renicio(){ //reiniciar el mundo
       std::cout<<"reinicio"<<dif<<lvls<<lvlactual<<"\n";
-      nueva=false;
+      nueva=true;
       dif=0;
       lvls=0;
       lvlactual=0;
@@ -280,3 +271,18 @@ void Mundo::Draw(sf::RenderWindow &window){//dibujar mapa y hud
   }
 }
 
+void Mundo::reinicionivel(){//reiniciar el nivel
+      std::cout<<"reinicionivel"<<dif<<lvls<<lvlactual<<"\n";
+      nueva=false;
+      dif=0;
+      lvls=0;
+      play=0;
+      dinoscreados=false;
+      colisiones=false;
+      vidas=jugador1->getVidas();
+      borrarcolisiones();
+      borrardinos();
+      borrarmapas();
+      std::cout<<"reinicionivelfin"<<dif<<lvls<<lvlactual<<"\n";
+      this->Inicializar();
+}

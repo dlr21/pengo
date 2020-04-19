@@ -18,6 +18,7 @@ using namespace std;
 class Mundo : public States {
   private:    
     static Mundo* jinstance;
+    int vidas=3;
     int dif;//dificultad
     int lvls;//numero de niveles
     int lvlactual=0;//nivel en el que estamos
@@ -30,7 +31,7 @@ class Mundo : public States {
     Tile* hud1;//el hud
     Tile* hud2;//el hud
     bool pulsada;//event de uno en uno
-    bool nueva;//controla la nueva partida
+    bool nueva=true;//controla la nueva partida
     bool adnscreados;
     bool dinoscreados;
     bool colisiones;
@@ -61,6 +62,7 @@ class Mundo : public States {
     void finjuego();
     void crearAdns(Map* m,int tot);
     void crearDinos(Map* m,int tot);
+    void reinicionivel();
     int getActivos(){
       int cont=0;
           for(unsigned int i=0;i<dinosaurios.size();i++){
@@ -124,6 +126,7 @@ class Mundo : public States {
     void aSprites(sf::Sprite* d){
       todoSprites.push_back(d);
     }
+
 };
 
 #endif

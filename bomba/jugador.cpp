@@ -167,36 +167,28 @@ void Jugador::mover(int direccion, float time){
 }
 void Jugador::Update(float time ){
     
-    if(getInvencible()){
-        setVidas(3);
-    }
     if(getempujon()){
         empujando(time);
     }        
-    if(!colision && !tecla){
+    if(!colision && !colocado()){
             posredondeada(time);
     }
-    settecla(false);
 }
 
 void Jugador::posredondeada(float time){
 
     int x=getSprite()->getPosition().x+16;
     bool uno=true;
-    bool dos=true;
-
-    if((x%32)>0.1){
+    
+    if((x%32)>0.5){
         mover(getmir(),time);
-    }else{uno=false;}
-
+    }
     int y=getSprite()->getPosition().y;
-    
-    if((y%32)>0.1){
+    bool dos=true;
+    if((y%32)>0.5){
         mover(getmir(),time);
-    }else{dos=false;}
+    }
 
-    if(!uno && !dos){}
-    
 }
 
 

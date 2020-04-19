@@ -24,10 +24,9 @@ class Jugador{
     void setInvencibilidad(float f){invencibilidad = f;}
     void changeInvencile(){
        if(!invencible){
-          invencible=true;
-          }else
-          {
-             invencible=false;
+            invencible=true;
+          }else{
+            invencible=false;
           } 
       }
     void empujando(float time);
@@ -40,7 +39,6 @@ class Jugador{
          movido=false;
          tecla=false;
          moviendo=false;
-         invencible=false;
          mir=1;
     }//DEPENDE DEL MAPA
     void setkx(float a){kVelx=a;}
@@ -68,7 +66,7 @@ class Jugador{
        bool gettecla(){return tecla;}
      
            
-    void quitarVidas(){if(vidas > 0)vidas--;}
+    void quitarVidas(){if(vidas > 0 && !invencible)vidas--;}
     void setmir(int i){mir=i;}
     void setempujon(bool i){
        animal=true;
@@ -81,26 +79,39 @@ class Jugador{
     void mover(int direccion,float time);
     void Update(float time );
     void posredondeada(float time);
+
+    bool colocado(){
+
+      if((int(sprite->getPosition().x)+16)%32<=2 && (int(sprite->getPosition().y))%32<=2){
+
+        return true;
+
+      }
+
+      return false;
+    }
+
+
  private:
     sf::Texture* textura;
     sf::Sprite* sprite;
     sf::Sprite* sprite2;
     int identificador;
     bool bomba;
-    float kVel=1882/10;
-    float kVelx=1882/10;
-    float kVely=1882/10;
+    float kVel=200;
+    float kVelx=200;
+    float kVely=200;
     int vidas = 3;
     
     
     int puntos=0;;
     int mir;
-    float switchtime=0.15;
+    float switchtime=0.1;
     float totaltime=0;
     float timeempujar=0;
     float invencibilidad = -1;
     
-    bool invencible;
+    bool invencible=false;
     bool empuja;
     bool normal;
     bool colision;

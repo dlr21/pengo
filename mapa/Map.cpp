@@ -163,7 +163,6 @@ void Map::setactivelayer(int layer){
   _activelayer=layer;
 }
 void Map::Update(sf::RenderWindow &window){
-
 }
 void Map::reservarMemoria(int _numlayers){
     //reservando memoria para mapa
@@ -206,26 +205,32 @@ sf::Sprite* Map::empujado(sf::Sprite* j, int dir){
 
   if(dir==0){
     if(y-1>-1 && (_tilemap[1][y-1][x]==5 || _tilemap[1][y-1][x]==6) ){
+      idmovido=_tilemap[1][y-1][x];
+      std::cout<<idmovido<<" ID EMPUJADO"<<std::endl;
       return _tilemapSprite[1][y-1][x];
     }else{
       return NULL;
     }
   }else if(dir==1){
      if( y+1<18 && (_tilemap[1][y+1][x]==5 || _tilemap[1][y+1][x]==6) ){
-
+      idmovido=_tilemap[1][y+1][x];
+      std::cout<<idmovido<<" ID EMPUJADO"<<std::endl;
       return _tilemapSprite[1][y+1][x];
     }else{
       return NULL;
     }
   }else if(dir==2){
-    std::cout<<_tilemap[1][y][x+1]<<endl;
     if( x+1<16 && (_tilemap[1][y][x+1]==5 || _tilemap[1][y][x+1]==6) ){
+      idmovido=_tilemap[1][y][x+1];
+      std::cout<<idmovido<<" ID EMPUJADO"<<std::endl;
       return _tilemapSprite[1][y][x+1];
     }else{
       return NULL;
     }
   }else if(dir==3){
     if( x-1>-1 && (_tilemap[1][y][x-1]==5 || _tilemap[1][y][x-1]==6) ){
+      idmovido=_tilemap[1][y][x-1];
+      std::cout<<idmovido<<" ID EMPUJADO"<<std::endl;
       return _tilemapSprite[1][y][x-1];
     }else{
       return NULL;
@@ -280,4 +285,42 @@ void Map::deslizarbloque(sf::Sprite* s, int j, float time){
     s->move(kVelx,kVely);
     s->move(0,0);
   
+}
+
+sf::Sprite* Map::dinomira(sf::Sprite* j, int dir){
+
+  //0 arriba 1 abajo 2 derecha 3 izq
+  int x=(j->getPosition().x-112)/32;
+  int y=(j->getPosition().y-64)/32;
+
+  if(dir==0){
+    if(y-1>-1 && (_tilemap[1][y-1][x]==5 || _tilemap[1][y-1][x]==6) ){
+
+      return _tilemapSprite[1][y-1][x];
+    }else{
+      return NULL;
+    }
+  }else if(dir==1){
+     if( y+1<18 && (_tilemap[1][y+1][x]==5 || _tilemap[1][y+1][x]==6) ){
+
+      return _tilemapSprite[1][y+1][x];
+    }else{
+      return NULL;
+    }
+  }else if(dir==2){
+    if( x+1<16 && (_tilemap[1][y][x+1]==5 || _tilemap[1][y][x+1]==6) ){
+
+      return _tilemapSprite[1][y][x+1];
+    }else{
+      return NULL;
+    }
+  }else if(dir==3){
+    if( x-1>-1 && (_tilemap[1][y][x-1]==5 || _tilemap[1][y][x-1]==6) ){
+
+      return _tilemapSprite[1][y][x-1];
+    }else{
+      return NULL;
+    }
+  }
+
 }
