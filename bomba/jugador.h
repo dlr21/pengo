@@ -33,8 +33,6 @@ class Jugador{
     void empujando(float time);
     void setInicio(){  
          sprite->setPosition(112+32, 64+32);
-         moviendo=false;
-         empuja=false;  
          empuja=false;
          normal=true;
          colision=false;
@@ -44,7 +42,7 @@ class Jugador{
          moviendo=false;
          invencible=false;
          mir=1;
-         }//DEPENDE DEL MAPA
+    }//DEPENDE DEL MAPA
     void setkx(float a){kVelx=a;}
     void setky(float a){kVely=a;}
     float getkx(){return kVelx;}

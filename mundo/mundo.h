@@ -50,6 +50,7 @@ class Mundo : public States {
     int _cont = 0; // Contador de iteraciones del juego
     sf::Sprite* bloqueadeslizar;
     sf::Clock clock;
+    IA* ia;
   public:
     void Inicializar();
     static Mundo* Instance();

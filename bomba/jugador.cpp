@@ -173,7 +173,7 @@ void Jugador::Update(float time ){
     if(getempujon()){
         empujando(time);
     }        
-    if(!colision && !movido && !tecla){
+    if(!colision && !tecla){
             posredondeada(time);
     }
     settecla(false);
@@ -182,17 +182,20 @@ void Jugador::Update(float time ){
 void Jugador::posredondeada(float time){
 
     int x=getSprite()->getPosition().x+16;
-    
+    bool uno=true;
+    bool dos=true;
 
-    if((x%32)>1){
+    if((x%32)>0.1){
         mover(getmir(),time);
-    }
+    }else{uno=false;}
 
     int y=getSprite()->getPosition().y;
     
-    if((y%32)>1){
+    if((y%32)>0.1){
         mover(getmir(),time);
-    }
+    }else{dos=false;}
+
+    if(!uno && !dos){}
     
 }
 

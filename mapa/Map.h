@@ -43,22 +43,24 @@ public:
   };
 
   sf::Sprite* gettilemapSprite(int l, int y, int x); // Get sprite de los til
-   void settilemapSprite(sf::Sprite* s, int y, int x){
-     _tilemapSprite[1][x][y]=s;
-   } // Get sprite de los til
-   void setid(int x, int y, int id){
-     _tilemap[1][x][y]=id;
-   };
+  void settilemapSprite(sf::Sprite* s, int x, int y){
+     _tilemapSprite[1][y][x]=s;
+  } // Get sprite de los til
+  void setid(int x, int y, int id){
+     _tilemap[1][y][x]=id;
+      std::cout<<_tilemap[1][y][x]<<"nuevo tile id"<<std::endl;
+  };
   sf::Sprite spawnDino(int pos_dino, int l, int y, int x);
   void anadirVector(std::vector<sf::Sprite*> &vectorS);
   void Update();
   void reservarMemoria(int num);
   sf::Sprite* empujado(sf::Sprite* j,int dir);
   void deslizarbloque(sf::Sprite* s, int dir,float time);
-  void borrardemapa(int i, int x, int y){
-    if(_tilemap[i][y][x]==5){
-            _tilemapSprite[i][y][x]=NULL;
-            delete[] _tilemapSprite[i][y][x];
+  void borrardemapa(int x, int y){
+    if(_tilemap[1][y][x]==5){
+        _tilemap[1][y][x]=0;
+        _tilemapSprite[1][y][x]=NULL;
+        std::cout<<"borrado de mapa"<<std::endl;
     }
   }
 private:

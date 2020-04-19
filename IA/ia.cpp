@@ -1,10 +1,6 @@
 #include <iostream>
 #include "ia.h"
 
-/* Genera numeros aleatorios entre el 0 y el 4 para ver en que direccion se mueve.
- * Usa un contador de iteraciones del programa para que no dependa del tiempo
- */
-
 void IA::movimientoDinos(vector<Dinosaurio*> dinosaurios, int _cont,std::vector<sf::Sprite*> &todoSprite, float times, Map* m){
         for(int i=0; i < dinosaurios.size(); i++){
             if(dinosaurios[i]->getactivo()){

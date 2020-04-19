@@ -37,22 +37,6 @@ void Dinosaurio::modifyVida(){ // Quitar un punto de vida si toca la bomba
 }
 
 sf::Sprite* Dinosaurio::getSprite() { // Devuelve el sprite
-    /* En caso de que el Sprite visible se haya perdido, se reestablece usando la posion
-     * a la que mira el dinosaurio. Aunque se haya perdido, sus propiedades siguen 
-     * estando ahi.
-     */
-    if(_posdino==0){
-        _Sprite->setTextureRect(sf::IntRect(4 * 32, 9 * 32, 32, 32));
-    }
-    if(_posdino==1){
-        _Sprite->setTextureRect(sf::IntRect(0 * 32, 9 * 32, 32, 32));
-    }   
-    if(_posdino==2){
-        _Sprite->setTextureRect(sf::IntRect(6 * 32, 9 * 32, 32, 32));
-    }
-    if(_posdino==3){
-        _Sprite->setTextureRect(sf::IntRect(3 * 32, 9 * 32, 32, 32));
-    }
     return _Sprite;
 }
 
@@ -150,12 +134,8 @@ void Dinosaurio::sumaPasos(){
     for(int i = 0; i < 160; i++){
         pasos++;
     }
-};
-
-
-int Dinosaurio::getDireccion(){
-    return _posdino;
 }
+
 
 void Dinosaurio::draw(sf::RenderWindow &window){
     if(activo)window.draw(*_Sprite);

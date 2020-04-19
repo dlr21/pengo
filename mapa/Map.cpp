@@ -206,7 +206,6 @@ sf::Sprite* Map::empujado(sf::Sprite* j, int dir){
 
   if(dir==0){
     if(y-1>-1 && (_tilemap[1][y-1][x]==5 || _tilemap[1][y-1][x]==6) ){
-      std::cout<<"sigue"<<endl;
       return _tilemapSprite[1][y-1][x];
     }else{
       return NULL;

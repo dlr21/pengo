@@ -23,6 +23,7 @@ void Mundo::Inicializar() {
         jugador1=new Jugador(1);
         clock.restart();
       }
+     ia=new IA();
      bloqueadeslizar=NULL;
      pulsada=false;//event de uno en uno
      nueva=false;//controla la nueva partida
@@ -93,10 +94,10 @@ void Mundo::Event(sf::Event event,sf::RenderWindow &window, float time){ //COSAS
                   bloqueadeslizar=(mapas[lvlactual]->empujado(jugador1->getSprite(),dirbloque));
                   //BORRAR BLOQUE O MOVER
                   if(mapas[lvlactual]->empujado(bloqueadeslizar,dirbloque)){//BORAR BLOQUE
-                    mapas[lvlactual]->borrardemapa(1,(bloqueadeslizar->getPosition().x-112)/32,(bloqueadeslizar->getPosition().y-64)/32);
+                    mapas[lvlactual]->borrardemapa((bloqueadeslizar->getPosition().x-112)/32,(bloqueadeslizar->getPosition().y-64)/32);
                     borradetodoSprites(bloqueadeslizar);
+                    bloqueadeslizar->setPosition(-50,-50);
                     bloqueadeslizar=NULL;
-                    delete[] bloqueadeslizar;
                   }else{//MOVER BLOQUE
                     jugador1->setmoviendo(true);
                     std::cout<<"moviendo"<<endl;
@@ -215,26 +216,26 @@ void Mundo::Update(sf::RenderWindow &window, float time) {//COSAS DEL MUNDO QUE 
             colisiones=true;
           }
         }
-    if(play==1){// UN JUGADOR O DOS JUGADORES UPDATEAN ELLOS Y SUS HUDS
-      Colisiones::crearColisiones(*jugador1->getSprite(),todoSprites,3,jugador1->getVelocidad(), time, jugador1);
-      todosno();
-      hud1->Update(jugador1);
-      jugador1->Update(time);
-      if(jugador1->getVidas()==0){
-         finjuego();
-        std::cout<<"PIERDES"<<endl;
-      }
-      if(bloqueadeslizar!=NULL && jugador1->getmoviendo()){
-          mapas[lvlactual]->deslizarbloque(bloqueadeslizar,dirbloque,time);
-      }
-      Colisiones::crearColisiones(*jugador1->getSprite(),todoSprites,3,jugador1->getVelocidad(), time, jugador1);
-      Colisiones::update(temporizador,bloqueadeslizar,dinosaurios,*jugador1,totalExplosiones,*mapas[lvlactual],todoSprites,paredesSprites,time); 
       
-    }
+      Colisiones::crearColisiones(*jugador1->getSprite(),todoSprites,3,jugador1->getVelocidad(), time, jugador1);
+      if(play==1){// UN JUGADOR O DOS JUGADORES UPDATEAN ELLOS Y SUS HUDS
+        todosno();
+        hud1->Update(jugador1);
+        jugador1->Update(time);
+        if(jugador1->getVidas()==0){
+          finjuego();
+          std::cout<<"PIERDES"<<endl;
+        }
+        if(bloqueadeslizar!=NULL && jugador1->getmoviendo()){
+            mapas[lvlactual]->deslizarbloque(bloqueadeslizar,dirbloque,time);
+        }
+        Colisiones::crearColisiones(*jugador1->getSprite(),todoSprites,3,jugador1->getVelocidad(), time, jugador1);
+        Colisiones::update(temporizador,bloqueadeslizar,dinosaurios,*jugador1,totalExplosiones,*mapas[lvlactual],todoSprites,paredesSprites,time); 
+      }
     // Mover los dinosaurios con la IA
-    IA ia; // Genera una ia con cada iteracion
-    ia.movimientoDinos(dinosaurios, _cont,todoSprites, time, mapas[lvlactual]); // Permite mover a los dinosaurios
-    _cont++; // Contador de iteraciones del programa
+
+    ia->movimientoDinos(dinosaurios, _cont,todoSprites, time, mapas[lvlactual]); // Permite mover a los dinosaurios
+    _cont++; 
     //Detecta si le tiene que quitar vida a jugadores y dinosaurios si colisionan con una explosion.
 }
 
@@ -256,10 +257,10 @@ void Mundo::renicio(){ //reiniciar el mundo
       lvlactual=0;
       play=0;
       std::cout<< mapas.size()<<endl;
-            dinoscreados=false;
-            colisiones=false;
-            borrarcolisiones();
-            borrardinos();
+      dinoscreados=false;
+      colisiones=false;
+      borrarcolisiones();
+      borrardinos();
       borrarmapas();
       std::cout<<"reiniciofin"<<dif<<lvls<<lvlactual<<"\n";
 }

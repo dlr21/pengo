@@ -25,25 +25,7 @@ class Dinosaurio
       sf::FloatRect getHitbox();
       //Devolver invencibilidad
       float getInvencibilidad(){return invencibilidad;}
-      // Modificar vida del dinosaurio en el caso de que toque la bomba
-      void modifyVida();
-      // Cambiar textura
-      void modifyTexture(sf::Texture&);
-      // Cambiar posicion
-      void modifyPosition(int x, int y);
-      int generaRandom(int max);
-      int movimiento();
-      void sumaPasos();
-      int getDireccion();
-      void draw(sf::RenderWindow &window);
-      bool getparado(){return parado;}
-      void setparado(bool a){parado=a;}
-      bool getactivo(){return activo;}
-      void activar(){activo=true;}
-      void animacion(int d,float time);
-      void mover(int dir,float deltatime);
-      void setposdino(int i){_posdino=i;}
-      void setactivo(bool a){activo=a;}
+
       int getposimapax(){
        int x=_Sprite->getPosition().x-112;
        if(x%32<=16)return x/32;
@@ -56,6 +38,28 @@ class Dinosaurio
       }
       float getcambiodir(){return cambiodir;}
       float gettotalcambio(){return totalcambio;}
+      int getDireccion(){return _posdino;}
+      bool getactivo(){return activo;}
+      // Modificar vida del dinosaurio en el caso de que toque la bomba
+      void modifyVida();
+      // Cambiar textura
+      void modifyTexture(sf::Texture&);
+      // Cambiar posicion
+      void modifyPosition(int x, int y);
+      int generaRandom(int max);
+      int movimiento();
+      void sumaPasos();
+    
+      void draw(sf::RenderWindow &window);
+      bool getparado(){return parado;}
+      void setparado(bool a){parado=a;}
+
+      void activar(){activo=true;}
+      void animacion(int d,float time);
+      void mover(int dir,float deltatime);
+      void setposdino(int i){_posdino=i;}
+      void setactivo(bool a){activo=a;}
+
       void settotalcambio(float a){totalcambio=a;}
 
     private:
