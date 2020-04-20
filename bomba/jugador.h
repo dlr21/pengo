@@ -16,6 +16,7 @@ class Jugador{
     float getInvencibilidad(){return invencibilidad;}
     bool getInvencible(){return invencible;}
     int getPuntos(){return puntos;}
+        void setPuntos(int a){ puntos=a;}
     void sumaPuntos(){puntos+=100;}
     void maspuntos(int a){puntos+=(60-a)*10;};
     void setPuesta(bool estado){bomba = estado;}

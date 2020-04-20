@@ -31,7 +31,6 @@ void Colisiones::update(sf::Clock &temporizador,sf::Sprite* deslizado,std::vecto
         {
           if(dinosaurios[j]->getInvencibilidad() == -1 || temporizador.getElapsedTime().asSeconds() - dinosaurios[j]->getInvencibilidad() > 1)
           {
-            dinosaurios[j]->setInvencibilidad(temporizador.getElapsedTime().asSeconds());
             dinosaurios[j]->modifyVida();
             if(dinosaurios[j]->getVida() == 0)
             {
@@ -49,18 +48,18 @@ void Colisiones::update(sf::Clock &temporizador,sf::Sprite* deslizado,std::vecto
       for(unsigned int j = 0;j < todoSprites.size();j++)//BLOQUE MOVIDO CON BLOQUE PARADO
       {
         if(todoSprites[j]->getGlobalBounds().intersects(deslizado->getGlobalBounds()) && deslizado!=todoSprites[j]){
-        int x=deslizado->getPosition().x-112;
-        if(x%32<=16)x=x/32;
-        if(x%32>16)x=(x/32)+1;
-        int y=deslizado->getPosition().y-64;
-        if(y%32<=16)y=y/32;
-        if(y%32>16)y=(y/32)+1;
-        std::cout<<x<<" "<<y<<endl;
-        deslizado->setPosition(x*32+112,y*32+64);
-        std::cout<<mapa.getid()<<"presetid"<<std::endl;
-        mapa.setid(x,y);
-        mapa.settilemapSprite(deslizado,x,y);
-        jugador.setmoviendo(false);
+          int x=deslizado->getPosition().x-112;
+          if(x%32<=16)x=x/32;
+          if(x%32>16)x=(x/32)+1;
+          int y=deslizado->getPosition().y-64;
+          if(y%32<=16)y=y/32;
+          if(y%32>16)y=(y/32)+1;
+          std::cout<<x<<" "<<y<<endl;
+          deslizado->setPosition(x*32+112,y*32+64);
+          std::cout<<mapa.getid()<<"presetid"<<std::endl;
+          mapa.setid(x,y);
+          mapa.settilemapSprite(deslizado,x,y);
+          jugador.setmoviendo(false);
         }
       }
     }
@@ -70,11 +69,25 @@ void Colisiones::update(sf::Clock &temporizador,sf::Sprite* deslizado,std::vecto
       //JUGADOR CON SNOBEE
       if(jugador.getSprite()->getGlobalBounds().intersects(dinosaurios[j]->getSprite()->getGlobalBounds()) && dinosaurios[j]->getactivo())
       {
+        if(!dinosaurios[j]->getaturdido()){
         std::cout<<"colision con snobe"<<endl;
-        if(jugador.getInvencibilidad() == -1 || temporizador.getElapsedTime().asSeconds() - jugador.getInvencibilidad() > 2)
-        {
-          jugador.quitarVidas();
-          jugador.setInvencibilidad(temporizador.getElapsedTime().asSeconds());
+          if(jugador.getInvencibilidad() == -1 || temporizador.getElapsedTime().asSeconds() - jugador.getInvencibilidad() > 2)
+          {
+            jugador.quitarVidas();
+            jugador.setInvencibilidad(temporizador.getElapsedTime().asSeconds());
+          }
+        }else{
+            dinosaurios[j]->modifyVida();
+            if(dinosaurios[j]->getVida() == 0)
+            {
+              for(unsigned int a = 0;a < todoSprites.size();a++){
+                if(todoSprites[a]==dinosaurios[j]->getSprite()){
+                  todoSprites.erase(todoSprites.begin() + a);
+                }
+              }
+              dinosaurios.erase(dinosaurios.begin() + j);
+              jugador.sumaPuntos();
+            }
         }
       }
     }

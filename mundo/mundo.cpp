@@ -18,10 +18,12 @@ void Mundo::Inicializar() {
       lvls=2; //numero de niveles
       play=1;//numero de jugadores      
       //CREAR JUGADORES
-      hud1=new Tile();
       if (nueva)
       {
         jugador1=new Jugador(1);
+        hud1=new Tile();
+        nueva=false;
+        prepuntos=0;
       }
       jugador1->setInicio();
       clock.restart();
@@ -83,30 +85,41 @@ void Mundo::Event(sf::Event event,sf::RenderWindow &window, float time){ //COSAS
             case 57: //EMPUJAR
             {
               if(!jugador1->getempujon() && !jugador1->getmoviendo()) {
-                std::cout<<"empujar?";
+                std::cout<<"empujar?"<<std::endl;
                 jugador1->setempujon(true);//PENDIENTE
                 dirbloque=jugador1->getmir();
-                if(mapas[lvlactual]->empujado(jugador1->getSprite(),dirbloque) != NULL){
-                  std::cout<<"SI EMPUJA"<<std::endl;
-                  bloqueadeslizar=(mapas[lvlactual]->empujado(jugador1->getSprite(),dirbloque));
-                  mapas[lvlactual]->settilemap0((bloqueadeslizar->getPosition().x-112)/32,(bloqueadeslizar->getPosition().y-64)/32);
-                  //BORRAR BLOQUE O MOVER
-                  if(mapas[lvlactual]->empujado(bloqueadeslizar,dirbloque)){//BORAR BLOQUE
-                    if(mapas[lvlactual]->borrardemapa((bloqueadeslizar->getPosition().x-112)/32,(bloqueadeslizar->getPosition().y-64)/32)){
-                      borradetodoSprites(bloqueadeslizar);
-                      bloqueadeslizar->setPosition(-50,-50);
-                      bloqueadeslizar=NULL;
+
+                if(mapas[lvlactual]->muroempujon(jugador1->getSprite(),dirbloque) == NULL){
+
+                  if(mapas[lvlactual]->empujado(jugador1->getSprite(),dirbloque) != NULL){ 
+                    std::cout<<"SI EMPUJA"<<std::endl;
+                    bloqueadeslizar=(mapas[lvlactual]->empujado(jugador1->getSprite(),dirbloque));
+                    //BORRAR BLOQUE O MOVER
+                    if(mapas[lvlactual]->empujado(bloqueadeslizar,dirbloque)){//BORAR BLOQUE
+                      if(mapas[lvlactual]->borrardemapa((bloqueadeslizar->getPosition().x-112)/32,(bloqueadeslizar->getPosition().y-64)/32)){
+                        mapas[lvlactual]->settilemap0((bloqueadeslizar->getPosition().x-112)/32,(bloqueadeslizar->getPosition().y-64)/32);
+                        borradetodoSprites(bloqueadeslizar);
+                        bloqueadeslizar->setPosition(-50,-50);
+                        bloqueadeslizar=NULL;
+                      }
+                    }else{//MOVER BLOQUE
+                      jugador1->setmoviendo(true);
+                      std::cout<<"moviendo"<<endl;
+                      mapas[lvlactual]->settilemap0((bloqueadeslizar->getPosition().x-112)/32,(bloqueadeslizar->getPosition().y-64)/32);
                     }
-                  }else{//MOVER BLOQUE
-                    jugador1->setmoviendo(true);
-                    std::cout<<"moviendo"<<endl;
                   }
-                }
+                  
+                }else{
+                    aturdir();
+                  }
               }else{
                 std::cout<<"ya estaba empujando"<<endl;
                 }
               break;
             }
+            case -1://ñ probar aturdimiento
+              aturdir();
+            break;
             case 59: //delete reinicio nivel 59
                 this->reinicionivel();
               break;
@@ -120,7 +133,8 @@ void Mundo::Event(sf::Event event,sf::RenderWindow &window, float time){ //COSAS
             break;
 
             case 23://x muerte 23
-              jugador1->setVidas(0);
+              jugador1->setVidas(3);
+              this->reinicionivel();
             break;
             case 36://esc salir 31
               Contexto::Instance()->Quit();
@@ -129,17 +143,16 @@ void Mundo::Event(sf::Event event,sf::RenderWindow &window, float time){ //COSAS
             case 15://matar sno
                 if(dinosaurios.size()>0){
                     dinosaurios[0]->modifyVida();
-                    if(dinosaurios[0]->getVida() == 0)
-                {
-                  for(unsigned int a = 0;a < todoSprites.size();a++){
-                    if(todoSprites[a]==dinosaurios[0]->getSprite()){
-                      todoSprites.erase(todoSprites.begin() + a);
+                    if(dinosaurios[0]->getVida() == 0){
+                      for(unsigned int a = 0;a < todoSprites.size();a++){
+                        if(todoSprites[a]==dinosaurios[0]->getSprite()){
+                          todoSprites.erase(todoSprites.begin() + a);
+                        }
+                      }
+                    dinosaurios.erase(dinosaurios.begin() + 0);
+                    jugador1->sumaPuntos();
                     }
-                  }
-                  dinosaurios.erase(dinosaurios.begin() + 0);
-                  jugador1->sumaPuntos();
                 }
-              }
             break;
             //Arriba
              case 73:
@@ -150,29 +163,25 @@ void Mundo::Event(sf::Event event,sf::RenderWindow &window, float time){ //COSAS
             break;
             //Abajos
             case 74:
-                    if(!jugador1->getColision() && jugador1->colocado()){
-            jugador1->mover(1,time);
-              Colisiones::crearColisiones(*jugador1->getSprite(),todoSprites,1,jugador1->getVelocidad(), time, jugador1);
-
-                    }
+                if(!jugador1->getColision() && jugador1->colocado()){
+                  jugador1->mover(1,time);
+                  Colisiones::crearColisiones(*jugador1->getSprite(),todoSprites,1,jugador1->getVelocidad(), time, jugador1);
+                }
             break;
             //Derecha
             case 72:
-                    if(!jugador1->getColision() &&  jugador1->colocado()){
-            jugador1->mover(2,time);
-              Colisiones::crearColisiones(*jugador1->getSprite(),todoSprites,2,jugador1->getVelocidad(), time, jugador1);
-
-                    }
+                if(!jugador1->getColision() &&  jugador1->colocado()){
+                  jugador1->mover(2,time);
+                  Colisiones::crearColisiones(*jugador1->getSprite(),todoSprites,2,jugador1->getVelocidad(), time, jugador1);
+                }
             break;
             //Izquierda
             case 71:
-                    if(!jugador1->getColision() && jugador1->colocado()){
-            jugador1->mover(3,time);
-              Colisiones::crearColisiones(*jugador1->getSprite(),todoSprites,3,jugador1->getVelocidad(), time, jugador1);
-
-                    }
+                if(!jugador1->getColision() && jugador1->colocado()){
+                  jugador1->mover(3,time);
+                  Colisiones::crearColisiones(*jugador1->getSprite(),todoSprites,3,jugador1->getVelocidad(), time, jugador1);
+                }
             break;    
-        
           //Cualquier tecla desconocida se imprime por pantalla su código
           default:
             std::cout << " code " << event.key.code << std::endl;
@@ -189,6 +198,7 @@ void Mundo::Update(sf::RenderWindow &window, float time) {//COSAS DEL MUNDO QUE 
             std::cout<<"cambiar mapa\n";
             int i=clock.getElapsedTime().asSeconds();
             if(i<60){jugador1->maspuntos(i);}
+            prepuntos=jugador1->getPuntos();
             dinoscreados=false;
             colisiones=false;
             borrarcolisiones();
@@ -274,6 +284,7 @@ void Mundo::Draw(sf::RenderWindow &window){//dibujar mapa y hud
 
 void Mundo::reinicionivel(){//reiniciar el nivel
       std::cout<<"reinicionivel"<<dif<<lvls<<lvlactual<<"\n";
+      jugador1->setPuntos(prepuntos);
       nueva=false;
       dif=0;
       lvls=0;

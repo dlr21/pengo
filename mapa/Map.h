@@ -63,6 +63,7 @@ public:
   void reservarMemoria(int num);
   sf::Sprite* empujado(sf::Sprite* j,int dir);
   sf::Sprite* dinomira(sf::Sprite* j, int dir);
+  sf::Sprite* muroempujon(sf::Sprite* j, int dir);
   void deslizarbloque(sf::Sprite* s, int dir,float time);
   bool borrardemapa(int x, int y){
     if(_tilemap[1][y][x]==5){
@@ -71,6 +72,7 @@ public:
         std::cout<<"borrado SPRITE de mapa"<<std::endl;
         return true;
     }else{
+      std::cout<<"borrado SPRITE de mapa mal"<<std::endl;
       return false;
     }
   }

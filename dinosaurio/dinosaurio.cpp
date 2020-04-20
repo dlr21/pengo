@@ -25,10 +25,7 @@ Dinosaurio::~Dinosaurio(){ // Destructor
   delete _Sprite; 
 }
 
-void Dinosaurio::modifyTexture(sf::Texture& textura){ // Establecer textura del dinosaurio
-    _Sprite->setTexture(textura);
-    
-}
+
 
 void Dinosaurio::modifyVida(){ // Quitar un punto de vida si toca la bomba
     if(_Vida >= 1){
@@ -54,9 +51,6 @@ int Dinosaurio::getSpeed(){ // Devolver velocidad
     return kVel;
 }
 
-sf::FloatRect Dinosaurio::getHitbox(){ // FloatRect devuelve coordenada superior izq
-    return _Sprite->getGlobalBounds(); // Coordenadas de entorno de Sprite
-}
 
 // Funciones de movimiento (salto y movimientos)
 int Dinosaurio::marriba(std::vector<sf::Sprite*> &todo, float time){ // Movimiento arriba
@@ -143,66 +137,82 @@ void Dinosaurio::draw(sf::RenderWindow &window){
 
 
 void Dinosaurio::animacion(int dir,float deltatime){
-    if(_posdino!=dir){
-        _posdino=dir;
-            if(dir==0) {
-                            _Sprite->setTextureRect(sf::IntRect(4 * 32, 9 * 32, 32, 32));
+    if(!aturdido){
+        if(_posdino!=dir){
+            _posdino=dir;
+                if(dir==0) {
+                                _Sprite->setTextureRect(sf::IntRect(4 * 32, 9 * 32, 32, 32));
 
+                }
+                if(dir==1) {
+                                _Sprite->setTextureRect(sf::IntRect(0 * 32, 9 * 32, 32, 32));
+
+                }
+                if(dir==2) {
+                                _Sprite->setTextureRect(sf::IntRect(7 * 32, 9 * 32, 32, 32));
+
+                }
+                if(dir==3) {
+                                _Sprite->setTextureRect(sf::IntRect(3 * 32, 9 * 32, 32, 32));
+
+                }
+        }
+        totaltime+=deltatime;
+        if(totaltime>switchtime){
+            totaltime=0;
+            if(animal){
+                animal=false;
+                if(dir==0) {
+                                _Sprite->setTextureRect(sf::IntRect(4 * 32, 9 * 32, 32, 32));
+
+                }
+                if(dir==1) {
+                                _Sprite->setTextureRect(sf::IntRect(0 * 32, 9 * 32, 32, 32));
+
+                }
+                if(dir==2) {
+                                _Sprite->setTextureRect(sf::IntRect(7 * 32, 9 * 32, 32, 32));
+
+                }
+                if(dir==3) {
+                                _Sprite->setTextureRect(sf::IntRect(3 * 32, 9 * 32, 32, 32));
+
+                }
+            }else{
+                animal=true;
+                if(dir==0) {
+                                _Sprite->setTextureRect(sf::IntRect(5 * 32, 9 * 32, 32, 32));
+
+                }
+                if(dir==1) {
+                                _Sprite->setTextureRect(sf::IntRect(1 * 32, 9 * 32, 32, 32));
+
+                }
+                if(dir==2) {
+                                _Sprite->setTextureRect(sf::IntRect(6 * 32, 9 * 32, 32, 32));
+
+                }
+                if(dir==3) {
+                                _Sprite->setTextureRect(sf::IntRect(2 * 32, 9 * 32, 32, 32));
+
+                }
             }
-            if(dir==1) {
-                            _Sprite->setTextureRect(sf::IntRect(0 * 32, 9 * 32, 32, 32));
+        } 
+    }else
+    {
 
-            }
-            if(dir==2) {
-                            _Sprite->setTextureRect(sf::IntRect(7 * 32, 9 * 32, 32, 32));
-
-            }
-            if(dir==3) {
-                            _Sprite->setTextureRect(sf::IntRect(3 * 32, 9 * 32, 32, 32));
-
-            }
-    }
-    totaltime+=deltatime;
-    if(totaltime>switchtime){
-        totaltime=0;
-        if(animal){
-            animal=false;
-            if(dir==0) {
-                            _Sprite->setTextureRect(sf::IntRect(4 * 32, 9 * 32, 32, 32));
-
-            }
-            if(dir==1) {
-                            _Sprite->setTextureRect(sf::IntRect(0 * 32, 9 * 32, 32, 32));
-
-            }
-            if(dir==2) {
-                            _Sprite->setTextureRect(sf::IntRect(7 * 32, 9 * 32, 32, 32));
-
-            }
-            if(dir==3) {
-                            _Sprite->setTextureRect(sf::IntRect(3 * 32, 9 * 32, 32, 32));
-
-            }
-        }else{
-            animal=true;
-            if(dir==0) {
-                            _Sprite->setTextureRect(sf::IntRect(5 * 32, 9 * 32, 32, 32));
-
-            }
-            if(dir==1) {
-                            _Sprite->setTextureRect(sf::IntRect(1 * 32, 9 * 32, 32, 32));
-
-            }
-            if(dir==2) {
-                            _Sprite->setTextureRect(sf::IntRect(6 * 32, 9 * 32, 32, 32));
-
-            }
-            if(dir==3) {
-                            _Sprite->setTextureRect(sf::IntRect(2 * 32, 9 * 32, 32, 32));
-
+        totaltime+=deltatime;
+        if(totaltime>switchtime){
+            totaltime=0;
+            if(animal){
+                animal=false;
+                _Sprite->setTextureRect(sf::IntRect(6 * 32, 8 * 32, 32, 32));
+            }else{
+                animal=true;
+                _Sprite->setTextureRect(sf::IntRect(7 * 32, 8 * 32, 32, 32));
             }
         }
-    } 
+    }
 }
 
 void Dinosaurio::mover(int dir,float deltatime){

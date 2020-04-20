@@ -5,25 +5,22 @@ class Dinosaurio
 {
     public:
       Dinosaurio(); // Constructor por defecto
-      Dinosaurio(sf::Texture&); // Constructor con textura
       ~Dinosaurio(); // Destructor
-      // Movimiento
+
       int marriba(std::vector<sf::Sprite*> &c, float time);
       int mabajo(std::vector<sf::Sprite*> &c, float time);
       int mderecha(std::vector<sf::Sprite*> &c, float time);
       int mizquierda(std::vector<sf::Sprite*> &c, float time);
-  
-      // Devolver sprite
+
       sf::Sprite* getSprite() ;
-      //Otorga un segundo de invencibilidad
+
       void setInvencibilidad(float f){invencibilidad = f;}
-      // Devolver vida
+
       int getVida();
-      // Devolver velocidad
+
       int getSpeed();
-      // Devolver hitbox
-      sf::FloatRect getHitbox();
-      //Devolver invencibilidad
+
+
       float getInvencibilidad(){return invencibilidad;}
 
       int getposimapax(){
@@ -40,11 +37,7 @@ class Dinosaurio
       float gettotalcambio(){return totalcambio;}
       int getDireccion(){return _posdino;}
       bool getactivo(){return activo;}
-      // Modificar vida del dinosaurio en el caso de que toque la bomba
       void modifyVida();
-      // Cambiar textura
-      void modifyTexture(sf::Texture&);
-      // Cambiar posicion
       void modifyPosition(int x, int y);
       int generaRandom(int max);
       int movimiento();
@@ -62,6 +55,9 @@ class Dinosaurio
 
       void settotalcambio(float a){totalcambio=a;}
 
+      void setaturdido(bool a){aturdido=a;}
+      bool getaturdido(){return aturdido;}
+
     private:
       float kVel=1500/10;
       float kVelx=1500/10;
@@ -69,7 +65,7 @@ class Dinosaurio
       sf::Sprite* _Sprite = new sf::Sprite; // Sprite
       sf::Texture* textura;
       int _posdino=1; // Posicion a la que mira el dino ==> 0:Arriba | 1:Abajo | 2:Derecha | 3:Izquierda
-      int _Vida=1; // Vida del dino
+      int _Vida=1; 
       float invencibilidad = -1; 
       bool parado=false;
       bool activo=false;
@@ -78,9 +74,8 @@ class Dinosaurio
       float totaltime=0;
         float totalcambio=0;
       bool animal=true;
-      //Si no existen snowbees en forma de huevo
-      //Si quedan menos de 4 snowbees en pantalla
-      //Si no ha perdido una vida el juegador en los últimos 2 minutos
+      bool aturdido=false;
+
 };
 
 #endif

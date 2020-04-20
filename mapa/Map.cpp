@@ -324,3 +324,41 @@ sf::Sprite* Map::dinomira(sf::Sprite* j, int dir){
   }
 
 }
+
+sf::Sprite* Map::muroempujon(sf::Sprite* j, int dir){
+
+  //0 arriba 1 abajo 2 derecha 3 izq
+  int x=(j->getPosition().x-112)/32;
+  int y=(j->getPosition().y-64)/32;
+
+  if(dir==0){
+    if(y-1>-1 && _tilemap[0][y-1][x]==4){
+
+      return _tilemapSprite[1][y-1][x];
+    }else{
+      return NULL;
+    }
+  }else if(dir==1){
+     if( y+1<18 &&  _tilemap[0][y+1][x]==1 ){
+
+      return _tilemapSprite[1][y+1][x];
+    }else{
+      return NULL;
+    }
+  }else if(dir==2){
+    if( x+1<16 &&  _tilemap[0][y][x+1]==2 ){
+
+      return _tilemapSprite[1][y][x+1];
+    }else{
+      return NULL;
+    }
+  }else if(dir==3){
+    if( x-1>-1 && _tilemap[0][y][x-1]==3 ){
+
+      return _tilemapSprite[1][y][x-1];
+    }else{
+      return NULL;
+    }
+  }
+
+}

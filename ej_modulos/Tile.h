@@ -12,7 +12,7 @@ class Tile{
     void Cargarecursos();
     void Update(Jugador* j);
     void draw(sf::RenderWindow &window);
-    void reiniciocrono(){min=5;seg=59;terminada=false;}
+    void reiniciocrono(){min=4;seg=59;terminada=false;}
     bool getTerminada(){return terminada;}
     void setPuntos(int a){
         puntos.setString("Puntuacion: "+ std::to_string(a));
@@ -38,8 +38,8 @@ private:
     sf::Text puntos;
     int vidas=3;
     bool terminada=false;
-    int min=2;
-    int seg=12;
+    int min=4;
+    int seg=59;
 
 
 

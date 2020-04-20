@@ -27,6 +27,7 @@ class Mundo : public States {
     int snovivos;
     int snodurmiendo;
     int dirbloque;
+    int prepuntos;
     std::vector<Map*> mapas;//vector de mapas para jugar
     Tile* hud1;//el hud
     Tile* hud2;//el hud
@@ -126,6 +127,20 @@ class Mundo : public States {
     void aSprites(sf::Sprite* d){
       todoSprites.push_back(d);
     }
+    void aturdir(){
+              for(unsigned a=0;a<dinosaurios.size();a++){
+                if (!dinosaurios[a]->getaturdido() )
+                {
+                  dinosaurios[a]->setaturdido(true);
+                  std::cout<<"aturdido"<<std::endl;
+                }else if (dinosaurios[a]->getaturdido() )
+                {
+                  dinosaurios[a]->setaturdido(false);
+                  std::cout<<" NO aturdido"<<std::endl;
+                }             
+              }
+    }
+
 
 };
 
