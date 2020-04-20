@@ -18,6 +18,7 @@ using namespace std;
 class Mundo : public States {
   private:    
     static Mundo* jinstance;
+
     int vidas=3;
     int dif;//dificultad
     int lvls;//numero de niveles
@@ -37,6 +38,7 @@ class Mundo : public States {
     bool dinoscreados;
     bool colisiones;
     bool moverse;
+    bool aturdidos=false;
     std::vector<Dinosaurio*> dinosaurios;
     std::vector<Adn*> adns;//array de adns(seguramente modificcable)
     sf::Clock temporizador;
@@ -128,17 +130,14 @@ class Mundo : public States {
       todoSprites.push_back(d);
     }
     void aturdir(){
-              for(unsigned a=0;a<dinosaurios.size();a++){
-                if (!dinosaurios[a]->getaturdido() )
-                {
-                  dinosaurios[a]->setaturdido(true);
-                  std::cout<<"aturdido"<<std::endl;
-                }else if (dinosaurios[a]->getaturdido() )
-                {
-                  dinosaurios[a]->setaturdido(false);
-                  std::cout<<" NO aturdido"<<std::endl;
-                }             
-              }
+      for(unsigned a=0;a<dinosaurios.size();a++){
+        std::cout<<dinosaurios[a]->getposimapax()<<" "<<dinosaurios[a]->getposimapay()<<std::endl;
+        if (dinosaurios[a]->getactivo() && !dinosaurios[a]->getaturdido() && ((dinosaurios[a]->getposimapax()==1) || (dinosaurios[a]->getposimapax()==13) || (dinosaurios[a]->getposimapay()==1) || (dinosaurios[a]->getposimapay()==15)))
+        {
+          dinosaurios[a]->setaturdido(true);
+          std::cout<<"aturdido"<<std::endl;
+         }          
+        }
     }
 
 

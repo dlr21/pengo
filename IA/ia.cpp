@@ -6,9 +6,10 @@ void IA::movimientoDinos(vector<Dinosaurio*> dinosaurios, int _cont,std::vector<
             if(dinosaurios[i]->getactivo()){
                 if (dinosaurios[i]->getaturdido())
                 {
+                    dinosaurios[i]->controlaturido(times);
                     dinosaurios[i]->animacion(dinosaurios[i]->getDireccion() , times);
                 }else{
-                
+                    dinosaurios[i]->animacion(dinosaurios[i]->getDireccion() , times);
                     dinosaurios[i]->settotalcambio(dinosaurios[i]->gettotalcambio()+times);
                     if(dinosaurios[i]->gettotalcambio() >=dinosaurios[i]->getcambiodir() || dinosaurios[i]->getparado()){
                         dinosaurios[i]->settotalcambio(0);

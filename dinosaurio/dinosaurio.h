@@ -57,11 +57,17 @@ class Dinosaurio
 
       void setaturdido(bool a){aturdido=a;}
       bool getaturdido(){return aturdido;}
-
+      void controlaturido(float times){
+        switchaturdido+=times;
+        if(switchaturdido>=aturdidostime){
+          switchaturdido=0;
+          aturdido=false;
+        }
+      }
     private:
-      float kVel=1500/10;
-      float kVelx=1500/10;
-      float kVely=1500/10;
+      float kVel=150;
+      float kVelx=kVel;
+      float kVely=kVel;
       sf::Sprite* _Sprite = new sf::Sprite; // Sprite
       sf::Texture* textura;
       int _posdino=1; // Posicion a la que mira el dino ==> 0:Arriba | 1:Abajo | 2:Derecha | 3:Izquierda
@@ -69,10 +75,12 @@ class Dinosaurio
       float invencibilidad = -1; 
       bool parado=false;
       bool activo=false;
-      float switchtime=0.15;
+      float switchtime=0.10;
         float cambiodir=1;
       float totaltime=0;
         float totalcambio=0;
+      float aturdidostime=5;
+        float switchaturdido=0;
       bool animal=true;
       bool aturdido=false;
 

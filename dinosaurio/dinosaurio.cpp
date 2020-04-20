@@ -219,7 +219,6 @@ void Dinosaurio::mover(int dir,float deltatime){
     if(!parado){
         kVelx=0;
         kVely=0;
-        animacion(dir,deltatime);
         switch (dir)
         {
         //Arriba
