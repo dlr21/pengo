@@ -47,7 +47,7 @@ public:
   int getwidth(){
     return _width;
   };
-
+  bool tresenralla();
   sf::Sprite* gettilemapSprite(int l, int y, int x); // Get sprite de los til
   void settilemapSprite(sf::Sprite* s, int x, int y){
      _tilemapSprite[1][y][x]=s;

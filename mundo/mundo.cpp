@@ -89,18 +89,18 @@ void Mundo::Event(sf::Event event,sf::RenderWindow &window, float time){ //COSAS
                 jugador1->setempujon(true);//PENDIENTE
                 dirbloque=jugador1->getmir();
 
-                if(mapas[lvlactual]->muroempujon(jugador1->getSprite(),dirbloque) == NULL){
+                if(mapas[lvlactual]->muroempujon(jugador1->getSprite(),dirbloque) == NULL){//SI NO EMPUJAMURO ENTRA, SI EMPUJA ATURDE
 
-                  if(mapas[lvlactual]->empujado(jugador1->getSprite(),dirbloque) != NULL){ 
+                  if(mapas[lvlactual]->empujado(jugador1->getSprite(),dirbloque) != NULL){ //SI EL MUERO QUE EMPUJA TIENE GID 5 O 6
                     std::cout<<"SI EMPUJA"<<std::endl;
-                    bloqueadeslizar=(mapas[lvlactual]->empujado(jugador1->getSprite(),dirbloque));
+                    bloqueadeslizar=(mapas[lvlactual]->empujado(jugador1->getSprite(),dirbloque));//GUARDO SPRITE DEL BLOQUE A MOVER
                     //BORRAR BLOQUE O MOVER
-                    if(mapas[lvlactual]->empujado(bloqueadeslizar,dirbloque)){//BORAR BLOQUE
+                    if(mapas[lvlactual]->empujado(bloqueadeslizar,dirbloque)){//BORAR BLOQUE 
                       if(mapas[lvlactual]->borrardemapa((bloqueadeslizar->getPosition().x-112)/32,(bloqueadeslizar->getPosition().y-64)/32)){
-                        mapas[lvlactual]->settilemap0((bloqueadeslizar->getPosition().x-112)/32,(bloqueadeslizar->getPosition().y-64)/32);
+                        mapas[lvlactual]->settilemap0((bloqueadeslizar->getPosition().x-112)/32,(bloqueadeslizar->getPosition().y-64)/32);//CONTROLAR ID DE LA MATRIZ DEL MAPA
                         borradetodoSprites(bloqueadeslizar);
                         bloqueadeslizar->setPosition(-50,-50);
-                        bloqueadeslizar=NULL;
+                        bloqueadeslizar=NULL;//LIMPIAR SPRITE AUXILIAR
                       }
                     }else{//MOVER BLOQUE
                       jugador1->setmoviendo(true);
@@ -117,8 +117,8 @@ void Mundo::Event(sf::Event event,sf::RenderWindow &window, float time){ //COSAS
                 }
               break;
             }
-            case -1://ñ probar aturdimiento
-              aturdir();
+            case -1://ñ 
+              mapas[lvlactual]->tresenralla();
             break;
             case 59: //delete reinicio nivel 59
                 this->reinicionivel();
@@ -201,6 +201,7 @@ void Mundo::Update(sf::RenderWindow &window, float time) {//COSAS DEL MUNDO QUE 
             prepuntos=jugador1->getPuntos();
             dinoscreados=false;
             colisiones=false;
+            diamant=false;
             borrarcolisiones();
             borrardinos();
             lvlactual++;
@@ -234,11 +235,11 @@ void Mundo::Update(sf::RenderWindow &window, float time) {//COSAS DEL MUNDO QUE 
           std::cout<<"PIERDES"<<endl;
         }
         if(bloqueadeslizar!=NULL && jugador1->getmoviendo()){
-            mapas[lvlactual]->deslizarbloque(bloqueadeslizar,dirbloque,time);
+            mapas[lvlactual]->deslizarbloque(bloqueadeslizar,dirbloque,time);//MUEVE EL BLOQUE EMPUJADO
         }
         Colisiones::crearColisiones(*jugador1->getSprite(),todoSprites,3,jugador1->getVelocidad(), time, jugador1);
         Colisiones::update(temporizador,bloqueadeslizar,dinosaurios,*jugador1,totalExplosiones,*mapas[lvlactual],todoSprites,paredesSprites,time); 
-      
+        diamantitos();//COMPRUEBA LA POSICION DE LOS DIAMANTES
     // Mover los dinosaurios con la IA
     ia->movimientoDinos(dinosaurios, _cont,todoSprites, time, mapas[lvlactual]); // Permite mover a los dinosaurios
     _cont++; 
@@ -261,6 +262,7 @@ void Mundo::renicio(){ //reiniciar el mundo
       std::cout<< mapas.size()<<endl;
       dinoscreados=false;
       colisiones=false;
+      diamant=false;
       borrarcolisiones();
       borrardinos();
       borrarmapas();
@@ -291,6 +293,7 @@ void Mundo::reinicionivel(){//reiniciar el nivel
       play=0;
       dinoscreados=false;
       colisiones=false;
+      diamant=false;
       vidas=jugador1->getVidas();
       borrarcolisiones();
       borrardinos();

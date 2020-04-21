@@ -362,3 +362,32 @@ sf::Sprite* Map::muroempujon(sf::Sprite* j, int dir){
   }
 
 }
+
+bool Map::tresenralla(){
+  int cont=0;
+        for(int y=0; y<_height;y++){
+          for(int x=0; x<_width;x++){
+            if(_tilemap[1][y][x]==6){
+              cont ++;
+              if(cont==3){
+                std::cout<<"tres en raya"<<std::endl;
+                return true;
+                }
+            }else{cont=0;}
+          }
+        }
+        for(int y=0; y<_height;y++){
+          for(int x=0; x<_width;x++){
+            if(_tilemap[1][y][x]==6){
+              cont ++;
+              y++;x--;
+              if(cont==3){
+                std::cout<<"tres en raya"<<std::endl;
+                return true;
+                }
+            }else{cont=0;}
+          }
+        }
+  return false;
+
+}

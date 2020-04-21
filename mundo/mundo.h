@@ -39,6 +39,7 @@ class Mundo : public States {
     bool colisiones;
     bool moverse;
     bool aturdidos=false;
+    bool diamant=false;
     std::vector<Dinosaurio*> dinosaurios;
     std::vector<Adn*> adns;//array de adns(seguramente modificcable)
     sf::Clock temporizador;
@@ -55,6 +56,7 @@ class Mundo : public States {
     sf::Sprite* bloqueadeslizar;
     sf::Clock clock;
     IA* ia;
+
   public:
     void Inicializar();
     static Mundo* Instance();
@@ -139,7 +141,15 @@ class Mundo : public States {
          }          
         }
     }
-
+    void diamantitos(){
+      if(!diamant){
+        if(mapas[lvlactual]->tresenralla()){
+          jugador1->maspuntos(30);//DA AL JUGADOR 300PUNTOS
+          aturdir();
+          diamant=true;
+        }
+      }
+    }
 
 };
 
