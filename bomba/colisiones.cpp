@@ -10,6 +10,9 @@ void Colisiones::crearColisiones(sf::Sprite &jugador,std::vector<sf::Sprite*> to
               std::cout<<"colision bloque"<<std::endl;
                           j->setColision(true);
                           jugador.setPosition(j->getposimapax()*32+112,j->getposimapay()*32+64);
+                            if(jugador.getGlobalBounds().intersects(todoSprites[i]->getGlobalBounds())){
+                              jugador.setPosition(112+32, 64+32);
+                            }
                           j->setmovido(true);
             }
       }
@@ -41,6 +44,7 @@ void Colisiones::update(sf::Clock &temporizador,sf::Sprite* deslizado,std::vecto
               }
               dinosaurios.erase(dinosaurios.begin() + j);
               jugador.sumaPuntos();
+              jugador.setmatando(true);
             }
           }
         }

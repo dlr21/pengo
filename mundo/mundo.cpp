@@ -34,6 +34,7 @@ void Mundo::Inicializar() {
       dinoscreados=false;
       colisiones=false;
       moverse=true;
+
       dirbloque=0;
       snototales=4;
       snovivos=2;
@@ -58,10 +59,15 @@ void Mundo::crearDinos(Map* m,int tot){
           for(unsigned int x=2; x<m->getwidth()-1 && !todos;x++){
             int gid=m->gettilemap()[l][y][x]-1;
               v1 = rand() % 999;
-              if(gid==-1 && v1<80){//GID = camino
+              if(gid==-1 && v1<50){//GID = camino
               Dinosaurio *dino1 = new Dinosaurio(); // Constructor del dinosaurio
               dino1->modifyPosition(112+(x*32),64+(y*32)); // Punto de spawn. Debe estar dentro del mapa
               dinosaurios.push_back(dino1); // Guardar en el vector de dinosaurios
+              
+              if (cont<tot/2)
+              {
+                dino1->setactivo(true);
+              }
               cont++;
               if (tot==cont) { todos=true; }
             }
@@ -151,6 +157,7 @@ void Mundo::Event(sf::Event event,sf::RenderWindow &window, float time){ //COSAS
                       }
                     dinosaurios.erase(dinosaurios.begin() + 0);
                     jugador1->sumaPuntos();
+                    jugador1->setmatando(true);
                     }
                 }
             break;
@@ -207,7 +214,6 @@ void Mundo::Update(sf::RenderWindow &window, float time) {//COSAS DEL MUNDO QUE 
             lvlactual++;
             //Reiniciar contador
             hud1->reiniciocrono();
-            jugador1->setInicio();
       }
       if(!(lvlactual<mapas.size())){//TERMINAR Y VOLVER A MENU FIN DEL JUEGO   
           finjuego();
@@ -219,11 +225,15 @@ void Mundo::Update(sf::RenderWindow &window, float time) {//COSAS DEL MUNDO QUE 
           if(!colisiones){
             mapas[lvlactual]->anadirVector(todoSprites);
             colisiones=true;
+            jugador1->setInicio();
           }
         }
       Colisiones::crearColisiones(*jugador1->getSprite(),todoSprites,3,jugador1->getVelocidad(), time, jugador1);
       // UN JUGADOR O DOS JUGADORES UPDATEAN ELLOS Y SUS HUDS
-        todosno();
+        if (jugador1->getmatando())
+        {
+          todosno(time);
+        }
         hud1->Update(jugador1);
         jugador1->Update(time);
         if(jugador1->getVidas()!=vidas){

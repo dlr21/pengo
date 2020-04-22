@@ -56,6 +56,9 @@ class Mundo : public States {
     sf::Sprite* bloqueadeslizar;
     sf::Clock clock;
     IA* ia;
+    float waiteo=3;
+    float control=0;
+
 
   public:
     void Inicializar();
@@ -68,6 +71,7 @@ class Mundo : public States {
     void crearAdns(Map* m,int tot);
     void crearDinos(Map* m,int tot);
     void reinicionivel();
+    void setcontrol(float a){control=a;}
     int getActivos(){
       int cont=0;
           for(unsigned int i=0;i<dinosaurios.size();i++){
@@ -106,18 +110,26 @@ class Mundo : public States {
       }
       mapas.clear();
     }
-    void todosno(){
+    void todosno(float times){
       int activados=0;
+      control+=times;
       for (unsigned int i = 0; i < dinosaurios.size(); i++)
       {
-        if (activados<2){
+          if(activados<2 && control>=waiteo && !dinosaurios[i]->getactivo()){
             dinosaurios[i]->setactivo(true);
-            activados++;
-        } 
-      }
+            control=0;
+          }
+          if(dinosaurios[i]->getactivo())activados++;
+
+          if(activados==2){
+            jugador1->setmatando(false);
+            control=0;
+          }
+      } 
+      
       if(dinosaurios.size()<=0){
         mapas[lvlactual]->terminar();
-        std::cout<<"ganasmapa"<<endl;
+        std::cout<<"GANASMAPA"<<endl;
       }
     }
     void borradetodoSprites(sf::Sprite* s){

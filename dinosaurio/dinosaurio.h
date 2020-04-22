@@ -42,6 +42,22 @@ class Dinosaurio
       int generaRandom(int max);
       int movimiento();
       void sumaPasos();
+      void recolocar(std::vector<sf::Sprite*> &todo, int i){
+
+        for(unsigned int j = 0;j < todo.size();j++)
+        {
+            if(_Sprite->getGlobalBounds().intersects(todo[j]->getGlobalBounds()) && _Sprite!=todo[j])
+            {
+               _Sprite->setPosition(getposimapax()*32+112-(32*(i+1)),getposimapay()*32+64-(32*(i+1)));
+                if(_Sprite->getGlobalBounds().intersects(todo[j]->getGlobalBounds()) && _Sprite!=todo[j])
+                {
+                    recolocar(todo,i+1);
+                }
+
+            }
+        }
+
+      }
     
       void draw(sf::RenderWindow &window);
       bool getparado(){return parado;}

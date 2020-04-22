@@ -40,6 +40,7 @@ class Jugador{
          movido=false;
          tecla=false;
          moviendo=false;
+         matando=false;
          mir=1;
     }//DEPENDE DEL MAPA
     void setkx(float a){kVelx=a;}
@@ -65,6 +66,10 @@ class Jugador{
     void setmoviendo(bool a){moviendo=a;}
      void settecla(bool a){tecla=a;}
        bool gettecla(){return tecla;}
+
+
+            void setmatando(bool a){matando=a;}
+       bool getmatando(){return matando;}
      
            
     void quitarVidas(){if(vidas > 0 && !invencible)vidas--;}
@@ -120,4 +125,5 @@ class Jugador{
     bool movido;
     bool tecla;
     bool moviendo;
+    bool matando;
 };

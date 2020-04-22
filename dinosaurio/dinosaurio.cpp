@@ -62,6 +62,10 @@ int Dinosaurio::marriba(std::vector<sf::Sprite*> &todo, float time){ // Movimien
             {
                 //std::cout<<"dino no mueve arriba"<<std::endl;
                 _Sprite->setPosition(getposimapax()*32+112,getposimapay()*32+64);
+                                if(_Sprite->getGlobalBounds().intersects(todo[j]->getGlobalBounds()) && _Sprite!=todo[j])
+                {
+                    recolocar(todo,0);
+                }
                 setparado(true);
                 return 0;
             }
@@ -80,6 +84,10 @@ int Dinosaurio::mabajo(std::vector<sf::Sprite*> &todo, float time){ // Movimient
                 //std::cout<<"dino no mueve abajo"<<std::endl;
                 
                 _Sprite->setPosition(getposimapax()*32+112,getposimapay()*32+64);
+                if(_Sprite->getGlobalBounds().intersects(todo[j]->getGlobalBounds()) && _Sprite!=todo[j])
+                {
+                    recolocar(todo,0);
+                }
                 setparado(true);
                 return 1;
             }
@@ -98,6 +106,10 @@ int Dinosaurio::mderecha(std::vector<sf::Sprite*> &todo, float time){ // Movimie
             {
                 //std::cout<<"dino no mueve dre"<<std::endl;
                 _Sprite->setPosition(getposimapax()*32+112,getposimapay()*32+64);
+                if(_Sprite->getGlobalBounds().intersects(todo[j]->getGlobalBounds()) && _Sprite!=todo[j])
+                {
+                    recolocar(todo,0);
+                }
                 setparado(true);
                 return 2;
             }
@@ -115,6 +127,10 @@ int Dinosaurio::mizquierda(std::vector<sf::Sprite*> &todo, float time){ // Movim
             {
                 //std::cout<<"dino no mueve izq"<<std::endl;
                 _Sprite->setPosition(getposimapax()*32+112,getposimapay()*32+64);
+                                if(_Sprite->getGlobalBounds().intersects(todo[j]->getGlobalBounds()) && _Sprite!=todo[j])
+                {
+                    recolocar(todo,0);
+                }
                 setparado(true);
                 return 3;
             }
