@@ -41,6 +41,7 @@ class Jugador{
          tecla=false;
          moviendo=false;
          matando=false;
+         colocado=true;
          mir=1;
     }//DEPENDE DEL MAPA
     void setkx(float a){kVelx=a;}
@@ -68,7 +69,7 @@ class Jugador{
        bool gettecla(){return tecla;}
 
 
-            void setmatando(bool a){matando=a;}
+       void setmatando(bool a){matando=a;}
        bool getmatando(){return matando;}
      
            
@@ -85,16 +86,11 @@ class Jugador{
     void mover(int direccion,float time);
     void Update(float time );
     void posredondeada(float time);
-
-    bool colocado(){
-
-      if((int(sprite->getPosition().x)+16)%32<=2 && (int(sprite->getPosition().y))%32<=2){
-
-        return true;
-
-      }
-
-      return false;
+    bool setcolocado(bool a){
+       colocado=a;
+    }
+    bool getcolocado(){
+      return colocado;
     }
 
 
@@ -104,9 +100,9 @@ class Jugador{
     sf::Sprite* sprite2;
     int identificador;
     bool bomba;
-    float kVel=200;
-    float kVelx=200;
-    float kVely=200;
+    float kVel=225;
+    float kVelx=kVel;
+    float kVely=kVel;
     int vidas = 3;
     
     
@@ -126,4 +122,5 @@ class Jugador{
     bool tecla;
     bool moviendo;
     bool matando;
+    bool colocado;
 };

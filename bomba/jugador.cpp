@@ -170,25 +170,36 @@ void Jugador::Update(float time ){
     if(getempujon()){
         empujando(time);
     }        
-    if(!colision && !colocado()){
+    if(!colision && !colocado){
             posredondeada(time);
     }
+
 }
 
 void Jugador::posredondeada(float time){
 
     int x=getSprite()->getPosition().x+16;
-    bool uno=true;
+    bool uno=false;
     
-    if((x%32)>0.5){
+    if((x%32)>2 && (x%32)<31){
         mover(getmir(),time);
+    }else
+    {
+        uno=true;
     }
+    
     int y=getSprite()->getPosition().y;
-    bool dos=true;
-    if((y%32)>0.5){
-        mover(getmir(),time);
-    }
+    bool dos=false;
 
+    if((y%32)>2 && (y%32)<31){
+        mover(getmir(),time);
+    }else
+    {
+        dos=true;
+    }
+    if(uno && dos){colocado=true;}else{colocado=false;}
+    
+    std::cout<<x<<" "<<y<<" "<<uno<<" "<<dos<<std::endl;
 }
 
 

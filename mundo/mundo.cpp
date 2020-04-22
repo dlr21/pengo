@@ -163,30 +163,34 @@ void Mundo::Event(sf::Event event,sf::RenderWindow &window, float time){ //COSAS
             break;
             //Arriba
              case 73:
-              if(!jugador1->getColision() && jugador1->colocado()){ 
+              if(!jugador1->getColision() && jugador1->getcolocado()){ 
                 jugador1->mover(0,time);
                 Colisiones::crearColisiones(*jugador1->getSprite(),todoSprites,0,jugador1->getVelocidad(), time, jugador1);
+                jugador1->setcolocado(false);
               }
             break;
             //Abajos
             case 74:
-                if(!jugador1->getColision() && jugador1->colocado()){
+                if(!jugador1->getColision() && jugador1->getcolocado()){
                   jugador1->mover(1,time);
                   Colisiones::crearColisiones(*jugador1->getSprite(),todoSprites,1,jugador1->getVelocidad(), time, jugador1);
+                  jugador1->setcolocado(false);
                 }
             break;
             //Derecha
             case 72:
-                if(!jugador1->getColision() &&  jugador1->colocado()){
+                if(!jugador1->getColision() &&  jugador1->getcolocado()){
                   jugador1->mover(2,time);
                   Colisiones::crearColisiones(*jugador1->getSprite(),todoSprites,2,jugador1->getVelocidad(), time, jugador1);
+                  jugador1->setcolocado(false);
                 }
             break;
             //Izquierda
             case 71:
-                if(!jugador1->getColision() && jugador1->colocado()){
+                if(!jugador1->getColision() && jugador1->getcolocado()){
                   jugador1->mover(3,time);
                   Colisiones::crearColisiones(*jugador1->getSprite(),todoSprites,3,jugador1->getVelocidad(), time, jugador1);
+                  jugador1->setcolocado(false);
                 }
             break;    
           //Cualquier tecla desconocida se imprime por pantalla su código

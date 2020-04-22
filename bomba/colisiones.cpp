@@ -91,6 +91,7 @@ void Colisiones::update(sf::Clock &temporizador,sf::Sprite* deslizado,std::vecto
               }
               dinosaurios.erase(dinosaurios.begin() + j);
               jugador.sumaPuntos();
+              jugador.setmatando(true);
             }
         }
       }
