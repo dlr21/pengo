@@ -9,6 +9,7 @@
 #include "maquina/contexto.h"
 #include "SFML/Graphics.hpp"
 #include <time.h>
+
 #define UPDATETIME 1000/30
 
 int main() {

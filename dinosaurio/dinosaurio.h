@@ -39,9 +39,8 @@ class Dinosaurio
       bool getactivo(){return activo;}
       void modifyVida();
       void modifyPosition(int x, int y);
-      int generaRandom(int max);
-      int movimiento();
-      void sumaPasos();
+
+   
       void recolocar(std::vector<sf::Sprite*> &todo, int i){
 
         for(unsigned int j = 0;j < todo.size();j++)
@@ -84,9 +83,9 @@ class Dinosaurio
       float kVel=150;
       float kVelx=kVel;
       float kVely=kVel;
-      sf::Sprite* _Sprite = new sf::Sprite; // Sprite
+      sf::Sprite* _Sprite = new sf::Sprite; 
       sf::Texture* textura;
-      int _posdino=1; // Posicion a la que mira el dino ==> 0:Arriba | 1:Abajo | 2:Derecha | 3:Izquierda
+      int _posdino=1; // donde orienta la mirada
       int _Vida=1; 
       float invencibilidad = -1; 
       bool parado=false;

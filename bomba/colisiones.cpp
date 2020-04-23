@@ -5,9 +5,8 @@ void Colisiones::crearColisiones(sf::Sprite &jugador,std::vector<sf::Sprite*> to
    j->setmovido(false);
       for(unsigned int i = 0;i < todoSprites.size();i++)
       {
-        //Ha encontrado un objeto del vector con el que esta colisionando actualmente.
+        //Colisiona con algo
         if(jugador.getGlobalBounds().intersects(todoSprites[i]->getGlobalBounds())){
-              std::cout<<"colision bloque"<<std::endl;
                           j->setColision(true);
                           jugador.setPosition(j->getposimapax()*32+112,j->getposimapay()*32+64);
                             if(jugador.getGlobalBounds().intersects(todoSprites[i]->getGlobalBounds())){

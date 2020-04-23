@@ -43,7 +43,7 @@ class Jugador{
          matando=false;
          colocado=true;
          mir=1;
-    }//DEPENDE DEL MAPA
+    }
     void setkx(float a){kVelx=a;}
     void setky(float a){kVely=a;}
     float getkx(){return kVelx;}

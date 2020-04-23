@@ -7,13 +7,11 @@ Mundo* Mundo::jinstance=0;
 Mundo* Mundo::Instance() {
     if(jinstance==0){
       jinstance=new Mundo;
-        std::cout<<"mundooinstance"; 
     }
     return jinstance;
 }
 
 void Mundo::Inicializar() {
-      std::cout<<"mundoiniciado\n";
       dif=1;
       lvls=2; //numero de niveles
       play=1;//numero de jugadores      
@@ -34,7 +32,6 @@ void Mundo::Inicializar() {
       dinoscreados=false;
       colisiones=false;
       moverse=true;
-
       dirbloque=0;
       snototales=4;
       snovivos=2;
@@ -43,9 +40,8 @@ void Mundo::Inicializar() {
         string s="resources/mapas/"+to_string(dif)+"mapa"+to_string(a)+".tmx";
         std::cout<<s<<endl;
         Map* m=new Map(s,dif+3);
-        std::cout<< mapas.size()<<endl;
         mapas.push_back(m);//meter los mapas en el vector de mapas
-        std::cout<< mapas.size()<<endl;
+
       }
 }
 
@@ -64,7 +60,7 @@ void Mundo::crearDinos(Map* m,int tot){
               dino1->modifyPosition(112+(x*32),64+(y*32)); // Punto de spawn. Debe estar dentro del mapa
               dinosaurios.push_back(dino1); // Guardar en el vector de dinosaurios
               
-              if (cont<tot/2)
+              if (cont<tot/2)//los dos primeros snow bees los crea activos
               {
                 dino1->setactivo(true);
               }
@@ -83,17 +79,16 @@ void Mundo::Event(sf::Event event,sf::RenderWindow &window, float time){ //COSAS
           Contexto::Instance()->Quit();
           window.close();
         break;
-        //case sf::Event::MouseButtonPressed:
+  
         case sf::Event::KeyPressed:
               ///Verifico si se pulsa alguna tecla de movimiento
           switch (event.key.code) {  
-            std::cout<<"pulsa"<<std::endl;
             case 57: //EMPUJAR
             {
-              if(!jugador1->getempujon() && !jugador1->getmoviendo()) {
+              if(!jugador1->getempujon() && !jugador1->getmoviendo()) {//comprueba si empuja el jugador
                 std::cout<<"empujar?"<<std::endl;
-                jugador1->setempujon(true);//PENDIENTE
-                dirbloque=jugador1->getmir();
+                jugador1->setempujon(true);
+                dirbloque=jugador1->getmir();//hacia que bloque mira el jugador
 
                 if(mapas[lvlactual]->muroempujon(jugador1->getSprite(),dirbloque) == NULL){//SI NO EMPUJAMURO ENTRA, SI EMPUJA ATURDE
 
@@ -105,7 +100,7 @@ void Mundo::Event(sf::Event event,sf::RenderWindow &window, float time){ //COSAS
                       if(mapas[lvlactual]->borrardemapa((bloqueadeslizar->getPosition().x-112)/32,(bloqueadeslizar->getPosition().y-64)/32)){
                         mapas[lvlactual]->settilemap0((bloqueadeslizar->getPosition().x-112)/32,(bloqueadeslizar->getPosition().y-64)/32);//CONTROLAR ID DE LA MATRIZ DEL MAPA
                         borradetodoSprites(bloqueadeslizar);
-                        bloqueadeslizar->setPosition(-50,-50);
+                        bloqueadeslizar->setPosition(-50,-50);//elimina sprite de la pantalla
                         bloqueadeslizar=NULL;//LIMPIAR SPRITE AUXILIAR
                       }
                     }else{//MOVER BLOQUE
@@ -123,7 +118,7 @@ void Mundo::Event(sf::Event event,sf::RenderWindow &window, float time){ //COSAS
                 }
               break;
             }
-            case -1://ñ 
+            case -1://ñ comprueba si estan los diamantes en linea
               mapas[lvlactual]->tresenralla();
             break;
             case 59: //delete reinicio nivel 59
@@ -139,14 +134,14 @@ void Mundo::Event(sf::Event event,sf::RenderWindow &window, float time){ //COSAS
             break;
 
             case 23://x muerte 23
-              jugador1->setVidas(3);
+              jugador1->setVidas(3);//muere y reinicia el nivel con 3 vidas
               this->reinicionivel();
             break;
             case 36://esc salir 31
               Contexto::Instance()->Quit();
               window.close();
             break;
-            case 15://matar sno
+            case 15://p matar un sno
                 if(dinosaurios.size()>0){
                     dinosaurios[0]->modifyVida();
                     if(dinosaurios[0]->getVida() == 0){
@@ -202,17 +197,19 @@ void Mundo::Event(sf::Event event,sf::RenderWindow &window, float time){ //COSAS
 
 }
 void Mundo::Update(sf::RenderWindow &window, float time) {//COSAS DEL MUNDO QUE SE ACTUALIZAN SIEMPRE
-  if(hud1->getTerminada()){
+  if(hud1->getTerminada()){//si te quedas sin tiempo
     std::cout<<"terminado el tiempo"<<endl;//HAS PERDIDO
+finjuego();
   }
       if (mapas[lvlactual]->fin()){
             std::cout<<"cambiar mapa\n";
             int i=clock.getElapsedTime().asSeconds();
-            if(i<60){jugador1->maspuntos(i);}
-            prepuntos=jugador1->getPuntos();
+            if(i<60){jugador1->maspuntos(i);}//suma puntos en relacion al tiempo si es menor que 60s
+            prepuntos=jugador1->getPuntos();//guarda los puntos por si mueres en el segundo nivel
             dinoscreados=false;
             colisiones=false;
             diamant=false;
+//Limpia colisiones y snow-bee
             borrarcolisiones();
             borrardinos();
             lvlactual++;
@@ -233,18 +230,18 @@ void Mundo::Update(sf::RenderWindow &window, float time) {//COSAS DEL MUNDO QUE 
           }
         }
       Colisiones::crearColisiones(*jugador1->getSprite(),todoSprites,3,jugador1->getVelocidad(), time, jugador1);
-      // UN JUGADOR O DOS JUGADORES UPDATEAN ELLOS Y SUS HUDS
+      // matas todos los snowbees
         if (jugador1->getmatando())
         {
           todosno(time);
         }
         hud1->Update(jugador1);
         jugador1->Update(time);
-        if(jugador1->getVidas()!=vidas){
+        if(jugador1->getVidas()!=vidas){//si pierdes una vida
           reinicionivel();
           std::cout<<"PIERDES"<<endl;
         }
-        if(jugador1->getVidas()==0){
+        if(jugador1->getVidas()==0){//si pierdes todas las vidas
           finjuego();
           std::cout<<"PIERDES"<<endl;
         }
@@ -255,7 +252,7 @@ void Mundo::Update(sf::RenderWindow &window, float time) {//COSAS DEL MUNDO QUE 
         Colisiones::update(temporizador,bloqueadeslizar,dinosaurios,*jugador1,totalExplosiones,*mapas[lvlactual],todoSprites,paredesSprites,time); 
         diamantitos();//COMPRUEBA LA POSICION DE LOS DIAMANTES
     // Mover los dinosaurios con la IA
-    ia->movimientoDinos(dinosaurios, _cont,todoSprites, time, mapas[lvlactual]); // Permite mover a los dinosaurios
+    ia->movimientoDinos(dinosaurios, _cont,todoSprites, time, mapas[lvlactual]); 
     _cont++; 
 }
 
@@ -267,13 +264,11 @@ void Mundo::finjuego(){
 }
 
 void Mundo::renicio(){ //reiniciar el mundo
-      std::cout<<"reinicio"<<dif<<lvls<<lvlactual<<"\n";
       nueva=true;
       dif=0;
       lvls=0;
       lvlactual=0;
       play=0;
-      std::cout<< mapas.size()<<endl;
       dinoscreados=false;
       colisiones=false;
       diamant=false;
@@ -283,7 +278,7 @@ void Mundo::renicio(){ //reiniciar el mundo
       std::cout<<"reiniciofin"<<dif<<lvls<<lvlactual<<"\n";
 }
 
-void Mundo::Draw(sf::RenderWindow &window){//dibujar mapa y hud
+void Mundo::Draw(sf::RenderWindow &window){//dibujar mapa 
   if(lvlactual<mapas.size()){
       mapas[lvlactual]->draw(window);
       //DIBUJAR DINOSAURIOS
@@ -291,6 +286,7 @@ void Mundo::Draw(sf::RenderWindow &window){//dibujar mapa y hud
       {
         dinosaurios[i]->draw(window);
       }
+	//dibujar hud
        if(play==1){
         hud1->draw(window);
         jugador1->draw(window);  
@@ -299,7 +295,6 @@ void Mundo::Draw(sf::RenderWindow &window){//dibujar mapa y hud
 }
 
 void Mundo::reinicionivel(){//reiniciar el nivel
-      std::cout<<"reinicionivel"<<dif<<lvls<<lvlactual<<"\n";
       jugador1->setPuntos(prepuntos);
       nueva=false;
       dif=0;
@@ -308,7 +303,7 @@ void Mundo::reinicionivel(){//reiniciar el nivel
       dinoscreados=false;
       colisiones=false;
       diamant=false;
-      vidas=jugador1->getVidas();
+      vidas=jugador1->getVidas();//apareces con las vidas que tenias
       borrarcolisiones();
       borrardinos();
       borrarmapas();

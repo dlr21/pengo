@@ -2,7 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "Map.h"
 #include "jugador.h"
-#include "../dinosaurio/dinosaurio.h"
+#include "dinosaurio.h"
 
 class Colisiones {
 

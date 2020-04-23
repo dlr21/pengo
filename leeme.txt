@@ -1,0 +1,8 @@
+A la hora de destruir o empujar bloques tuve problemas sobretodo a la hora de manejar los punteros y actualizar el valor nuevo en el mapa.
+En relación al desplazamiento de Pengo, tuve muchos problemas, tanto para que se moviese de casilla en casilla como para que no su pudiese cambiar la dirección en el trayecto que dura este paso, jutando el tiempo para la animacion en el movimiento y en el redondeo hacia la posición correcta.
+A la hora de eliminar los Sno-bees no hubo mucho problema, mas bien al diferenciar su colisión con la de un bloque normal.
+Comprobando los Sno*bees activos hice que apareciesen cada vez que eran menos de 2 y quedaban mas por aparecer, tuve problemas al colocar un retraso de unos segundos entre muerte de uno y la aparición del siguiente.
+Pequeños problemas al tener que reiniciar el nivel con la perdida de una vida pero nada que haya dado pie a un gran retraso.
+Ningún problema con las teclas básicas y he añadido otras cuantas para ayudar a la comprobación de distintos sucesos, explicados en el codigo en el metodo Event de mundo.
+Pequeño problema al añadir el aturdimiento a la funcionalidad de los bloques estrella al igual que al añadirlo al margen.
+El HUD ningún problema, si terminas el nivel en menos de un minuto te da mas puntos en función de lo que hayas tardado, suma puntos cada vez que matas un Sno-bee, tienes 5 minutos para terminar el mapa y las vidas estan representadas como una imagen de un corazón cada una de ellas, comienzas con tres cada partida y se resta una cada vez que te mata un Snow-bee, cuando avanzas de nivel mantienes als vidas que tenias.
